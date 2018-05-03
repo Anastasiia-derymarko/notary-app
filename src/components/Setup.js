@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { orderTypes, orderObjects } from '../data/orders.js'
+import 'react-select/dist/react-select.css';
+import { orderTypes, orderObjects } from '../data/orders.js';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 
 class Setup extends Component {
   constructor (props) {
@@ -9,6 +13,7 @@ class Setup extends Component {
     this.state = {
       orderType: null,
       orderObject: null,
+      startDate: moment(),
     };
   }
 
@@ -25,8 +30,12 @@ class Setup extends Component {
     this.setState({ orderObject: selectedOption ? selectedOption.value : null });
   }
 
+  handleChange = date=> {
+    this.setState({ startDate: date });
+  }
+ 
   render() {
-    const {orderType, orderObject} = this.state;
+    const {orderType, orderObject, startDate} = this.state;
 
     return (
       <div>
@@ -41,6 +50,10 @@ class Setup extends Component {
           value={orderObject}
           onChange={this.handleOrderObjectChange}
           options={orderObjects}
+        />
+        <DatePicker
+        selected={startDate}
+        onChange={this.handleChange}
         /> 
       </div>
     );
