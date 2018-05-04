@@ -5,7 +5,8 @@ import { orderTypes, orderObjects } from '../data/orders.js';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import Parties from '../components/Parties.js';
+ 
 class Setup extends Component {
   constructor (props) {
     super(props);
@@ -13,7 +14,7 @@ class Setup extends Component {
     this.state = {
       orderType: null,
       orderObject: null,
-      startDate: moment(),
+      orderDate: moment(),
     };
   }
 
@@ -24,18 +25,20 @@ class Setup extends Component {
 
   handleOrderTypeChange = selectedOption => {
     this.setState({ orderType: selectedOption ? selectedOption.value : null });
+    console.log(`Selected: ${selectedOption.label}`);
   }
 
   handleOrderObjectChange = selectedOption => {
     this.setState({ orderObject: selectedOption ? selectedOption.value : null });
   }
 
-  handleChange = date=> {
-    this.setState({ startDate: date });
+  handleChange = date => {
+    this.setState({ orderDate: date });
+    console.log(date);
   }
  
   render() {
-    const {orderType, orderObject, startDate} = this.state;
+    const {orderType, orderObject, orderDate} = this.state;
 
     return (
       <div>
@@ -52,9 +55,12 @@ class Setup extends Component {
           options={orderObjects}
         />
         <DatePicker
-        selected={startDate}
+        dateFormat="DD/MM/YYYY"
+        selected={orderDate}
         onChange={this.handleChange}
-        /> 
+        />
+       
+      <Parties />
       </div>
     );
   }
