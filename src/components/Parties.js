@@ -7,7 +7,9 @@ class Parties extends Component{
 
     this.state = {
       chooseMorW: null,
+      NameValue:'',
     };
+
   }
   
   handleChooseMorWChange = (radioGroup) => {
@@ -15,17 +17,19 @@ class Parties extends Component{
 
   }
 
+
   render () {
  
-    return(
+    return( 
+
+      <div>
       <RadioGroup onChange={ this.handleChooseMorWChange } value={ this.state.chooseMorW } horizontal>
         <RadioButton value="man">Чоловік</RadioButton>
         <RadioButton value="women">Жінка</RadioButton>
       </RadioGroup>
-
-    )    
+      </div>
+    )  
   }
-
 }
 
 export default Parties  

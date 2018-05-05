@@ -25,7 +25,6 @@ class Setup extends Component {
 
   handleOrderTypeChange = selectedOption => {
     this.setState({ orderType: selectedOption ? selectedOption.value : null });
-    console.log(`Selected: ${selectedOption.label}`);
   }
 
   handleOrderObjectChange = selectedOption => {
@@ -34,9 +33,9 @@ class Setup extends Component {
 
   handleChange = date => {
     this.setState({ orderDate: date });
-    console.log(date);
+
   }
- 
+  
   render() {
     const {orderType, orderObject, orderDate} = this.state;
 
@@ -59,8 +58,17 @@ class Setup extends Component {
         selected={orderDate}
         onChange={this.handleChange}
         />
-       
       <Parties />
+      <div className="checkbox-list">
+          <label className="checkbox">
+            <input type="radio" className="checkbox-control"  value="AU" onChange={this.switchCountry}/>
+            <span className="checkbox-label">Australia</span>
+          </label>
+          <label className="checkbox">
+            <input type="radio" className="checkbox-control"  value="US" onChange={this.switchCountry}/>
+            <span className="checkbox-label">United States</span>
+          </label>
+        </div>
       </div>
     );
   }
