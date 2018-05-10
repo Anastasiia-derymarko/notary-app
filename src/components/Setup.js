@@ -15,6 +15,7 @@ class Setup extends Component {
       orderType: null,
       orderObject: null,
       orderDate: moment(),
+    
     };
   }
 
@@ -31,9 +32,12 @@ class Setup extends Component {
     this.setState({ orderObject: selectedOption ? selectedOption.value : null });
   }
 
-  handleChange = date => {
+  handleOrderDateChange = date => {
     this.setState({ orderDate: date });
 
+  }
+  handleChooseMorWChange = radioGroup =>{
+   
   }
   
   render() {
@@ -56,19 +60,18 @@ class Setup extends Component {
         <DatePicker
         dateFormat="DD/MM/YYYY"
         selected={orderDate}
-        onChange={this.handleChange}
+        onChange={this.handleOrderDateChange}
         />
+
+      <input type="radio" value="W" onChange={this.handleChooseMorWChange}/>
+      <span>W</span>
+      <input type="radio" value="M" onChange={this.handleChooseMorWChange}/>
+      <span>M</span>
+      <div style={{display:'flex', flexDirection: 'row', justifyContent:'space-between'}}>  
       <Parties />
-      <div className="checkbox-list">
-          <label className="checkbox">
-            <input type="radio" className="checkbox-control"  value="AU" onChange={this.switchCountry}/>
-            <span className="checkbox-label">Australia</span>
-          </label>
-          <label className="checkbox">
-            <input type="radio" className="checkbox-control"  value="US" onChange={this.switchCountry}/>
-            <span className="checkbox-label">United States</span>
-          </label>
-        </div>
+      <Parties />
+      </div>
+
       </div>
     );
   }
