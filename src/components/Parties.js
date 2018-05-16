@@ -24,7 +24,7 @@ class Parties extends Component{
 
  
   ChangeRegistrationNumber = (event) => {
-    this.setState({registrationNumber: event.target.value});
+    this.setState({registrationNumber: event.target.value.replace(/\D/,'')});
   }
 
   ChangeAddress = (event) => {
@@ -52,7 +52,7 @@ class Parties extends Component{
       
       <input type="text" value={name} onChange={this.handleNameChange} />
       <p>РНОКПП</p>
-      <input type="text"  value={registrationNumber} onChange={this.ChangeRegistrationNumber}/>
+      <input type="text"  value={registrationNumber} onChange={this.ChangeRegistrationNumber} maxLength={10} pattern="[0-9]*"/>
       <p>зараєстрований за адресою </p>
       <input type="text" value={address} onChange={this.ChangeAddress}/>
 

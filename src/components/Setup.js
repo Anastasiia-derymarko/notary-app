@@ -6,7 +6,10 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Parties from '../components/Parties.js';
- 
+
+import { connect } from 'react-redux';
+
+
 class Setup extends Component {
   constructor (props) {
     super(props);
@@ -39,9 +42,11 @@ class Setup extends Component {
   handleChooseMorWChange = radioGroup =>{
    
   }
-  
-  render() {
+
+ render() {
     const {orderType, orderObject, orderDate} = this.state;
+
+
 
     return (
       <div>
@@ -71,10 +76,12 @@ class Setup extends Component {
       <Parties />
       <Parties />
       </div>
-
+     
       </div>
     );
   }
 }
+
+
 
 export default Setup;
