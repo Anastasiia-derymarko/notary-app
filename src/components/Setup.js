@@ -7,11 +7,12 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import Parties from '../components/Parties.js';
+import { connect } from 'react-redux';
+import { setTypeOrder, setObject } from '../actions/SetupeActions';
 
 import PropTypes from 'prop-types';
 
-
-export default class Setup extends Component {
+class Setup extends Component {
   constructor (props) {
     super(props);
 
@@ -67,11 +68,11 @@ export default class Setup extends Component {
           onChange={this.handleOrderObjectChange}
           options={orderObjects}
         />
-        <DatePicker
-        dateFormat="DD/MM/YYYY"
-        selected={orderDate}
-        onChange={this.handleOrderDateChange}
-        />
+        {/* <DatePicker
+        // dateFormat="DD/MM/YYYY"
+        // selected={orderDate}
+        // onChange={this.handleOrderDateChange}
+        */}
 
       <input type="radio" value="W" onChange={this.handleChooseMorWChange}/>
       <span>W</span>
@@ -85,7 +86,6 @@ export default class Setup extends Component {
       </div>
     );
   }
-
 }
 
 
@@ -95,4 +95,10 @@ Setup.propTypes = {
   orderType:PropTypes.number.isRequired,
   orderObject:PropTypes.number.isRequired,
   orderDate:PropTypes.string.isRequired
-}
+};
+
+const mapStateToProps = state => ({
+    ...state.headerOrder
+});
+
+export default connect(mapStateToProps, {setTypeOrder, setObject})(Setup);

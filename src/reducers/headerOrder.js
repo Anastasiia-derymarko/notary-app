@@ -11,10 +11,10 @@ export default function headerOrder(state = initialState, action) {
   
   switch (action.type){
   	case SET_TYPE_ORDER:
-  	return { ...state, orderType: action.paylod }
+  	return { ...state, orderType: action.payload }
 
   	case SET_OBJECT:
-  	return { ...state, orderObject: action.paylod }
+  	return { ...state, orderObject: action.payload }
 
   	default:
   	  return state;

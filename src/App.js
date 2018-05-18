@@ -2,27 +2,15 @@ import React, { Component } from 'react';
 import Setup from './components/Setup';
 import Show from './components/Show';
 import './App.css';
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import  * as setupeActions from './actions/SetupeActions'
-
-
 
 class App extends Component {    
   render() {
-    const { headerOrder, parties } = this.props
-    const { setTypeOrder, setObject} = this.props.setupeActions
-
+    const { headerOrder, parties } = this.props;
 
   	return (
       <div className="App">
-        <Setup 
-        setTypeOrder={setTypeOrder} 
-        setObject={setObject} 
-        orderType = {headerOrder.orderType}
-        orderObject={headerOrder.orderObject}
-
-        />  
+        <Setup />  
         <Show  
         orderType = {headerOrder.orderType}
         orderObject={headerOrder.orderObject}
@@ -40,17 +28,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
+const mapStateToProps = state => ({
     headerOrder: state.headerOrder,
     parties: state.parties
+});
 
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setupeActions: bindActionCreators(setupeActions, dispatch)
-  }
- } 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App);
