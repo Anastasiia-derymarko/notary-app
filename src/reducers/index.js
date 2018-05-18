@@ -1,17 +1,9 @@
-const initialState = {
-  orderType: 'sss',
-  orderObject:null,
-  orderDate: 'дата dkd',
+import { combineReducers } from 'redux'
+import headerOrder from './headerOrder'
+import parties from './Parties'
 
-};
-
-export default function show(state = initialState, action) {
+export default combineReducers({
+	headerOrder,
+	parties
+})
   
-switch (action.type){
-	case 'SET_TYPE':
-  return {...state, orderType:action.paylod }
-
-  default:
-  return state;
-}
-}
