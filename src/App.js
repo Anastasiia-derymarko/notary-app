@@ -7,15 +7,18 @@ import { connect } from 'react-redux';
 import  * as setupeActions from './actions/SetupeActions'
 
 
+
 class App extends Component {    
   render() {
     const { headerOrder, parties } = this.props
-    const { setTypeOrder } = this.props.setupeActions
+    const { setTypeOrder, setObject} = this.props.setupeActions
+
 
   	return (
       <div className="App">
         <Setup 
         setTypeOrder={setTypeOrder} 
+        setObject={setObject} 
         orderType = {headerOrder.orderType}
         orderObject={headerOrder.orderObject}
 

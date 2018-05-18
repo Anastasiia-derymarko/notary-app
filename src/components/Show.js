@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { orderTypes } from '../data/orders.js';
+import { orderTypes, orderObjects } from '../data/orders.js';
 
 export default class Show extends Component {
 
@@ -10,7 +10,7 @@ render(){
 	<div>
 		<p>Show наш договор</p>
 		<div>Договор {orderTypes[orderType].label }</div>
-		<div>{ orderObject }</div>
+		<div>{ orderObjects[orderObject].label  }</div>
 		<div>{ orderDate }</div>
 		<p>СТОРОНИ</p>
 		<div>{ name }, {registrationNumber} зареєстрованИЙ за адресою {address}</div>

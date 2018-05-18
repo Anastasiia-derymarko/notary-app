@@ -24,7 +24,7 @@ export default class Setup extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(nextProps);
+    // console.log(nextProps);
     
   }
 
@@ -36,6 +36,8 @@ export default class Setup extends Component {
 
   handleOrderObjectChange = selectedOption => {
     this.setState({ orderObject: selectedOption ? selectedOption.value : null });
+    this.props.setObject(+selectedOption.value)
+    
   }
 
   handleOrderDateChange = date => {
@@ -89,6 +91,7 @@ export default class Setup extends Component {
 
 Setup.propTypes = {
   setTypeOrder: PropTypes.func.isRequired,
+  setObject: PropTypes.func.isRequired,
   orderType:PropTypes.number.isRequired,
   orderObject:PropTypes.number.isRequired,
   orderDate:PropTypes.string.isRequired
