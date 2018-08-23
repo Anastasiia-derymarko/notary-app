@@ -5,7 +5,7 @@ import 'react-select/dist/react-select.css';
 import { orderTypes, orderObjects } from '../data/orders.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Parties from '../components/Parties.js';
+import Parties from '../components/PartiesTest.js';
 import { connect } from 'react-redux';
 import { setTypeOrder, setObject, setDate } from '../actions/SetupeActions';
 
@@ -62,14 +62,13 @@ class Setup extends Component {
           onChange={this.handleOrderObjectChange}
           options={orderObjects}
         />
-         <DatePicker
+        <DatePicker
         dateFormat="DD/MM/YYYY"
         selected={moment(orderDate)}
         onChange={this.handleOrderDateChange}
         />     
       <div style={{display:'flex', flexDirection: 'row', justifyContent:'space-between'}}>  
-      <Parties foo='Продавець'/>
-      <Parties foo='Покупець'/>
+      <Parties/>
       </div>
       
       </div>

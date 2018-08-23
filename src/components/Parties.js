@@ -11,7 +11,7 @@ class Parties extends Component{
     this.state = {
       chooseMorW: this.props.chooseMorW,
       name:this.props.name,
-      registrationNumber:'',
+      registrationNumber:this.props.registrationNumber,
       address:'',
     };
 
@@ -25,13 +25,12 @@ class Parties extends Component{
 
   handleNameChange = (event) => {
     this.setState({name: event.target.value});
-    this.props.setName(event.target.value);
-    console.log(event);
+    this.props.setName(event.target.value);  
   }
 
- 
   ChangeRegistrationNumber = (event) => {
-    this.setState({registrationNumber: event.target.value.replace(/\D/,'')});
+    this.setState({registrationNumber: event.target.value});
+    console.log(event.target.value);
   }
 
   ChangeAddress = (event) => {
@@ -39,30 +38,28 @@ class Parties extends Component{
   }
 
   handleSubmit = () => {
-    console.log('name: '+this.state.name);
-    console.log('registrationNumber: '+this.state.registrationNumber);
-    console.log('address: '+this.state.address);
-
+    console.log('name: '+this.state.name+'\n'+
+                this.props.nameParties
+                );
   }
 
   render () {
-    const {chooseMorW, name, registrationNumber, address }= this.props;
+    const {chooseMorW, name, registrationNumber, address, nameParties }= this.props;
 
     return( 
-
-      <div style = {{width:'48%', textAlign:'left'}}>
-      <RadioGroup onChange={ this.handleChooseMorWChange } value={ chooseMorW } horizontal>
+      <div style = {{width:'48%', textAlign:'left'}}>    
+      <p>{nameParties} </p>
+      <RadioGroup onChange={ this.handleChooseMorWChange } value={ chooseMorW } horizontal style = {{width:'20%'}}>
         <RadioButton value="men">Чоловік</RadioButton>
         <RadioButton value="women">Жінка</RadioButton>
       </RadioGroup>
-      <p>ПІБ {this.props.foo} </p>
-      
+      <p>ПІБ</p>
       <input type="text" value={name} onChange={this.handleNameChange} />
       <p>РНОКПП</p>
-      <input type="text"  value={registrationNumber} onChange={this.ChangeRegistrationNumber} maxLength={10} pattern="[0-9]*"/>
+      <input type="text" name='registr'/> 
+      <input type="text" value={registrationNumber} onChange={this.ChangeRegistrationNumber}/>
       <p>зараєстрований за адресою </p>
       <input type="text" value={address} onChange={this.ChangeAddress}/>
-
       <input type="submit" value="Submit" onClick={this.handleSubmit}/>
       </div>
     )  
@@ -73,8 +70,8 @@ Parties.propTypes = {
   setMorW:PropTypes.func.isRequired,
   chooseMorW:PropTypes.string.isRequired,
   setName:PropTypes.func.isRequired,
-  name:PropTypes.string.isRequired
-
+  name:PropTypes.string.isRequired,
+  registrationNumber:PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
