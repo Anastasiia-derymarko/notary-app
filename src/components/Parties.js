@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setMorW, setName } from '../actions/SetupeActions';
+import { setMorW, setName, setRegistrationNumber, setNameSeller } from '../actions/SetupeActions';
 
 class Parties extends Component{
  constructor (props) {
@@ -13,54 +13,56 @@ class Parties extends Component{
       name:this.props.name,
       registrationNumber:this.props.registrationNumber,
       address:'',
+      nameSellers:this.props.nameSellers,
     };
 
   }
-  
+ 
   handleChooseMorWChange = (radioGroup) => {
     this.setState({ chooseMorW: radioGroup });
     this.props.setMorW(radioGroup);
- 
   }
 
+    
   handleNameChange = (event) => {
-    this.setState({name: event.target.value});
-    this.props.setName(event.target.value);  
+    
+    if (this.props.parties_type === 'Seller') {
+      this.setState({nameSellers: event.target.value});
+      this.props.setNameSeller(event.target.value)
+    }
+    else if (this.props.parties_type === 'Buyer'){
+      this.props.setName(event.target.value)
+      this.setState({name: event.target.value});
+    }
   }
 
   ChangeRegistrationNumber = (event) => {
     this.setState({registrationNumber: event.target.value});
-    console.log(event.target.value);
+    this.props.setRegistrationNumber(event.target.value.replace(/\D/,''));   
+
   }
 
   ChangeAddress = (event) => {
      this.setState({address: event.target.value});
   }
 
-  handleSubmit = () => {
-    console.log('name: '+this.state.name+'\n'+
-                this.props.nameParties
-                );
-  }
 
   render () {
-    const {chooseMorW, name, registrationNumber, address, nameParties }= this.props;
+    const {chooseMorW, name, registrationNumber, address, parties_type }= this.props;
 
     return( 
       <div style = {{width:'48%', textAlign:'left'}}>    
-      <p>{nameParties} </p>
-      <RadioGroup onChange={ this.handleChooseMorWChange } value={ chooseMorW } horizontal style = {{width:'20%'}}>
-        <RadioButton value="men">Чоловік</RadioButton>
-        <RadioButton value="women">Жінка</RadioButton>
-      </RadioGroup>
-      <p>ПІБ</p>
-      <input type="text" value={name} onChange={this.handleNameChange} />
-      <p>РНОКПП</p>
-      <input type="text" name='registr'/> 
-      <input type="text" value={registrationNumber} onChange={this.ChangeRegistrationNumber}/>
-      <p>зараєстрований за адресою </p>
-      <input type="text" value={address} onChange={this.ChangeAddress}/>
-      <input type="submit" value="Submit" onClick={this.handleSubmit}/>
+        <p>{parties_type} </p>
+        <RadioGroup onChange={ this.handleChooseMorWChange } value={ chooseMorW } horizontal style = {{width:'20%'}}>
+          <RadioButton value="men">Чоловік</RadioButton>
+          <RadioButton value="women">Жінка</RadioButton>
+        </RadioGroup>
+        <p>ПІБ</p>
+        <input type="text" value={name} onChange={this.handleNameChange} />
+        <p>РНОКПП</p>
+        <input type="text"  value={registrationNumber} maxLength="10" onChange={this.ChangeRegistrationNumber}/>
+        <p>зараєстрований за адресою </p>
+        <input type="text" value={address} onChange={this.ChangeAddress}/>
       </div>
     )  
   }
@@ -68,13 +70,12 @@ class Parties extends Component{
 
 Parties.propTypes = {
   setMorW:PropTypes.func.isRequired,
-  chooseMorW:PropTypes.string.isRequired,
   setName:PropTypes.func.isRequired,
-  name:PropTypes.string.isRequired,
-  registrationNumber:PropTypes.number.isRequired,
+  setRegistrationNumber:PropTypes.func.isRequired,
+  setNameSeller:PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
     ...state.parties
 });
-export default connect(mapStateToProps, {setMorW, setName})(Parties)  
+export default connect(mapStateToProps, {setMorW, setName, setRegistrationNumber, setNameSeller})(Parties)  

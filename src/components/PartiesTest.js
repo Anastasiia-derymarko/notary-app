@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Parties extends Component{
 	constructor (props) {
     super(props);
+
     this.state = {
       sex:'Female',
       name:'',
@@ -14,10 +15,7 @@ class Parties extends Component{
     onInputChange(event) {
       const name = event.target.name;
       this.setState({[name]: event.target.value});
-      console.log(this.props);
-
     }
-
     render(){
     	return(
 	    	<form>
@@ -28,6 +26,7 @@ class Parties extends Component{
 	          <label> Address: <input name="address"  type="text"
 	                               value={this.state.address} onChange={this.onInputChange}/></label>
 	          <label> Sex: <select name="sex"  value={this.state.sex} onChange={this.onInputChange}>
+	              <option value="none">none</option>
 	              <option value="male">Male</option>
 	              <option value="female">Female</option>
 	            </select>

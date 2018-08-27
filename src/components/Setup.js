@@ -5,7 +5,7 @@ import 'react-select/dist/react-select.css';
 import { orderTypes, orderObjects } from '../data/orders.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import Parties from '../components/PartiesTest.js';
+import Parties from '../components/Parties.js';
 import { connect } from 'react-redux';
 import { setTypeOrder, setObject, setDate } from '../actions/SetupeActions';
 
@@ -20,12 +20,8 @@ class Setup extends Component {
       orderType: this.props.orderType,
       orderObject: this.props.orderObject,
       orderDate: this.props.orderDate,
-    };
-  }
 
-  componentWillReceiveProps (nextProps) {
-    // console.log(nextProps);
-    
+    };
   }
 
   handleOrderTypeChange = selectedOption => {
@@ -67,10 +63,8 @@ class Setup extends Component {
         selected={moment(orderDate)}
         onChange={this.handleOrderDateChange}
         />     
-      <div style={{display:'flex', flexDirection: 'row', justifyContent:'space-between'}}>  
-      <Parties/>
-      </div>
-      
+        <Parties parties_type='Seller'/>
+        <Parties parties_type='Buyer'/>
       </div>
     );
   }

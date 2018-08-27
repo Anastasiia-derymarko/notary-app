@@ -1,10 +1,11 @@
-import { SET_M_OR_W, SET_NAME } from '../constans/setup'
+import { SET_M_OR_W, SET_NAME, SET_NAME_SELLER, SET_REGISTRATION_NUMBER } from '../constans/setup'
 
 const initialState = {
   chooseMorW: '',
   name: '',
-  registrationNumber: 0,
+  registrationNumber: '',
   address: '',
+  nameSellers:'',
 };
 
 export default function parties(state = initialState, action) {
@@ -13,10 +14,16 @@ export default function parties(state = initialState, action) {
   	case SET_M_OR_W:
   	return { ...state, chooseMorW: action.payload }
  	
- 	case SET_NAME:
+  	case SET_NAME:
   	return { ...state, name: action.payload }
- 	
-  	default:
+ 	  
+    case SET_REGISTRATION_NUMBER:
+    return { ...state, registrationNumber: action.payload }	
+
+    case SET_NAME_SELLER:
+    return { ...state, nameSellers: action.payload } 
+    
+    default:
  	 	return state;
    }
 
