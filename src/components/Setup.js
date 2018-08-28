@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Parties from '../components/Parties.js';
 import { connect } from 'react-redux';
-import { setTypeOrder, setObject, setDate } from '../actions/SetupeActions';
+import { setTypeOrder, setObject, setDate, setNameSeller } from '../actions/SetupeActions';
 
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ class Setup extends Component {
       orderType: this.props.orderType,
       orderObject: this.props.orderObject,
       orderDate: this.props.orderDate,
-
+      nameSeller:  this.props.nameSeller,
     };
   }
 
@@ -40,9 +40,14 @@ class Setup extends Component {
     this.props.setDate(date)   
     
   }
+
+  handleNameChangeSeller = (event) => {
+    this.setState({nameSeller: event.target.value});
+    this.props.setNameSeller(event.target.value)
+  }
  render() {
 
-    const {orderType, orderObject, orderDate} = this.props
+    const {orderType, orderObject, orderDate, nameSeller,registrationNumberSeller} = this.props
 
     return (
       <div>
@@ -59,12 +64,16 @@ class Setup extends Component {
           options={orderObjects}
         />
         <DatePicker
-        dateFormat="DD/MM/YYYY"
-        selected={moment(orderDate)}
-        onChange={this.handleOrderDateChange}
+          dateFormat="DD/MM/YYYY"
+          selected={moment(orderDate)}
+          onChange={this.handleOrderDateChange}
         />     
-        <Parties parties_type='Seller'/>
-        <Parties parties_type='Buyer'/>
+        <Parties 
+          value={nameSeller} 
+          handleNameChange={this.handleNameChangeSeller}
+          value={registrationNumberSeller} 
+        />
+
       </div>
     );
   }
@@ -77,11 +86,14 @@ Setup.propTypes = {
   setDate: PropTypes.func.isRequired,
   orderType:PropTypes.number.isRequired,
   orderObject:PropTypes.number.isRequired,
-  orderDate:PropTypes.object.isRequired
+  orderDate:PropTypes.object.isRequired,
+  setNameSeller:PropTypes.func.isRequired,
+  nameSeller:PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-    ...state.headerOrder
+    ...state.headerOrder,
+    ...state.parties,
 });
 
-export default connect(mapStateToProps, {setTypeOrder, setObject, setDate})(Setup);
+export default connect(mapStateToProps, {setTypeOrder, setObject, setDate, setNameSeller})(Setup);

@@ -5,7 +5,7 @@ const initialState = {
   name: '',
   registrationNumber: '',
   address: '',
-  nameSellers:'',
+  nameSeller:'',
 };
 
 export default function parties(state = initialState, action) {
@@ -21,7 +21,7 @@ export default function parties(state = initialState, action) {
     return { ...state, registrationNumber: action.payload }	
 
     case SET_NAME_SELLER:
-    return { ...state, nameSellers: action.payload } 
+    return { ...state, nameSeller: action.payload } 
     
     default:
  	 	return state;

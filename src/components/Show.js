@@ -8,7 +8,7 @@ import moment from 'moment';
 class Show extends Component {
 
 render(){
-	const { orderType, orderObject, orderDate, name, registrationNumber, nameSellers } = this.props;
+	const { orderType, orderObject, orderDate, registrationNumber, nameSeller } = this.props;
 	return	(
 	<div>
 		<p>Show наш договор</p>
@@ -18,8 +18,8 @@ render(){
 		<p>СТОРОНИ</p>
 	
 		<p>{registrationNumber}</p>
-		<p>Sellers {nameSellers}</p>
-		<p>Buyer {name}</p>
+		<p>Sellers {nameSeller}</p>
+		<p>Buyer </p>
 		
 	</div>
 )
@@ -31,9 +31,9 @@ Show.propTypes = {
 	orderType:PropTypes.number.isRequired,
 	orderObject:PropTypes.number.isRequired,
 	orderDate:PropTypes.object.isRequired,
-	name:PropTypes.string.isRequired,
+	// name:PropTypes.string.isRequired,
 	registrationNumber:PropTypes.string.isRequired,
-	nameSellers:PropTypes.string.isRequired,
+	nameSeller:PropTypes.string.isRequired,
 
 }
 
