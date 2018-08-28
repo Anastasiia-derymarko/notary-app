@@ -8,7 +8,7 @@ import moment from 'moment';
 class Show extends Component {
 
 render(){
-	const { orderType, orderObject, orderDate, registrationNumber, nameSeller } = this.props;
+	const { orderType, orderObject, orderDate, registrationNumberSeller, nameSeller, addressSeller } = this.props;
 	return	(
 	<div>
 		<p>Show наш договор</p>
@@ -17,8 +17,8 @@ render(){
 		<div>{ moment(orderDate).format('DD/MM/YYYY') }</div>
 		<p>СТОРОНИ</p>
 	
-		<p>{registrationNumber}</p>
-		<p>Sellers {nameSeller}</p>
+
+		<p>Sellers {nameSeller}</p><p>{registrationNumberSeller}</p><p>{addressSeller}</p>
 		<p>Buyer </p>
 		
 	</div>
@@ -31,10 +31,9 @@ Show.propTypes = {
 	orderType:PropTypes.number.isRequired,
 	orderObject:PropTypes.number.isRequired,
 	orderDate:PropTypes.object.isRequired,
-	// name:PropTypes.string.isRequired,
-	registrationNumber:PropTypes.string.isRequired,
+	registrationNumberSeller:PropTypes.string.isRequired,
 	nameSeller:PropTypes.string.isRequired,
-
+  addressSeller:PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({

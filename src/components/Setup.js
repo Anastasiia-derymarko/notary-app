@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Parties from '../components/Parties.js';
 import { connect } from 'react-redux';
-import { setTypeOrder, setObject, setDate, setNameSeller } from '../actions/SetupeActions';
+import { setTypeOrder, setObject, setDate, setNameSeller, setRegistrationNumber, setMorW, setAddressSeller } from '../actions/SetupeActions';
 
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -21,6 +21,9 @@ class Setup extends Component {
       orderObject: this.props.orderObject,
       orderDate: this.props.orderDate,
       nameSeller:  this.props.nameSeller,
+      registrationNumberSeller:this.props.registrationNumberSeller,
+      chooseMorWSeller: this.props.chooseMorWSeller,
+      addressSeller:this.props.addressSeller
     };
   }
 
@@ -45,9 +48,24 @@ class Setup extends Component {
     this.setState({nameSeller: event.target.value});
     this.props.setNameSeller(event.target.value)
   }
+
+  ChangeRegistrationNumberSeller = (event) => {
+    this.setState({registrationNumberSeller: event.target.value});
+    this.props.setRegistrationNumber(event.target.value.replace(/\D/,''));   
+  }
+
+  handleChooseMorWChange = (radioGroup) => {
+    this.setState({ chooseMorWSeller: radioGroup });
+    this.props.setMorW(radioGroup);
+  }
+  ChangeAddress = (event) => {
+     this.setState({addressSeller: event.target.value});
+     this.props.setAddressSeller(event.target.value);
+  }
+
  render() {
 
-    const {orderType, orderObject, orderDate, nameSeller,registrationNumberSeller} = this.props
+    const {orderType, orderObject, orderDate, nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller} = this.props
 
     return (
       <div>
@@ -69,9 +87,14 @@ class Setup extends Component {
           onChange={this.handleOrderDateChange}
         />     
         <Parties 
-          value={nameSeller} 
+          name={nameSeller} 
           handleNameChange={this.handleNameChangeSeller}
-          value={registrationNumberSeller} 
+          registrationNumber={registrationNumberSeller} 
+          ChangeRegistrationNumber={this.ChangeRegistrationNumberSeller}
+          chooseMorW = {chooseMorWSeller}
+          handleChooseMorWChange={this.handleChooseMorWChange}
+          address={addressSeller}
+          ChangeAddress={this.ChangeAddress}
         />
 
       </div>
@@ -89,6 +112,13 @@ Setup.propTypes = {
   orderDate:PropTypes.object.isRequired,
   setNameSeller:PropTypes.func.isRequired,
   nameSeller:PropTypes.string.isRequired,
+  setRegistrationNumber:PropTypes.func.isRequired,
+  registrationNumberSeller:PropTypes.string.isRequired,
+  setMorW:PropTypes.func.isRequired,
+  chooseMorWSeller:PropTypes.string.isRequired,
+  addressSeller:PropTypes.string.isRequired,
+  setAddressSeller:PropTypes.func.isRequired,
+  
 };
 
 const mapStateToProps = state => ({
@@ -96,4 +126,4 @@ const mapStateToProps = state => ({
     ...state.parties,
 });
 
-export default connect(mapStateToProps, {setTypeOrder, setObject, setDate, setNameSeller})(Setup);
+export default connect(mapStateToProps, {setTypeOrder, setObject, setDate, setNameSeller, setRegistrationNumber,setMorW,setAddressSeller})(Setup);
