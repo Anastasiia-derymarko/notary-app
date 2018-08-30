@@ -11,8 +11,8 @@ class Parties extends Component{
       <div style = {{width:'48%', textAlign:'left'}}>    
         <p></p>
         <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } horizontal style = {{width:'20%'}}>
-          <RadioButton value="men">Чоловік</RadioButton>
-          <RadioButton value="women">Жінка</RadioButton>
+          <RadioButton value="0">Чоловік</RadioButton>
+          <RadioButton value="1">Жінка</RadioButton>
         </RadioGroup>
         <p>ПІБ</p>
         <input 
