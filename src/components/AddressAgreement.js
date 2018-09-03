@@ -9,24 +9,47 @@ class AddressAgreement extends Component{
 
     this.state = {
       regionValue:' ',
-
+      regions: {},
     }
 
   }
+
+  componentDidMount()
+  {
+     fetch('http://localhost', {
+        method: 'POST',
+        // headers: {
+        //   'Accept': 'application/json',
+        //   'Content-Type': 'application/json'
+        // },
+        body: JSON.stringify({
+          action: 'region',
+        }),
+        cache: 'no-cache',
+      })
+      .then(response => {
+        response.json().then(data => {
+          this.setState(() => ({regions: data}));
+        });
+      });
+  }
+
   handleRegionValueChange = selectedOption => {
     this.setState({ regionValue: selectedOption ? selectedOption.value : null });
-    // this.props.setTypeOrder(+selectedOption.value)
-
   }
-    render(){
-    	const {regionValue} = this.state
+      render(){
+    	const {regionValue, regions} = this.state
+
+      let regionsOptions = Object.keys(regions).map(key => ({value: key, label: regions[key].name}));
+      console.log (regionsOptions);
+
     	return(
     		<div>
     			<Select
 		          name="region"
-		          value={this.state.regionValue}
+		          value={regionValue}
 		          onChange={this.handleRegionValueChange}
-		          options={allRegions}
+		          options={regionsOptions}
         		/>
     		</div>
 	    	
