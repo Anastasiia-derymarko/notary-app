@@ -98,7 +98,7 @@ class Setup extends Component {
       nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer} = this.props
 
     return (
-      <div>
+      <div className="row">
         <Select
           name="order_type"
           value={orderType}
