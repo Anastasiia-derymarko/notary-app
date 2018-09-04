@@ -5,6 +5,7 @@ import 'react-select/dist/react-select.css';
 import { orderTypes, orderObjects } from '../data/orders.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../components/style/setup.css'
 import Parties from '../components/Parties.js';
 import AddressAgreement from '../components/AddressAgreement.js';
 import { connect } from 'react-redux';

@@ -1,0 +1,54 @@
+.Select {
+	width: 25%;
+} 
+.Select-clear {
+	display: none;
+}
+.Additional_information{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0px 10px;
+	text-align: center;
+}
+.react-datepicker__input-container input{
+	height: 29px;	
+	text-align: center;
+}
+.broker_info{
+	display: flex;
+}
+.broker_info label{
+	padding-right: 5px;
+	width: 30%;
+	text-align: center;
+}
+.chooseMorW {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 30%;
+
+}
+.parties {
+	width: 45%;
+}
+.parties label input{
+	height: 30px;
+	border:1px solid grey;
+	border-radius: 5px;
+	width: 100%;
+	font-size: 20px;
+	color: #695e5e;
+}
+.nameParties{
+	width: 70%;
+}
+.NumberParties{
+	width: 25%;
+}
+.addressParties{
+	display: block;
+	width: 70%;
+	padding-top: 20px;
+}
