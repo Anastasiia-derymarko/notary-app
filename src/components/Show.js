@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { orderTypes, orderObjects } from '../data/orders.js';
 import moment from 'moment';
+import '../components/style/show.css';
 
 function Declination(props) {
 	return (props.nameWorM !== 1 ? 'який зареєстрований' : 'яка зареєстрована')
@@ -14,18 +15,22 @@ render(){
 		registrationNumberSeller, nameSeller, addressSeller,
 		registrationNumberBuyer, nameBuyer, addressBuyer  } = this.props;
 	return	(
-	<div style = {{width:'50%', margin:'0px auto'}}>
-	<div style = {{textAlign :'center'}}>
-		<p>Договор { orderTypes[orderType].label }</p>
-		<p>{ orderObjects[orderObject].label }</p>
-		<p>{ moment(orderDate).format('DD/MM/YYYY') }</p>
-	</div>	
-		<p>Ми, гр. України {nameSeller}, реєстраційний номер облікової картки платника податків {registrationNumberSeller},
- 			<Declination nameWorM = {parseInt(this.props.chooseMorWSeller, 10)}/> за адресою: {addressSeller}, – надалі «Продавець», 
- 			та гр. України {nameBuyer}, реєстраційний номер облікової картки платника податків {registrationNumberBuyer}, 
-			<Declination nameWorM = {parseInt(this.props.chooseMorWBuyer, 10)}/> за адресою: {addressBuyer},  
-			– надалі «Покупець», які також іменуються «Сторони», уклали цей договір про нижчевикладене:</p>
-		
+	<div className="row">
+		<div className="show">
+			<div className="showHead">
+				<p>Договор { orderTypes[orderType].label }</p>
+				<p>{ orderObjects[orderObject].label }</p>
+				<p>{ moment(orderDate).format('DD/MM/YYYY') }</p>
+			</div>
+			<div className="showBody">
+				<p>Ми, гр. України {nameSeller}, реєстраційний номер облікової картки платника податків {registrationNumberSeller},
+		 			<Declination nameWorM = {parseInt(this.props.chooseMorWSeller, 10)}/> за адресою: {addressSeller}, – надалі «Продавець», 
+		 			та гр. України {nameBuyer}, реєстраційний номер облікової картки платника податків {registrationNumberBuyer}, 
+					<Declination nameWorM = {parseInt(this.props.chooseMorWBuyer, 10)}/> за адресою: {addressBuyer},  
+					– надалі «Покупець», які також іменуються «Сторони», уклали цей договір про нижчевикладене:
+				</p>
+			</div>	
+		</div>		
 	</div>
 )
 }

@@ -5,6 +5,7 @@ import 'react-select/dist/react-select.css';
 import { orderTypes, orderObjects } from '../data/orders.js';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import '../components/style/setup.css';
 import Parties from '../components/Parties.js';
 import AddressAgreement from '../components/AddressAgreement.js';
 import { connect } from 'react-redux';
@@ -99,45 +100,63 @@ class Setup extends Component {
 
     return (
       <div>
-        <Select
-          name="order_type"
-          value={orderType}
-          onChange={this.handleOrderTypeChange}
-          options={orderTypes}
-        />
-        <Select
-          name="order_object"
-          value={orderObject}
-          onChange={this.handleOrderObjectChange}
-          options={orderObjects}
-        />
-        <DatePicker
-          dateFormat="DD/MM/YYYY"
-          selected={moment(orderDate)}
-          onChange={this.handleOrderDateChange}
-        />     
-        <Parties 
-          name={nameSeller} 
-          handleNameChange={this.handleNameChangeSeller}
-          registrationNumber={registrationNumberSeller} 
-          ChangeRegistrationNumber={this.ChangeRegistrationNumberSeller}
-          chooseMorW = {chooseMorWSeller}
-          handleChooseMorWChange={this.handleChooseMorWChange}
-          address={addressSeller}
-          ChangeAddress={this.ChangeAddress}
-        />
-        <Parties 
-          name={nameBuyer} 
-          handleNameChange={this.handleNameChangeBuyer}
-          registrationNumber={registrationNumberBuyer} 
-          ChangeRegistrationNumber={this.ChangeRegistrationNumberBuyer}
-          chooseMorW = {chooseMorWBuyer}
-          handleChooseMorWChange={this.handleChooseMorWChangeBuyer}
-          address={addressBuyer}
-          ChangeAddress={this.ChangeAddressBuyer}
-        />
-        <AddressAgreement/>
-      </div>
+        <div className="row">
+          <Select
+            name="order_type"
+            value={orderType}
+            onChange={this.handleOrderTypeChange}
+            options={orderTypes}
+          />
+          <Select
+            name="order_object"
+            value={orderObject}
+            onChange={this.handleOrderObjectChange}
+            options={orderObjects}
+          />
+          <DatePicker
+            dateFormat="DD/MM/YYYY"
+            selected={moment(orderDate)}
+            onChange={this.handleOrderDateChange}
+          />
+          <div className="Additional_information">
+            <label>Оцінка</label> 
+            <input type="checkbox"/> 
+          </div>
+          <div className="Additional_information">
+            <label>Запит в БТІ</label> 
+            <input type="checkbox"/> 
+          </div>
+          <div className = "broker_info">
+            <label>Інформація про брокера</label> 
+            <textarea></textarea> 
+          </div>
+        </div>
+        <div className = "row">     
+          <Parties 
+            name={nameSeller} 
+            handleNameChange={this.handleNameChangeSeller}
+            registrationNumber={registrationNumberSeller} 
+            ChangeRegistrationNumber={this.ChangeRegistrationNumberSeller}
+            chooseMorW = {chooseMorWSeller}
+            handleChooseMorWChange={this.handleChooseMorWChange}
+            address={addressSeller}
+            ChangeAddress={this.ChangeAddress}
+            NameParties = "Продавець"
+          />
+          <Parties 
+            name={nameBuyer} 
+            handleNameChange={this.handleNameChangeBuyer}
+            registrationNumber={registrationNumberBuyer} 
+            ChangeRegistrationNumber={this.ChangeRegistrationNumberBuyer}
+            chooseMorW = {chooseMorWBuyer}
+            handleChooseMorWChange={this.handleChooseMorWChangeBuyer}
+            address={addressBuyer}
+            ChangeAddress={this.ChangeAddressBuyer}
+            NameParties = "Покупець"
+          />
+
+        </div>
+        </div>
     );
   }
 }

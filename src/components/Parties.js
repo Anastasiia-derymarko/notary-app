@@ -8,30 +8,37 @@ class Parties extends Component{
       registrationNumber, ChangeAddress }= this.props;
 
     return( 
-      <div style = {{width:'48%', textAlign:'left'}}>    
-        <p></p>
-        <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } horizontal style = {{width:'20%'}}>
-          <RadioButton value="0">Чоловік</RadioButton>
-          <RadioButton value="1">Жінка</RadioButton>
+      <div className = "parties">    
+        <p>{this.props.NameParties}</p>
+        <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } className = "chooseMorW">
+          <RadioButton value="0">Він</RadioButton>
+          <RadioButton value="1">Вона</RadioButton>
         </RadioGroup>
-        <p>ПІБ</p>
-        <input 
-          type="text" 
-          value={name} 
-          onChange={handleNameChange} 
-        />
-        <p>РНОКПП</p>
+        <div className="container">
+        <label className="nameParties">ПІБ
+          <input 
+            type="text" 
+            value={name} 
+            onChange={handleNameChange} 
+            
+          />
+        </label>
+        <label className = "NumberParties">РНОКПП
         <input 
           type="text"
           maxLength="10" 
           value={registrationNumber}       
           onChange={ChangeRegistrationNumber}
-        />
-        <p>зараєстрований за адресою </p>
+         />
+        </label>
+        </div>
+        <label className="addressParties">Зараєстрований за адресою 
         <input 
           type="text" 
           value={address} 
-          onChange={ChangeAddress}/>
+          onChange={ChangeAddress}
+        />
+        </label> 
       </div>
     )  
   }
