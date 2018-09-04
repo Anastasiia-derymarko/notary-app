@@ -11,8 +11,8 @@ class Parties extends Component{
       <div className = "parties">    
         <p>{this.props.NameParties}</p>
         <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } className = "chooseMorW">
-          <RadioButton value="0">Він</RadioButton>
-          <RadioButton value="1">Вона</RadioButton>
+          <RadioButton value="0" padding={1}>Він</RadioButton>
+          <RadioButton value="1" padding={1}>Вона</RadioButton>
         </RadioGroup>
         <div className="container">
         <label className="nameParties">ПІБ

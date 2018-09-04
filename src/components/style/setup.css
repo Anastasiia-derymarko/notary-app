@@ -12,8 +12,11 @@
 	text-align: center;
 }
 .react-datepicker__input-container input{
-	height: 29px;	
+	height: 32px;	
 	text-align: center;
+  font-size: 18px;
+  border:1px solid #d9d9d9;
+  border-radius: 5px;
 }
 .broker_info{
 	display: flex;
@@ -27,7 +30,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	width: 30%;
+	width: 40%;
 
 }
 .parties {

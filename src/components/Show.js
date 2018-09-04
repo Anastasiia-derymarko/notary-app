@@ -43,12 +43,12 @@ Show.propTypes = {
 	orderDate:PropTypes.object.isRequired,
 	registrationNumberSeller:PropTypes.string.isRequired,
 	nameSeller:PropTypes.string.isRequired,
-  	addressSeller:PropTypes.string.isRequired,
-  	registrationNumberBuyer:PropTypes.string.isRequired,
+  addressSeller:PropTypes.string.isRequired,
+  registrationNumberBuyer:PropTypes.string.isRequired,
 	nameBuyer:PropTypes.string.isRequired,
-  	addressBuyer:PropTypes.string.isRequired,
-  	chooseMorWSeller:PropTypes.string.isRequired,
-  	chooseMorWBuyer:PropTypes.string.isRequired,
+  addressBuyer:PropTypes.string.isRequired,
+  chooseMorWSeller:PropTypes.string.isRequired,
+  chooseMorWBuyer:PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
