@@ -154,8 +154,11 @@ class Setup extends Component {
             ChangeAddress={this.ChangeAddressBuyer}
             NameParties = "Покупець"
           />
-            
-        </div>
+          </div>
+          <div>
+            <AddressAgreement />  
+          </div>
+        
         </div>
     );
   }

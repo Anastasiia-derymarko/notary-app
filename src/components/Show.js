@@ -11,7 +11,7 @@ function Declination(props) {
 
 function ConvertingNumberToString(number){
 	number = number.number;
-		// number = props.number;
+
      number = number.split('/');
 	
       
@@ -38,7 +38,7 @@ function ConvertingNumberToString(number){
         }else{
           day= String(day).split('');
             day[0] = days[2][day[0]];
-          if(day[1] == '0'){
+          if(day[1] === '0'){
             day[0] = day[0].slice(0, -1) + 'ого';
             delete day[1];
           }else{
@@ -56,9 +56,7 @@ function ConvertingNumberToString(number){
           
       var year_str = years.join(' '); 
       number[2] = year_str;
-      var str = number.join(' ');
-      console.log(str);          
-
+      var str = number.join(' ');   
       return str;          
     }
 
@@ -70,18 +68,19 @@ render(){
 	return	(
 	<div className="row">
 		<div className="show">
-			<div className="showHead">
-				<p>Договор { orderTypes[orderType].label }</p>
+			<div className="showHead bold">
+				<p className="uppercase">Договір { orderTypes[orderType].label }</p>
 				<p>{ orderObjects[orderObject].label }</p>
-				<p>Місто Київ, <ConvertingNumberToString number = { moment(orderDate).format('DD/MM/YYYY') }/></p>
+				<p className= "italic">Місто Київ, <ConvertingNumberToString number = { moment(orderDate).format('DD/MM/YYYY') }/></p>
 			</div>
 			<div className="showBody">
-				<p>Ми, гр. України {nameSeller}, реєстраційний номер облікової картки платника податків {registrationNumberSeller},
+        <p>Попередньо ознайомившись з вимогами цивільного законодавства щодо недійсності правочинів, перебуваючи при здоровому розумі та ясній пам'яті, діючи добровільно, ми:</p>
+				<span><span className = "bold uppercase italic">{nameSeller},</span> реєстраційний номер облікової картки платника податків <span className = "bold uppercase italic">{registrationNumberSeller}, </span>
 		 			<Declination nameWorM = {parseInt(this.props.chooseMorWSeller, 10)}/> за адресою: {addressSeller}, – надалі «Продавець», 
-		 			та гр. України {nameBuyer}, реєстраційний номер облікової картки платника податків {registrationNumberBuyer}, 
+		 			та <span className = "bold uppercase italic">{nameBuyer},</span> реєстраційний номер облікової картки платника податків <span className = "bold uppercase italic">{registrationNumberBuyer}, </span>
 					<Declination nameWorM = {parseInt(this.props.chooseMorWBuyer, 10)}/> за адресою: {addressBuyer},  
 					– надалі «Покупець», які також іменуються «Сторони», уклали цей договір про нижчевикладене:
-				</p>
+				</span>
 			</div>	
 		</div>		
 	</div>
