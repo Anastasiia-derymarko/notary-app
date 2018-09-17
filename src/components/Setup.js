@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
-import { orderTypes, orderObjects } from '../data/orders.js';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+
 import '../components/style/setup.css';
+
 import Parties from '../components/Parties.js';
 import AddressAgreement from '../components/AddressAgreement.js';
-import { connect } from 'react-redux';
-import { setTypeOrder, setObject, setDate, 
-setNameSeller, setRegistrationNumber, setMorW, 
+import DocsSeller from '../components/DocsSeller.js';
+import GeneralAgreementInfo from '../components/GeneralAgreementInfo.js'
+import PriceObject from '../components/PriceObject.js'
+
+import {setNameSeller, setRegistrationNumber, setMorW, 
 setAddressSeller,setNameBuyer,setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer } from '../actions/SetupeActions';
 
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Show from '../components/Show';
+
+
 
 class Setup extends Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      orderType: this.props.orderType,
-      orderObject: this.props.orderObject,
-      orderDate: this.props.orderDate,
       nameSeller:  this.props.nameSeller,
       registrationNumberSeller:this.props.registrationNumberSeller,
       chooseMorWSeller: this.props.chooseMorWSeller,
@@ -31,26 +32,11 @@ class Setup extends Component {
       nameBuyer:  this.props.nameBuyer,
       registrationNumberBuyer:this.props.registrationNumberBuyer,
       chooseMorWBuyer: this.props.chooseMorWBuyer,
-      addressBuyer:this.props.addressBuyer
+      addressBuyer:this.props.addressBuyer,
     };
   }
 
-  handleOrderTypeChange = selectedOption => {
-    this.setState({ orderType: selectedOption ? selectedOption.value : null });
-    this.props.setTypeOrder(+selectedOption.value)
 
-  }
-
-  handleOrderObjectChange = selectedOption => {
-    this.setState({ orderObject: selectedOption ? selectedOption.value : null });
-    this.props.setObject(+selectedOption.value)  
-  }
-
-  handleOrderDateChange = date => {
-    this.setState({ orderDate:date});   
-    this.props.setDate(date)   
-    
-  }
 // Seller
   handleNameChangeSeller = (event) => {
     this.setState({nameSeller: event.target.value});
@@ -90,48 +76,31 @@ class Setup extends Component {
   ChangeAddressBuyer = (event) => {
      this.setState({addressBuyer: event.target.value});
      this.props.setAddressBuyer(event.target.value);
-  }
+  };
 
  render() {
 
-    const {orderType, orderObject, orderDate, 
+    const { 
       nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller,
       nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer} = this.props
 
     return (
-      <div>
-        <div className="row">
-          <Select
-            name="order_type"
-            value={orderType}
-            onChange={this.handleOrderTypeChange}
-            options={orderTypes}
-          />
-          <Select
-            name="order_object"
-            value={orderObject}
-            onChange={this.handleOrderObjectChange}
-            options={orderObjects}
-          />
-          <DatePicker
-            dateFormat="DD/MM/YYYY"
-            selected={moment(orderDate)}
-            onChange={this.handleOrderDateChange}
-          />
-          <div className="Additional_information">
-            <label>Оцінка</label> 
-            <input type="checkbox"/> 
-          </div>
-          <div className="Additional_information">
-            <label>Запит в БТІ</label> 
-            <input type="checkbox"/> 
-          </div>
-          <div className = "broker_info">
-            <label>Інформація про брокера</label> 
-            <textarea></textarea> 
-          </div>
-        </div>
-        <div className = "row">     
+     <div className= "setup"> 
+     <Tabs>
+      <TabList>
+        <Tab>Загальна інформація</Tab>
+        <Tab>Сторони</Tab>
+        <Tab>Об'єкт нерухомого майна</Tab>
+        <Tab>Супровідні документи</Tab>
+        <Tab>Ціна</Tab>
+        <Tab>Заяви-згоди</Tab>
+        <Tab>Договір</Tab>
+      </TabList>
+      <TabPanel>
+       <GeneralAgreementInfo />
+        </TabPanel>
+        <TabPanel>
+        <div className = "row" style = {this.state.displayNoneParties}>     
           <Parties 
             name={nameSeller} 
             handleNameChange={this.handleNameChangeSeller}
@@ -155,23 +124,36 @@ class Setup extends Component {
             NameParties = "Покупець"
           />
           </div>
-          <div>
+          </TabPanel>
+
+          <TabPanel>
             <AddressAgreement />  
-          </div>
-        
-        </div>
+          </TabPanel>
+
+          <TabPanel>
+            <DocsSeller />  
+          </TabPanel>
+
+          <TabPanel>
+            <PriceObject />
+          </TabPanel>  
+
+          <TabPanel>
+            <div className = "row"><span>Заяви-згоди</span></div>
+          </TabPanel>  
+
+          <TabPanel>
+            <Show  />
+          </TabPanel>  
+
+         </Tabs>
+        </div> 
     );
   }
 }
 
 
 Setup.propTypes = {
-  setTypeOrder: PropTypes.func.isRequired,
-  setObject: PropTypes.func.isRequired,
-  setDate: PropTypes.func.isRequired,
-  orderType:PropTypes.number.isRequired,
-  orderObject:PropTypes.number.isRequired,
-  orderDate:PropTypes.object.isRequired,
   setNameSeller:PropTypes.func.isRequired,
   nameSeller:PropTypes.string.isRequired,
   setRegistrationNumber:PropTypes.func.isRequired,
@@ -194,6 +176,5 @@ const mapStateToProps = state => ({
     ...state.parties,
 });
 
-export default connect(mapStateToProps, {setTypeOrder, setObject, setDate, 
-  setNameSeller, setRegistrationNumber,setMorW,setAddressSeller,
+export default connect(mapStateToProps, {setNameSeller, setRegistrationNumber,setMorW,setAddressSeller,
   setNameBuyer, setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer})(Setup);

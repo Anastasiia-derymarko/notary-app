@@ -8,7 +8,8 @@ class Parties extends Component{
       registrationNumber, ChangeAddress }= this.props;
 
     return( 
-      <div className = "parties">    
+      <div className = "parties">  
+      <button className = "exemplify">Приклад</button>  
         <p>{this.props.NameParties}</p>
         <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } className = "chooseMorW">
           <RadioButton value="0" padding={5}>Він</RadioButton>

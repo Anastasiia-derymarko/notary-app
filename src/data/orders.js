@@ -1,16 +1,26 @@
 export const orderTypes = [
-  {label: "none", value: 0},
-  {label: "купівлі-продажу", value: 1},
-  {label: "дарування", value: 2},
-  {label: "оренди", value: 3},
-  {label: "іпотеки", value: 4},
-  {label: "попередній", value: 5},  
+  {label: "оберіть варіант", value: 0},
+  {label: "договір купівлі-продажу", value: 1},
+  // {label: "дарування", value: 2},
+  // {label: "оренди", value: 3},
+  // {label: "іпотеки", value: 4},
+  // {label: "попередній", value: 5},  
 ];
 
+export const docsSellerName = [
+  {label: "оберіть варіант", value: 0},
+  {label: "договору купівлі-продажу", value: 1},
+  // {label: "договору дарування", value: 2},
+  // {label: "свідоцтва про право власності", value: 3},
+  // {label: "свідоцтва про право на спадщину", value: 4},
+  // {label: "рішення суду", value: 5}
+
+]
+
 export const orderObjects = [
-  {label: "none", value: 0},
+  {label: "оберіть варіант", value: 0},
   {label: "квартири", value: 1},
-  {label: "житлового будинку", value: 2},
+  // {label: "житлового будинку", value: 2},
 ];
 
 export const month = ['','січень', 'лютий','березень','квітень','травень','червень','липень','серпень','вересень','жовтень','листопад','грудень'];
@@ -22,6 +32,22 @@ export const days = [
 	 ['',' одна',' дві']
       ];   
 export const days_new = ['','першого','другого','третього','четвертого','п’ятого','шостого','сьомого','восьмого','дев’ятого'];
+
+export const buildingOptions = [
+  {label: "будинок", value: 1, name:"buildingValue"},
+  // {label: "земельна ділянка", value: 2, name:"buildingValue"},
+];
+export const sectionBuildingOptions = [
+  {label: "секц.", value: 1, name:"sectionBuildingValue"},
+  {label: "корп.", value: 2, name:"sectionBuildingValue"},
+];
+export const typeObjectOptions = [
+  // {label: "гараж", value: 1, name:"typeObjectValue"},
+  {label: "квартира", value: 2, name:"typeObjectValue"},
+  // {label: "кімната", value: 3, name:"typeObjectValue"},
+  // {label: "приміщення", value: 4, name:"typeObjectValue"},
+  // {label: "блок", value: 5, name:"typeObjectValue"},
+];
 
 // export const allRegions = [
 // 	 {value: "26", label: "м.Київ"},

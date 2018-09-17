@@ -1,4 +1,18 @@
-.Select {
+.header{
+  height: 55px;
+}
+.setup {
+  margin: 25px auto;
+  padding: 20px 0px;
+  min-height: 85vh;
+  width: 90%;
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 35px -8px rgba(191,176,191,1);
+}
+.react-tabs__tab{
+  padding: 7px 20px;
+}
+.header .Select {
 	width: 25%;
 } 
 .Select-clear {
@@ -15,7 +29,7 @@
 	height: 32px;	
 	text-align: center;
   font-size: 18px;
-  border:1px solid #d9d9d9;
+  border:1px solid #ccc;;
   border-radius: 5px;
 }
 .broker_info{
@@ -35,10 +49,11 @@
 }
 .parties {
 	width: 45%;
+  position: relative;
 }
 .parties label input{
 	height: 30px;
-	border:1px solid grey;
+	border:1px solid #ccc;
 	border-radius: 5px;
 	width: 100%;
 	font-size: 20px;
@@ -55,6 +70,22 @@
 	width: 70%;
 	padding-top: 20px;
 }
-.address_iput_style .Select {
+
+.address .Select {
   margin-bottom: 20px;
+  width: 100%;  
+}
+h2{
+  margin-top: 5px;
+  font-size: 1.4em;
+  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  cursor: pointer; 
+}
+
+.exemplify {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
 }

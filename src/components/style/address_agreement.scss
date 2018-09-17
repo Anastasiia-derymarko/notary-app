@@ -1,0 +1,42 @@
+
+.address {
+  width: 50%;
+  .street{
+    width: 100%;
+    height: 35px;    
+    input{
+      height: 100%;
+      width: 100%;
+      font-size: 15px;
+      padding-left: 10px;
+      color: #333;
+    }
+  }
+   span {
+    margin-bottom: 10px;
+   } 
+  }
+.building{
+  width: 40%;
+  .label_building{
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;   
+        .type{
+          width: 70%;
+        }
+        .number{
+          width: 15%;
+        }
+  }
+  .Select {
+  width: 100%;
+}
+  input{
+   width: 100%;
+   height: 65%;
+    }
+}
+

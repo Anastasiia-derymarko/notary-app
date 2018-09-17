@@ -19,8 +19,14 @@ class Parties extends Component{
     render(){
     	return(
 	    	<form>
-	          <label>Name: <input name="name"  type="text"
-	                               value={this.state.name} onChange={this.onInputChange}/></label>
+	          <label>Name: 
+              <input 
+                name="name"  
+                type="text"
+    	          value={this.state.name} 
+                onChange={this.onInputChange}
+              />
+            </label>
 	          <label> Registration Number: <input name="registrationNumber"  type="text"
 	                               value={this.state.registrationNumber} onChange={this.onInputChange}/></label>
 	          <label> Address: <input name="address"  type="text"
