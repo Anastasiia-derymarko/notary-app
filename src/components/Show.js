@@ -10,12 +10,23 @@ function Declination(props) {
 	return (props.nameWorM !== 1 ? 'який зареєстрований' : 'яка зареєстрована')
 }
 
+function СonsistsText (numberOfRooms) {
+    let number = numberOfRooms.number,
+        classification = ["двох", "трьох", "чотирьох", "п'яти", "шести", "сьоми", "восьми", "дев'яти", "десяти",  "однокімнатна", "двокімнатна", "трьохкімнатна"]
+
+    if (Number(number) > 1 ){
+        return classification[number-2]+' жилих кімнат';
+    }else{
+        return 'однієї жилої кімнати';
+    }
+}
+
 class Show extends Component {
 render(){
 	const { orderType, orderObject, orderDate, 
 		registrationNumberSeller, nameSeller, addressSeller,
-		registrationNumberBuyer, nameBuyer, addressBuyer,cityValue,addressStateObject  } = this.props;
-    console.log(addressStateObject.numberBuildingValue);
+		registrationNumberBuyer, nameBuyer, addressBuyer,cityValue,addressStateObject, footage  } = this.props;
+
 	return	(
 	<div className="row">
 		<div className="show">
@@ -36,6 +47,7 @@ render(){
         що знаходиться в будинку під номером 2-А (два «А») на вулиці Піддубного Івана в місті{cityValue <= 0 ? '' : cityValue}, 
         а Покупець зобов’язується прийняти цю квартиру та сплатити за неї ціну відповідно до умов, 
         що визначені в цьому Договорі.</p>
+                <p>Квартира, що відчужується, складається з <span className="bold"><СonsistsText number = { footage.numberOfRooms }/>. </span>Загальна площа квартири <span className="bold">{footage.totalArea} кв.м.,</span> в тому числі житлова – <span className="bold">{footage.livingArea} кв.м.</span></p>
 			</div>	
 		</div>		
 	</div>
@@ -57,7 +69,8 @@ Show.propTypes = {
   chooseMorWSeller:PropTypes.string.isRequired,
   chooseMorWBuyer:PropTypes.string.isRequired,
   cityValue:PropTypes.number.isRequired,
-  addressStateObject:PropTypes.object.isRequired
+  addressStateObject:PropTypes.object.isRequired,
+    footage:PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({

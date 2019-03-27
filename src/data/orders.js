@@ -19,7 +19,7 @@ export const docsSellerName = [
 
 export const orderObjects = [
   {label: "оберіть варіант", value: 0},
-  {label: "квартири", value: 1},
+  {label: "квартири", value: 1, },
   // {label: "житлового будинку", value: 2},
 ];
 

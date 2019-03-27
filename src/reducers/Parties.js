@@ -2,14 +2,14 @@ import { SET_M_OR_W, SET_NAME_SELLER, SET_REGISTRATION_NUMBER, SET_ADDRESS_SELLE
   SET_M_OR_W_BUYER, SET_NAME_BUYER, SET_ADDRESS_BUYER, SET_REGISTRATION_NUMBER_BUYER} from '../constans/setup'
 
 const initialState = {
-  chooseMorWSeller: '',
-  registrationNumberSeller: '',
-  nameSeller:'',
-  addressSeller:'',
-  chooseMorWBuyer: '',
-  registrationNumberBuyer: '',
-  nameBuyer:'',
-  addressBuyer:'',
+  chooseMorWSeller: '1',
+  registrationNumberSeller: '2875016385',
+  nameSeller:'Школьна Наталія Петрівна',
+  addressSeller:'с. Борова Фастівського р-ну Київської обл., вул. Р. Люксембург, буд. 28, кв. 5,',
+  chooseMorWBuyer: '1',
+  registrationNumberBuyer: '2544412288',
+  nameBuyer:'Римар Людмили Петрівни',
+  addressBuyer:'с. Борова Фастівського р-ну Київської обл., вул. Миру, буд. 20,',
 };
 
 export default function parties(state = initialState, action) {

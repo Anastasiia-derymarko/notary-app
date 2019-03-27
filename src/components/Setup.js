@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Show from '../components/Show';
 
-
+import Scheduel from '../components/scheduel/scheduel.js';
 
 class Setup extends Component {
   constructor (props) {
@@ -35,8 +35,6 @@ class Setup extends Component {
       addressBuyer:this.props.addressBuyer,
     };
   }
-
-
 // Seller
   handleNameChangeSeller = (event) => {
     this.setState({nameSeller: event.target.value});
@@ -57,6 +55,8 @@ class Setup extends Component {
      this.setState({addressSeller: event.target.value});
      this.props.setAddressSeller(event.target.value);
   }
+
+
 // Buyer
   handleNameChangeBuyer = (event) => {
     this.setState({nameBuyer: event.target.value});
@@ -79,14 +79,14 @@ class Setup extends Component {
   };
 
  render() {
-
-    const { 
+    const {
       nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller,
-      nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer} = this.props
+      nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer} = this.props;
 
-    return (
+    console.log(this.props.footage);
+     return (
      <div className= "setup"> 
-     <Tabs>
+     <Tabs defaultIndex={6}>
       <TabList>
         <Tab>Загальна інформація</Tab>
         <Tab>Сторони</Tab>
@@ -95,6 +95,7 @@ class Setup extends Component {
         <Tab>Ціна</Tab>
         <Tab>Заяви-згоди</Tab>
         <Tab>Договір</Tab>
+        <Tab>Календар</Tab>
       </TabList>
       <TabPanel>
        <GeneralAgreementInfo />
@@ -145,7 +146,9 @@ class Setup extends Component {
           <TabPanel>
             <Show  />
           </TabPanel>  
-
+          <TabPanel>
+            <Scheduel />
+          </TabPanel>
          </Tabs>
         </div> 
     );
@@ -169,11 +172,14 @@ Setup.propTypes = {
   chooseMorWBuyer:PropTypes.string.isRequired,
   addressBuyer:PropTypes.string.isRequired,
   setAddressBuyer:PropTypes.func.isRequired,
+    footage: PropTypes.object.isRequired
+
 };
 
 const mapStateToProps = state => ({
     ...state.headerOrder,
     ...state.parties,
+    ...state.addressObject,
 });
 
 export default connect(mapStateToProps, {setNameSeller, setRegistrationNumber,setMorW,setAddressSeller,

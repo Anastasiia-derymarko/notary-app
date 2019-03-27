@@ -1,10 +1,11 @@
-import { SET_TYPE_ORDER,SET_OBJECT, SET_DATE } from '../constans/setup'
-import moment from 'moment'; 
+import { SET_TYPE_ORDER,SET_OBJECT, SET_DATE, SET_GENERAL_INFO_ORDER } from '../constans/setup'
 
+let dataLocal = new Date();
+let dataString = dataLocal.getFullYear()+'-0'+(+dataLocal.getMonth()+1)+'-'+dataLocal.getDate();
 const initialState = {
-  orderType: 0,
-  orderObject: 0,
-  orderDate: moment(), 
+  orderType: 1,
+  orderObject: 1,
+  orderDate: dataString,
 };
 
 export default function headerOrder(state = initialState, action) {

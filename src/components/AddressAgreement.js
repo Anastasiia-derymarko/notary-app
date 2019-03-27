@@ -6,7 +6,9 @@ import { buildingOptions, typeObjectOptions } from '../data/orders.js';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setCity,setStateAddress } from '../actions/SetupeActions';
+import { setCity, setStateAddress } from '../actions/SetupeActions';
+
+import Footage from './addressAndFootage/footage';
 
 class AddressAgreement extends Component{
 	constructor (props) {
@@ -26,6 +28,7 @@ class AddressAgreement extends Component{
       numberBuildingValue:this.props.numberBuildingValue,
       typeObjectValue:this.props.typeObjectValue,
       numberObjectValue:this.props.numberObjectValue,
+
     }
   }
 
@@ -98,8 +101,15 @@ class AddressAgreement extends Component{
   }
   onInputChange = event => {
     const name = event.target.name;
-    this.setState({[name]: event.target.value});
+    let value = event.target.value;
+
+    if (name == 'numberOfRooms') {
+        value = event.target.validity.valid ? event.target.value : this.state.numberOfRooms;
+    }
+
+    this.setState({[name]: value});
     this.props.setStateAddress(this.state);
+
   }
   handleStreetOnChange = event => {
 
@@ -131,7 +141,7 @@ class AddressAgreement extends Component{
       render(){
     	const {regionValue, regions, areas, areaValue, 
         citys, streets, streetValue, buildingValue, numberBuildingValue, 
-        typeObjectValue, numberObjectValue } = this.state
+        typeObjectValue, numberObjectValue} = this.state
       const {cityValue} = this.props
       
 
@@ -164,7 +174,6 @@ class AddressAgreement extends Component{
 
       return(
         <div style = {{position:"relative"}}>
-        <button className = "exemplify">Приклад</button>
           <div className = "column">
             <div className= "column address">
               <span>Регіон:</span>
@@ -190,8 +199,8 @@ class AddressAgreement extends Component{
                     </option>
                   )}
                   </datalist>
-                </div>  
-              </div>   
+                </div>
+              </div>
 
           		<div className="column building">
                 <div className = "label_building">
@@ -215,7 +224,8 @@ class AddressAgreement extends Component{
                 <div className = "label_building">
                   <label className ="type">Тип об'єкта:
                     <Select
-                      value={typeObjectValue}
+                        name="numberObjectValue"
+                        value={typeObjectValue}
                       onChange={this.handleSelectValueChange}
                       options={typeObjectOptions}
                     /> 
@@ -223,16 +233,15 @@ class AddressAgreement extends Component{
                   <label className = "number"> №
                     <input
                       className ="input"
-                      name="numberObjectValue"
                       value={numberObjectValue || ''}
                       onChange={this.onInputChange}
                     /> 
                   </label>
                 </div>
-              
-            </div>
-          </div> 
-        </div>   
+                <Footage/>
+                </div>
+          </div>
+        </div>
     	);
     }
 }

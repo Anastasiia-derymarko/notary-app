@@ -23,7 +23,7 @@ class Parties extends Component{
               <input 
                 name="name"  
                 type="text"
-    	          value={this.state.name} 
+                value={this.state.name}
                 onChange={this.onInputChange}
               />
             </label>

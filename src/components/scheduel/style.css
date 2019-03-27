@@ -1,0 +1,74 @@
+
+.rbc-month-view{
+    height: 60vh;
+}
+.rbc-event{
+    height: auto;
+}
+h3{
+    margin-top: 0;
+}
+.modal-Window{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 5;
+    background: white;
+    width:40%;
+    padding: 1em;
+}
+.wrapper {
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: -.5em;
+    top: -.5em;
+    color: #3174ad;
+    font-weight: bold;
+}
+.close:hover{
+    cursor: pointer;
+    color: #085698;
+}
+.hours{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: .5em;
+    width: 9em;
+    position: absolute;
+    background: white;
+}
+.time{
+    padding: 1em 0;
+}
+.time span:hover{
+    cursor: pointer;
+}
+.hours li {
+    list-style: none;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hours li:last-child{
+}
+.hours li:hover {
+    background: #eaf6ff;
+    cursor: pointer;
+}
+.title, textarea{
+    width:100%;
+
+}
+.title {
+    border: none;
+    border-bottom: .05em solid #ccc;
+}
+.data{
+    margin-right: 2em
+}

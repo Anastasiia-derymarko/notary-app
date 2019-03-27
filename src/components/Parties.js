@@ -9,7 +9,6 @@ class Parties extends Component{
 
     return( 
       <div className = "parties">  
-      <button className = "exemplify">Приклад</button>  
         <p>{this.props.NameParties}</p>
         <RadioGroup onChange={ handleChooseMorWChange } value={ chooseMorW } className = "chooseMorW">
           <RadioButton value="0" padding={5}>Він</RadioButton>
@@ -20,8 +19,7 @@ class Parties extends Component{
           <input 
             type="text" 
             value={name} 
-            onChange={handleNameChange} 
-            
+            onChange={handleNameChange}
           />
         </label>
         <label className = "NumberParties">РНОКПП
