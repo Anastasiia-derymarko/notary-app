@@ -8,11 +8,12 @@ class Footage extends Component{
 
     constructor(props) {
         super(props);
+        let footage = this.props.footage;
 
         this.state = {
-            numberOfRooms: this.props.footage.numberOfRooms,
-            totalArea:this.props.footage.totalArea,
-            livingArea:this.props.footage.livingArea,
+            numberOfRooms: footage.numberOfRooms,
+            totalArea: footage.totalArea,
+            livingArea: footage.livingArea,
         }
     }
     onInputChange = event => {

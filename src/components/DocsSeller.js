@@ -5,68 +5,57 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import {docsSellerName, orderObjects} from '../data/orders.js';
 
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import { setDocSeller} from '../actions/SetupeActions';
 
 class DocsSeller extends Component {
   constructor (props) {
     super(props);
 
-    this.state = {
-     docName:this.props.docName,
-     docObjType:this.props.docObjType,
-     docDate:this.props.docDate,
-     techCheck:false,
-     numberDoc:this.props.numberDoc,
-     issuedDoc:this.props.issuedDoc,
-     numberTech:this.props.numberTech,
-     techDate:this.props.techDate,
-     nameTech:this.props.nameTech,
+      let docSeller = this.props.docSeller;
+
+      this.state = {
+        name:docSeller.name,
+        type:docSeller.type,
+        issuedOn:docSeller.issuedOn,
+        issuedBy:docSeller.issuedBy,
+        indexNumbers:docSeller.indexNumbers,
+        registryName:docSeller.registry.name,
+        registryIssuedOn:docSeller.registry.issuedOn,
+        registryIndexNumbers:docSeller.registry.indexNumbers,
     };
   }
-onInputChange = event => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    onInputChange = event => {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
 
-    this.setState({
-      [name]: value
-    });
-  }
-handleDocTypeNameChange = selectedOption => {
-  this.setState({ docName: selectedOption ? selectedOption.value : null });
-}
+        this.setState({[name]: value}, () => this.props.setDocSeller(this.state));
+    };
 
-handleDocObjTypeChange = selectedOption => {
-  this.setState({ docObjType: selectedOption ? selectedOption.value : null });
-}
+    handleDocTypeNameChange = selectedOption => {
+      this.setState({ name: selectedOption ? selectedOption.value : null }, () => this.props.setDocSeller(this.state));
+    };
 
-handleDocDateChange = date => {
-    this.setState({ docDate:date});      
-}
-
-handleTechDateChange = date => {
-    this.setState({ techDate:date});      
-}
-
-DocSellerState = state => {
-  console.log(this.state);
-} 
+    handleDocObjTypeChange = selectedOption => {
+      this.setState({ type: selectedOption ? selectedOption.value : null }, () => this.props.setDocSeller(this.state));
+    };
 
   render() {
 
-    const {docName, docObjType, docDate, techCheck, 
-      numberDoc, issuedDoc, nameTech, techDate, numberTech} = this.state 
+    const {name, type, issuedOn, issuedBy,
+        indexNumbers, registryName, registryIssuedOn, registryIndexNumbers} = this.state
 
     return (
       <div>
         <div className = "row" style = {{marginRight: "10px"}}>
-        <button className = "exemplify">Приклад</button>  
         <div className = "column">
           <label>
           <span>Назва документа:</span>
            <Select 
-             value={docName}
+             value={name}
              onChange={this.handleDocTypeNameChange}
              options={docsSellerName}
            />
@@ -74,23 +63,24 @@ DocSellerState = state => {
            <label>
            <span>Доповнення:</span>
            <Select 
-             value={docObjType}
+             value={type}
              onChange={this.handleDocObjTypeChange}
              options={orderObjects}
            /> 
            </label>
             <div className = "row">
               <label style = {{width: "75%"}} >Дата
-              <DatePicker
-              dateFormat="DD/MM/YYYY"
-              selected={moment(docDate)}
-              onChange = {this.handleDocDateChange}
+              <input
+                type="date"
+                name="issuedOn"
+                value= {issuedOn}
+                onChange = {this.onInputChange}
               />
               </label>
               <label style = {{width: "25%"}} >№ 
               <input
-                name = 'numberDoc'
-                value={numberDoc}
+                name = 'indexNumbers'
+                value={indexNumbers}
                 onChange={this.onInputChange || ''}
               />
               </label>
@@ -98,43 +88,35 @@ DocSellerState = state => {
             <label>
             <span>Ким виданий:</span>
             <input 
-              name = 'issuedDoc'
-              value={issuedDoc}
+              name = 'issuedBy'
+              value={issuedBy}
               onChange={this.onInputChange || ''}
             />
             </label>
 
             </div>
             <div className = "column">
-              <div className = "DivCheckbox">
-              <input
-                name = 'techCheck'
-                type = 'checkbox'
-                checked={techCheck}
-                onChange={this.onInputChange || ''}
-               />
-              <span>Зареєстрований в БТІ</span>
-              </div> 
               <label>
-              <span>Назва в БТІ:</span>
+              <span>Назва реєстра:</span>
               <input 
-                name = 'nameTech'
-                value={nameTech}
+                name = 'registryName'
+                value={registryName}
                 onChange={this.onInputChange || ''}
               />
               </label>
               <div className = "row">
                  <label style = {{width: "75%"}}>Дата
-                <DatePicker 
-                  dateFormat="DD/MM/YYYY"
-                  selected={moment(techDate)}
-                  onChange = {this.handleTechDateChange}
+                <input
+                    type="date"
+                    name="registryIssuedOn"
+                    value= {registryIssuedOn}
+                    onChange = {this.onInputChange}
                 />
                 </label>
                 <label style = {{width: "25%"}}><span>№ </span>
                 <input
-                name = 'numberTech'
-                value={numberTech}
+                name = 'registryIndexNumbers'
+                value={registryIndexNumbers}
                 onChange={this.onInputChange || ''}         
                 />
                 </label>
@@ -142,10 +124,19 @@ DocSellerState = state => {
             </div>
           </div> 
             <div className = "row" style={{marginRight: "10px"}}> 
-            <button onClick = {this.DocSellerState}>+ Додати документ</button>
+            <button onClick = {() => this.props.setDocSeller(this.state)}>+ Додати документ</button>
             </div>  
       </div>
     )
   }      
 }
-export default (DocsSeller);
+
+DocsSeller.propTypes = {
+    setDocSeller: PropTypes.func.isRequired,
+    docSeller:PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+    ...state.docSeller,
+});
+export default connect(mapStateToProps, { setDocSeller })(DocsSeller);

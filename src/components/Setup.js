@@ -8,11 +8,12 @@ import '../components/style/setup.css';
 import Parties from '../components/Parties.js';
 import AddressAgreement from '../components/AddressAgreement.js';
 import DocsSeller from '../components/DocsSeller.js';
-import GeneralAgreementInfo from '../components/GeneralAgreementInfo.js'
-import PriceObject from '../components/PriceObject.js'
+import GeneralAgreementInfo from '../components/GeneralAgreementInfo.js';
+import PriceObject from '../components/PriceObject.js';
+import Statement from '../components/Statement';
 
 import {setNameSeller, setRegistrationNumber, setMorW, 
-setAddressSeller,setNameBuyer,setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer } from '../actions/SetupeActions';
+setAddressSeller,setNameBuyer,setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer, setBuyer } from '../actions/SetupeActions';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -20,19 +21,40 @@ import Show from '../components/Show';
 
 import Scheduel from '../components/scheduel/scheduel.js';
 
+function parties (e, arr){
+    let name = typeof(e) !== 'string' ? e.target.name+'Buyer' : 'chooseMorWBuyer';
+    let value = typeof(e) !== 'string' ? e.target.value : e;
+
+    if (name == 'registrationNumberBuyer'){
+        value = value.replace(/\D/,'');
+    }
+    let buyer = {};
+
+    for (let key in arr){
+        if(key.indexOf('Buyer') !== -1){
+            buyer[key] = arr[key];
+        }
+
+    }
+    return [name,value,buyer]
+}
+
 class Setup extends Component {
   constructor (props) {
     super(props);
 
+    let buyer = this.props.buyer;
     this.state = {
-      nameSeller:  this.props.nameSeller,
-      registrationNumberSeller:this.props.registrationNumberSeller,
-      chooseMorWSeller: this.props.chooseMorWSeller,
-      addressSeller:this.props.addressSeller,
-      nameBuyer:  this.props.nameBuyer,
-      registrationNumberBuyer:this.props.registrationNumberBuyer,
-      chooseMorWBuyer: this.props.chooseMorWBuyer,
-      addressBuyer:this.props.addressBuyer,
+        nameSeller:  this.props.nameSeller,
+        registrationNumberSeller:this.props.registrationNumberSeller,
+        chooseMorWSeller: this.props.chooseMorWSeller,
+        addressSeller:this.props.addressSeller,
+        statementSeller:false,
+        nameBuyer:  buyer.nameBuyer,
+        registrationNumberBuyer:buyer.registrationNumberBuyer,
+        chooseMorWBuyer: buyer.chooseMorWBuyer,
+        addressBuyer:buyer.addressBuyer,
+        statementBuyer:buyer.statementBuyer,
     };
   }
 // Seller
@@ -66,27 +88,38 @@ class Setup extends Component {
   ChangeRegistrationNumberBuyer = (event) => {
     this.setState({registrationNumberBuyer: event.target.value});
     this.props.setRegistrationNumberBuyer(event.target.value.replace(/\D/,''));   
-  }
+  };
 
   handleChooseMorWChangeBuyer = (radioGroup) => {
     this.setState({ chooseMorWBuyer: radioGroup });
     this.props.setMorWBuyer(radioGroup);
-  }
+  };
 
   ChangeAddressBuyer = (event) => {
      this.setState({addressBuyer: event.target.value});
      this.props.setAddressBuyer(event.target.value);
   };
 
+    handleChangeInputBuyer = e => {
+        let buyer = parties(e, this.state);
+
+        this.setState({[buyer[0]]:buyer[1]}, () => {this.props.setBuyer(buyer[2])});
+    }
+
+    handleChangeInputSeller = e => {
+        let seller = parties(e, this.state);
+        this.setState({[seller[0]]:seller[1]});
+    }
+
+
  render() {
     const {
       nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller,
-      nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer} = this.props;
+      nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer, statementSeller, statementBuyer} = this.state;
 
-    console.log(this.props.footage);
      return (
-     <div className= "setup"> 
-     <Tabs defaultIndex={6}>
+     <div className= "setup">
+     <Tabs defaultIndex={1}>
       <TabList>
         <Tab>Загальна інформація</Tab>
         <Tab>Сторони</Tab>
@@ -101,56 +134,74 @@ class Setup extends Component {
        <GeneralAgreementInfo />
         </TabPanel>
         <TabPanel>
-        <div className = "row" style = {this.state.displayNoneParties}>     
-          <Parties 
-            name={nameSeller} 
-            handleNameChange={this.handleNameChangeSeller}
-            registrationNumber={registrationNumberSeller} 
-            ChangeRegistrationNumber={this.ChangeRegistrationNumberSeller}
+        <div>
+          <Parties
+            name={nameSeller}
+            handleNameChange={this.handleChangeInputSeller}
+            registrationNumber={registrationNumberSeller}
+            ChangeRegistrationNumber={this.handleChangeInputSeller}
             chooseMorW = {chooseMorWSeller}
-            handleChooseMorWChange={this.handleChooseMorWChange}
+            handleChooseMorWChanfunctionge={this.handleChangeInputSeller}
             address={addressSeller}
-            ChangeAddress={this.ChangeAddress}
+            ChangeAddress={this.handleChangeInputSeller}
             NameParties = "Продавець"
           />
-          <Parties 
-            name={nameBuyer} 
-            handleNameChange={this.handleNameChangeBuyer}
-            registrationNumber={registrationNumberBuyer} 
-            ChangeRegistrationNumber={this.ChangeRegistrationNumberBuyer}
+            <div>
+                Заява-згода
+                <input
+                    type="checkbox"
+                    name="statementSeller"
+                    onChange={this.handleChangeInputSeller}
+                    value = {statementSeller}
+                />
+            </div>
+          <Parties
+            name={nameBuyer}
+            handleNameChange={this.handleChangeInputBuyer}
+            registrationNumber={registrationNumberBuyer}
+            ChangeRegistrationNumber={this.handleChangeInputBuyer}
             chooseMorW = {chooseMorWBuyer}
-            handleChooseMorWChange={this.handleChooseMorWChangeBuyer}
+            handleChooseMorWChange={this.handleChangeInputBuyer}
             address={addressBuyer}
-            ChangeAddress={this.ChangeAddressBuyer}
+            ChangeAddress={this.handleChangeInputBuyer}
             NameParties = "Покупець"
           />
+            <div>
+                Заява-згода
+                <input
+                    type="checkbox"
+                    name="statement"
+                    onChange={this.handleChangeInputBuyer}
+                    value = {statementBuyer}
+                />
+            </div>
           </div>
           </TabPanel>
 
           <TabPanel>
-            <AddressAgreement />  
+            <AddressAgreement />
           </TabPanel>
 
           <TabPanel>
-            <DocsSeller />  
+            <DocsSeller />
           </TabPanel>
 
           <TabPanel>
             <PriceObject />
-          </TabPanel>  
+          </TabPanel>
 
           <TabPanel>
-            <div className = "row"><span>Заяви-згоди</span></div>
-          </TabPanel>  
+              <Statement />
+          </TabPanel>
 
           <TabPanel>
-            <Show  />
-          </TabPanel>  
+            <Show/>
+          </TabPanel>
           <TabPanel>
             <Scheduel />
           </TabPanel>
          </Tabs>
-        </div> 
+        </div>
     );
   }
 }
@@ -172,7 +223,10 @@ Setup.propTypes = {
   chooseMorWBuyer:PropTypes.string.isRequired,
   addressBuyer:PropTypes.string.isRequired,
   setAddressBuyer:PropTypes.func.isRequired,
-    footage: PropTypes.object.isRequired
+    footage: PropTypes.object.isRequired,
+
+    buyer:PropTypes.object.isRequired,
+    setBuyer: PropTypes.func.isRequired,
 
 };
 
@@ -183,4 +237,4 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {setNameSeller, setRegistrationNumber,setMorW,setAddressSeller,
-  setNameBuyer, setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer})(Setup);
+  setNameBuyer, setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer, setBuyer})(Setup);

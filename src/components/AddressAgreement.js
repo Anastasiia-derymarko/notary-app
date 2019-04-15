@@ -103,7 +103,7 @@ class AddressAgreement extends Component{
     const name = event.target.name;
     let value = event.target.value;
 
-    if (name == 'numberOfRooms') {
+    if (name === 'numberOfRooms') {
         value = event.target.validity.valid ? event.target.value : this.state.numberOfRooms;
     }
 

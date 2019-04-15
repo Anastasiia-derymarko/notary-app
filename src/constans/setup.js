@@ -13,3 +13,6 @@ export const SET_CITY = 'SET_CITY';
 export const SET_STATE_ADDRESS = 'SET_STATE_ADDRESS';
 export const SET_GENERAL_INFO_ORDER = 'SET_GENERAL_INFO_ORDER';
 export const SET_FOOTAGE = 'SET_FOOTAGE';
+export const SET_DOC_SELLER = 'SET_DOC_SELLER';
+export const SET_PRICE= 'SET_PRICE';
+export const SET_BUYER = 'SET_BUYER';

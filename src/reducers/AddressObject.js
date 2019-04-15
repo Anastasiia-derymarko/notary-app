@@ -15,13 +15,13 @@ export default function addressObject(state = initialState, action) {
 
   switch (action.type){
     case SET_CITY:
-    return { ...state, cityValue: action.payload }
+    return { ...state, cityValue: action.payload };
 
     case SET_STATE_ADDRESS:
-    return { ...state, addressStateObject: action.payload }
+    return { ...state, addressStateObject: action.payload };
 
       case SET_FOOTAGE:
-        return{...state,footage: action.payload }
+        return{...state,footage: action.payload };
 
     default:
       return state;
