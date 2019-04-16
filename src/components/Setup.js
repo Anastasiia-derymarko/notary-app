@@ -12,8 +12,7 @@ import GeneralAgreementInfo from '../components/GeneralAgreementInfo.js';
 import PriceObject from '../components/PriceObject.js';
 import Statement from '../components/Statement';
 
-import {setNameSeller, setRegistrationNumber, setMorW, 
-setAddressSeller,setNameBuyer,setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer, setBuyer } from '../actions/SetupeActions';
+import {setSeller, setBuyer } from '../actions/SetupeActions';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -21,17 +20,17 @@ import Show from '../components/Show';
 
 import Scheduel from '../components/scheduel/scheduel.js';
 
-function parties (e, arr){
-    let name = typeof(e) !== 'string' ? e.target.name+'Buyer' : 'chooseMorWBuyer';
+function parties (e, arr, party){
+    let name = typeof(e) !== 'string' ? e.target.name + party: 'chooseMorWBuyer';
     let value = typeof(e) !== 'string' ? e.target.value : e;
 
-    if (name == 'registrationNumberBuyer'){
+    if (name == 'registrationNumber' + party){
         value = value.replace(/\D/,'');
     }
     let buyer = {};
 
     for (let key in arr){
-        if(key.indexOf('Buyer') !== -1){
+        if(key.indexOf(party) !== -1){
             buyer[key] = arr[key];
         }
 
@@ -43,13 +42,15 @@ class Setup extends Component {
   constructor (props) {
     super(props);
 
-    let buyer = this.props.buyer;
+      let buyer = this.props.buyer;
+      let seller = this.props.seller;
+
     this.state = {
-        nameSeller:  this.props.nameSeller,
-        registrationNumberSeller:this.props.registrationNumberSeller,
-        chooseMorWSeller: this.props.chooseMorWSeller,
-        addressSeller:this.props.addressSeller,
-        statementSeller:false,
+        nameSeller: seller.nameSeller,
+        registrationNumberSeller: seller.registrationNumberSeller,
+        chooseMorWSeller: seller.chooseMorWSeller,
+        addressSeller: seller.addressSeller,
+        statementSeller:seller.statementSeller,
         nameBuyer:  buyer.nameBuyer,
         registrationNumberBuyer:buyer.registrationNumberBuyer,
         chooseMorWBuyer: buyer.chooseMorWBuyer,
@@ -57,64 +58,20 @@ class Setup extends Component {
         statementBuyer:buyer.statementBuyer,
     };
   }
-// Seller
-  handleNameChangeSeller = (event) => {
-    this.setState({nameSeller: event.target.value});
-    this.props.setNameSeller(event.target.value)
-  }
-
-  ChangeRegistrationNumberSeller = (event) => {
-    this.setState({registrationNumberSeller: event.target.value});
-    this.props.setRegistrationNumber(event.target.value.replace(/\D/,''));   
-  }
-
-  handleChooseMorWChange = (radioGroup) => {
-    this.setState({ chooseMorWSeller: radioGroup });
-    this.props.setMorW(radioGroup);
-  }
-
-  ChangeAddress = (event) => {
-     this.setState({addressSeller: event.target.value});
-     this.props.setAddressSeller(event.target.value);
-  }
-
-
-// Buyer
-  handleNameChangeBuyer = (event) => {
-    this.setState({nameBuyer: event.target.value});
-    this.props.setNameBuyer(event.target.value)
-  }
-
-  ChangeRegistrationNumberBuyer = (event) => {
-    this.setState({registrationNumberBuyer: event.target.value});
-    this.props.setRegistrationNumberBuyer(event.target.value.replace(/\D/,''));   
-  };
-
-  handleChooseMorWChangeBuyer = (radioGroup) => {
-    this.setState({ chooseMorWBuyer: radioGroup });
-    this.props.setMorWBuyer(radioGroup);
-  };
-
-  ChangeAddressBuyer = (event) => {
-     this.setState({addressBuyer: event.target.value});
-     this.props.setAddressBuyer(event.target.value);
-  };
 
     handleChangeInputBuyer = e => {
-        let buyer = parties(e, this.state);
-
+        let buyer = parties(e, this.state, 'Buyer');
         this.setState({[buyer[0]]:buyer[1]}, () => {this.props.setBuyer(buyer[2])});
-    }
+    };
 
     handleChangeInputSeller = e => {
-        let seller = parties(e, this.state);
-        this.setState({[seller[0]]:seller[1]});
-    }
+        let seller = parties(e, this.state, 'Seller');
+        this.setState({[seller[0]]:seller[1]}, () => {this.props.setSeller(seller[2])});
+    };
 
 
  render() {
-    const {
-      nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller,
+    const { nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller,
       nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer, statementSeller, statementBuyer} = this.state;
 
      return (
@@ -208,26 +165,11 @@ class Setup extends Component {
 
 
 Setup.propTypes = {
-  setNameSeller:PropTypes.func.isRequired,
-  nameSeller:PropTypes.string.isRequired,
-  setRegistrationNumber:PropTypes.func.isRequired,
-  registrationNumberSeller:PropTypes.string.isRequired,
-  setMorW:PropTypes.func.isRequired,
-  chooseMorWSeller:PropTypes.string.isRequired,
-  addressSeller:PropTypes.string.isRequired,
-  setAddressSeller:PropTypes.func.isRequired,
-  nameBuyer:PropTypes.string.isRequired,
-  setRegistrationNumberBuyer:PropTypes.func.isRequired,
-  registrationNumberBuyer:PropTypes.string.isRequired,
-  setMorWBuyer:PropTypes.func.isRequired,
-  chooseMorWBuyer:PropTypes.string.isRequired,
-  addressBuyer:PropTypes.string.isRequired,
-  setAddressBuyer:PropTypes.func.isRequired,
     footage: PropTypes.object.isRequired,
-
+    seller:PropTypes.object.isRequired,
+    setSeller:PropTypes.func.isRequired,
     buyer:PropTypes.object.isRequired,
     setBuyer: PropTypes.func.isRequired,
-
 };
 
 const mapStateToProps = state => ({
@@ -236,5 +178,4 @@ const mapStateToProps = state => ({
     ...state.addressObject,
 });
 
-export default connect(mapStateToProps, {setNameSeller, setRegistrationNumber,setMorW,setAddressSeller,
-  setNameBuyer, setRegistrationNumberBuyer,setMorWBuyer,setAddressBuyer, setBuyer})(Setup);
+export default connect(mapStateToProps, {setSeller,setBuyer})(Setup);

@@ -38,9 +38,7 @@ function IssuedOnToValide(issuedOn) {
 class Show extends Component {
 render(){
 	const { orderType, orderObject, orderDate,
-		registrationNumberSeller, nameSeller, addressSeller,
-		registrationNumberBuyer, nameBuyer, addressBuyer,cityValue,
-        addressStateObject, footage, docSeller, price, buyer } = this.props;
+		cityValue, footage, docSeller, price, buyer, seller } = this.props;
 	return	(
 	<div className="row">
 		<div className="show">
@@ -54,11 +52,11 @@ render(){
         <p>Попередньо ознайомившись з вимогами цивільного законодавства щодо
             недійсності правочинів, перебуваючи при здоровому розумі та ясній пам'яті,
             діючи добровільно, ми:</p>
-				<span><span className = "bold uppercase italic">{nameSeller},</span>
+				<span><span className = "bold uppercase italic">{seller.nameSeller},</span>
                     реєстраційний номер облікової картки платника податків
-                    <span className = "bold uppercase italic">{registrationNumberSeller}, </span>
-		 			<Declination nameWorM = {parseInt(this.props.chooseMorWSeller, 10)}/>
-                    за адресою: {addressSeller}, – надалі «Продавець»,
+                    <span className = "bold uppercase italic">{seller.registrationNumberSeller}, </span>
+		 			<Declination nameWorM = {parseInt(seller.chooseMorWSeller, 10)}/>
+                    за адресою: {seller.addressSeller}, – надалі «Продавець»,
 		 			та <span className = "bold uppercase italic">{buyer.nameBuyer},</span> реєстраційний номер облікової картки платника податків
                     <span className = "bold uppercase italic"> {buyer.registrationNumberBuyer},</span>
 					<Declination nameWorM = {parseInt(buyer.chooseMorWBuyer, 10)}/>
@@ -72,7 +70,7 @@ render(){
         а Покупець зобов’язується прийняти цю квартиру та сплатити за неї ціну відповідно до умов,
         що визначені в цьому Договорі.</p>
                 <p>Квартира, що відчужується, складається з
-                    <b><СonsistsText number = { footage.numberOfRooms }/>.
+                    <b><СonsistsText number = {footage.numberOfRooms}/>.
                     </b> Загальна площа квартири <b>{footage.totalArea} кв.м.,</b>
                     в тому числі житлова – <b>{footage.livingArea} кв.м.</b></p>
 			    <p>2. Квартира належить <b>Продавцю</b> на пiдставi <b><GenitiveCase word = {orderTypes[docSeller.name].label}/> {orderObjects[docSeller.type].label}</b>,
@@ -147,20 +145,12 @@ Show.propTypes = {
   orderType:PropTypes.number.isRequired,
   orderObject:PropTypes.number.isRequired,
   orderDate:PropTypes.object.isRequired,
-  registrationNumberSeller:PropTypes.string.isRequired,
-  nameSeller:PropTypes.string.isRequired,
-  addressSeller:PropTypes.string.isRequired,
-  registrationNumberBuyer:PropTypes.string.isRequired,
-  nameBuyer:PropTypes.string.isRequired,
-  addressBuyer:PropTypes.string.isRequired,
-  chooseMorWSeller:PropTypes.string.isRequired,
-  chooseMorWBuyer:PropTypes.string.isRequired,
   cityValue:PropTypes.number.isRequired,
   addressStateObject:PropTypes.object.isRequired,
     footage:PropTypes.object.isRequired,
     price:PropTypes.object.isRequired,
     buyer:PropTypes.object.isRequired,
-
+    seller:PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
