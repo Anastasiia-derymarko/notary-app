@@ -2,10 +2,10 @@ import { SET_SELLER, SET_BUYER } from '../constans/setup'
 
 const initialState = {
     seller:{
-      chooseMorWSeller: '1',
-      registrationNumberSeller: '2875016385',
-      nameSeller:'Школьна Наталія Петрівна',
-      addressSeller:'с. Борова Фастівського р-ну Київської обл., вул. Р. Люксембург, буд. 28, кв. 5,',
+        chooseMorWSeller: '1',
+        registrationNumberSeller: '2875016385',
+        nameSeller:'Школьна Наталія Петрівна',
+        addressSeller:'с. Борова Фастівського р-ну Київської обл., вул. Р. Люксембург, буд. 28, кв. 5,',
         statementSeller: false,
 
     },

@@ -7,6 +7,12 @@ export const orderTypes = [
   // {label: "попередній", value: 5},  
 ];
 
+export const statementDoc = [
+    {label: "оберіть варіант", value: 0},
+    {label: "Свідоцтвом про одруження", value: 1},
+
+];
+
 export const docsSellerName = [
   {label: "оберіть варіант", value: 0},
   {label: "договору купівлі-продажу", value: 1},

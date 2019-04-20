@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import { orderTypes, orderObjects} from '../data/orders.js';
 import moment from 'moment';
 import '../components/style/show.css';
-import { ConvertingNumberToString, MonthToString, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from '../components/ConvertingNumberToString';
-
-function Declination(props) {
-	return (props.nameWorM !== 1 ? 'який зареєстрований' : 'яка зареєстрована')
-}
+import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from '../components/ConvertingNumberToString';
+import {Declination} from './Declination';
 
 function СonsistsText (numberOfRooms) {
     let number = numberOfRooms.number,
@@ -25,15 +22,6 @@ function GenitiveCase(word) {
     return word.word.replace('договір','Договору');
 }
 
-function IssuedOnToValide(issuedOn) {
-    issuedOn = issuedOn.date;
-    issuedOn = issuedOn.split('-');
-
-    issuedOn[1] = MonthToString(issuedOn[1]);
-    issuedOn[2]= parseInt(issuedOn[2], 10);
-
-    return issuedOn.reverse().join(' ');
-}
 
 class Show extends Component {
 render(){
@@ -55,11 +43,11 @@ render(){
 				<span><span className = "bold uppercase italic">{seller.nameSeller},</span>
                     реєстраційний номер облікової картки платника податків
                     <span className = "bold uppercase italic">{seller.registrationNumberSeller}, </span>
-		 			<Declination nameWorM = {parseInt(seller.chooseMorWSeller, 10)}/>
+		 			<Declination sex = {parseInt(seller.chooseMorWSeller, 10)}/>
                     за адресою: {seller.addressSeller}, – надалі «Продавець»,
 		 			та <span className = "bold uppercase italic">{buyer.nameBuyer},</span> реєстраційний номер облікової картки платника податків
                     <span className = "bold uppercase italic"> {buyer.registrationNumberBuyer},</span>
-					<Declination nameWorM = {parseInt(buyer.chooseMorWBuyer, 10)}/>
+					<Declination sex = {parseInt(buyer.chooseMorWBuyer, 10)}/>
                     за адресою: {buyer.addressBuyer},
 					– надалі «Покупець», які також іменуються «Сторони», уклали цей договір
                     про нижчевикладене:
@@ -130,7 +118,7 @@ render(){
                     18. Цей договір укладено за згодою чоловіка <b>Покупця</b> – ---------------------- на купівлю квартири, викладеною у вигляді заяви, справжність підпису на якій засвідчено --------------, приватним нотаріусом Київського міського нотаріального округу, 07 вересня 2018 року за реєстровим №----.
                 </p>
                 <p>
-                    Цей договір складено, підписано та посвідчено в двох примірниках, один з яких зберігається у справах приватного нотаріуса, а інший, викладений на нотаріальному бланку, видається Покупцю.
+                    Цей договір складено, підписано та посвідчено в двох примірниках, один з яких зберігається у справах приватного нотаріуса, а інший, викладений на нотаріальному бланку, видається <b>Покупцю.</b>
                 </p>
 
             </div>

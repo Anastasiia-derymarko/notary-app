@@ -21,7 +21,7 @@ import Show from '../components/Show';
 import Scheduel from '../components/scheduel/scheduel.js';
 
 function parties (e, arr, party){
-    let name = typeof(e) !== 'string' ? e.target.name + party: 'chooseMorWBuyer';
+    let name = typeof(e) !== 'string' ? e.target.name + party: 'chooseMorW' + party;
     let value = typeof(e) !== 'string' ? e.target.value : e;
 
     if (name == 'registrationNumber' + party){
@@ -76,7 +76,7 @@ class Setup extends Component {
 
      return (
      <div className= "setup">
-     <Tabs defaultIndex={1}>
+     <Tabs defaultIndex={5}>
       <TabList>
         <Tab>Загальна інформація</Tab>
         <Tab>Сторони</Tab>
@@ -94,13 +94,10 @@ class Setup extends Component {
         <div>
           <Parties
             name={nameSeller}
-            handleNameChange={this.handleChangeInputSeller}
+            handleChangeInput={this.handleChangeInputSeller}
             registrationNumber={registrationNumberSeller}
-            ChangeRegistrationNumber={this.handleChangeInputSeller}
-            chooseMorW = {chooseMorWSeller}
-            handleChooseMorWChanfunctionge={this.handleChangeInputSeller}
+            chooseMorW={chooseMorWSeller}
             address={addressSeller}
-            ChangeAddress={this.handleChangeInputSeller}
             NameParties = "Продавець"
           />
             <div>
@@ -114,13 +111,10 @@ class Setup extends Component {
             </div>
           <Parties
             name={nameBuyer}
-            handleNameChange={this.handleChangeInputBuyer}
+            handleChangeInput={this.handleChangeInputBuyer}
             registrationNumber={registrationNumberBuyer}
-            ChangeRegistrationNumber={this.handleChangeInputBuyer}
             chooseMorW = {chooseMorWBuyer}
-            handleChooseMorWChange={this.handleChangeInputBuyer}
             address={addressBuyer}
-            ChangeAddress={this.handleChangeInputBuyer}
             NameParties = "Покупець"
           />
             <div>

@@ -1,4 +1,3 @@
-// import React from 'react';
 import { months, days, days_new } from '../data/orders.js';
 
 function fun_dayes (day){
@@ -36,7 +35,17 @@ function MonthToString(month) {
     return month;
 }
 
-function ConvertingNumberToString(number){
+function IssuedOnToValide(issuedOn) {
+    issuedOn = issuedOn.date;
+    issuedOn = issuedOn.split('-');
+    console.log(issuedOn);
+    issuedOn[1] = MonthToString(issuedOn[1]);
+    issuedOn[2]= parseInt(issuedOn[2], 10);
+
+    return issuedOn.reverse().join(' ');
+}
+
+export const ConvertingNumberToString = (number) =>{
     number = number.number;
     number = number.split('/');
     number[0] = parseInt(number[0],10);
@@ -217,4 +226,4 @@ function SpaceBetweenNumbers(numbers) {
 
 }
 
-export {ConvertingNumberToString, MonthToString, FloatToSamplesInWordsRus, SpaceBetweenNumbers };
+export {MonthToString, FloatToSamplesInWordsRus, SpaceBetweenNumbers, IssuedOnToValide };
