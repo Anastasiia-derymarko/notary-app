@@ -34,14 +34,15 @@ class AddressAgreement extends Component{
 
   componentDidMount()
   {
-     fetch('http://localhost', {
+     fetch('http://lolololo.zzz.com.ua', {
         method: 'POST',
-        body: JSON.stringify({
+         body: JSON.stringify({
           action: 'region',
         }),
-        cache: 'no-cache',
+         cache: 'no-cache',
       })
       .then(response => {
+          console.log(response);
         response.json().then(data => {
           this.setState(() => ({regions: data}));
         });
@@ -51,7 +52,7 @@ class AddressAgreement extends Component{
     this.setState({ regionValue: selectedOption ? selectedOption.value : null });
 
     if (selectedOption.value === '9') {this.setState({cityValue:'8859'})}
-    fetch('http://localhost', {
+    fetch('http://lolololo.zzz.com.ua/notaryApp', {
         method: 'POST',
         body: JSON.stringify({
           action: 'area',
@@ -68,7 +69,7 @@ class AddressAgreement extends Component{
   }
   handleAreaValueChange = selectedOption => {
     this.setState({ areaValue: selectedOption ? selectedOption.value : null });
-    fetch('http://localhost', {
+    fetch('http://lolololo.zzz.com.ua/notaryApp', {
         method: 'POST',
         body: JSON.stringify({
           action: 'city',
@@ -119,7 +120,7 @@ class AddressAgreement extends Component{
       console.log(this.state.cityValue);
     console.log(event.target.value);
 
-      fetch('http://localhost', {
+      fetch('http://lolololo.zzz.com.ua/notaryApp', {
         method: 'POST',
         body: JSON.stringify({
           action: 'streets_test',
