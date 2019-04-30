@@ -141,6 +141,7 @@ class AddressAgreement extends Component{
         typeObjectValue, numberObjectValue} = this.state
       const {cityValue} = this.props
       
+        console.log('test');
 
       let regionsOptions = Object.keys(regions).map(key => ({value: key, label: regions[key].name}));
       let areasOptions = Object.keys(areas).map(key => ({value: areas[key].id, label: areas[key].name}));
