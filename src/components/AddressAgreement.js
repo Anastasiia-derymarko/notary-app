@@ -91,11 +91,7 @@ class AddressAgreement extends Component{
 
       
   }  
-  handleStreetValueChange = selectedOption => {
-    this.setState({ streetValue: selectedOption ? selectedOption.value : null });
-  }  
-
-  handleSelectValueChange = selectedOption => {
+   handleSelectValueChange = selectedOption => {
       const name = selectedOption.name;
       const value = selectedOption ? selectedOption.value : null ;
       this.setState({[name]: value});   
