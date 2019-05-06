@@ -3,7 +3,6 @@ import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 class Parties extends Component{
 
-
   render () {
     const {chooseMorW, name,address, handleChangeInput, registrationNumber }= this.props;
 

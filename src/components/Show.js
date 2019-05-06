@@ -24,14 +24,14 @@ function GenitiveCase(word) {
 
 class Show extends Component {
 render(){
-	const { orderType, orderObject, orderDate,
-		cityValue, footage, docSeller, price, buyer, seller } = this.props;
+    const { orderType, orderObject, orderDate, } = this.props.mainParametersContract
+	const { cityValue, footage, docSeller, price, buyer, seller, } = this.props;
 	return	(
 	<div className="row">
 		<div className="show">
 			<div className="showHead bold">
-				<p className="uppercase">{ orderTypes[orderType].label }</p>
-				<p>{ orderObjects[orderObject].label }</p>
+				<p className="uppercase">{ orderType.label }</p>
+				<p>{ orderObject.label }</p>
 				<p className= "italic">Місто Київ,
                     <ConvertingNumberToString number = { moment(orderDate).format('DD/MM/YYYY') }/></p>
 			</div>
@@ -60,8 +60,8 @@ render(){
                     <b><СonsistsText number = {footage.numberOfRooms}/>.
                     </b> Загальна площа квартири <b>{footage.totalArea} кв.м.,</b>
                     в тому числі житлова – <b>{footage.livingArea} кв.м.</b></p>
-			    <p>2. Квартира належить <b>Продавцю</b> на пiдставi <b><GenitiveCase word = {orderTypes[docSeller.name].label}/> {orderObjects[docSeller.type].label}</b>,
-                    посвідченого <IssuedOnToValide date = {docSeller.issuedOn} /> року {docSeller.issuedBy} за реєстровим № {docSeller.indexNumbers}, зареєстрованого {docSeller.registry.name} <IssuedOnToValide date ={docSeller.registry.issuedOn} /> року за реєстровим № {docSeller.registry.indexNumbers}.</p>
+			    {/*<p>2. Квартира належить <b>Продавцю</b> на пiдставi <b><GenitiveCase word = {orderTypes[docSeller.name].label}/> {orderObjects[docSeller.type].label}</b>,*/}
+                    {/*посвідченого <IssuedOnToValide date = {docSeller.issuedOn} /> року {docSeller.issuedBy} за реєстровим № {docSeller.indexNumbers}, зареєстрованого {docSeller.registry.name} <IssuedOnToValide date ={docSeller.registry.issuedOn} /> року за реєстровим № {docSeller.registry.indexNumbers}.</p>*/}
                 <p>3. За погодженням сторін продаж квартири вчинено за <b><SpaceBetweenNumbers price = {price.priceObject} /> <FloatToSamplesInWordsRus price={price.priceObject} />, </b>
                     які повністю сплачені <b>Покупцем Продавцю</b> до підписання цього договору. </p>
                 <p>
