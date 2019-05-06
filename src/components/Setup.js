@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-
-import '../components/style/setup.css';
+import './react-tabs-style.css';
 
 import Parties from '../components/Parties.js';
 import AddressAgreement from '../components/AddressAgreement.js';
@@ -19,6 +18,8 @@ import { connect } from 'react-redux';
 import Show from '../components/Show';
 
 import Scheduel from '../components/scheduel/scheduel.js';
+
+// const styledTabList = styled.TabList``;
 
 function parties (e, arr, party){
     let name = typeof(e) !== 'string' ? e.target.name + party: 'chooseMorW' + party;
@@ -76,7 +77,7 @@ class Setup extends Component {
 
      return (
      <div className= "setup">
-     <Tabs defaultIndex={5}>
+     <Tabs defaultIndex={0}>
       <TabList>
         <Tab>Загальна інформація</Tab>
         <Tab>Сторони</Tab>

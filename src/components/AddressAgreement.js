@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
-import '../components/style/address_agreement.css';
 import { buildingOptions, typeObjectOptions } from '../data/orders.js';
-
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setCity, setStateAddress } from '../actions/SetupeActions';
-
 import Footage from './addressAndFootage/footage';
-
 class AddressAgreement extends Component{
 	constructor (props) {
     super(props);

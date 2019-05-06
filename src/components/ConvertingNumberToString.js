@@ -217,7 +217,6 @@ function SpaceBetweenNumbers(numbers) {
     }else if(numbers >= 1000000 ){
         stringNumber = String(numbers).split('');
 
-        console.log(stringNumber);
         stringNumber.splice(-3, 0, " ");
         stringNumber.splice(-7, 0, " ");
         stringNumber = stringNumber.join('');

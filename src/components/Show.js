@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { orderTypes, orderObjects} from '../data/orders.js';
 import moment from 'moment';
-import '../components/style/show.css';
 import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from '../components/ConvertingNumberToString';
 import {Declination} from './Declination';
 

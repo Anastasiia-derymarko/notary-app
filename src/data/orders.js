@@ -1,14 +1,12 @@
 export const orderTypes = [
-  {label: "оберіть варіант", value: 0},
   {label: "договір купівлі-продажу", value: 1},
-  // {label: "дарування", value: 2},
+  {label: "дарування", value: 2},
   // {label: "оренди", value: 3},
   // {label: "іпотеки", value: 4},
   // {label: "попередній", value: 5},  
 ];
 
 export const statementDoc = [
-    {label: "оберіть варіант", value: 0},
     {label: "Свідоцтвом про одруження", value: 1},
 
 ];
@@ -24,7 +22,6 @@ export const docsSellerName = [
 ]
 
 export const orderObjects = [
-  {label: "оберіть варіант", value: 0},
   {label: "квартири", value: 1, },
   // {label: "житлового будинку", value: 2},
 ];

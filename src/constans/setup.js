@@ -1,4 +1,4 @@
-export const SET_TYPE_ORDER = 'SET_TYPE_ORDER';
+export const SET_MAIN_PARAMETERS = 'SET_MAIN_PARAMETERS';
 export const SET_OBJECT = 'SET_OBJECT';
 export const SET_DATE = 'SET_DATE';
 export const SET_CITY = 'SET_CITY';

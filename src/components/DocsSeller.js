@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import '../components/style/DocsSeller.css';
-
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 import {docsSellerName, orderObjects} from '../data/orders.js';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { setDocSeller} from '../actions/SetupeActions';
 
 class DocsSeller extends Component {
