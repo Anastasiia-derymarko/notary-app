@@ -1,50 +1,48 @@
 import React, { Component } from 'react';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import {Row, Label, Placeholder, Input} from '../components/styleComponents';
 
 class Parties extends Component{
 
   render () {
-    const {chooseMorW, name,address, handleChangeInput, registrationNumber }= this.props;
+    const {name,address, handleChangeInput, registrationNumber }= this.props;
 
-      const chooseMorWRadioGroup = <RadioGroup name='chooseMorW' onChange={ handleChangeInput } value={ chooseMorW } className = "chooseMorW">
-          <RadioButton value="0" padding={5}>Він</RadioButton>
-          <RadioButton value="1" padding={5}>Вона</RadioButton>
-      </RadioGroup>;
-
-      const check = chooseMorW !== 'false' ? chooseMorWRadioGroup : "";
+      // const chooseMorWRadioGroup = <RadioGroup name='chooseMorW' onChange={ handleChangeInput } value={ chooseMorW } className = "chooseMorW">
+      //     <RadioButton value="0" padding={5}>Він</RadioButton>
+      //     <RadioButton value="1" padding={5}>Вона</RadioButton>
+      // </RadioGroup>;
 
     return(
-      <div className = "parties">
-        <p>{this.props.NameParties}</p>
-          {check}
-          <div className="container">
-        <label className="nameParties">ПІБ
-          <input
-            type="text"
-            name='name'
-            value={name}
-            onChange={handleChangeInput}
-          />
-        </label>
-        <label className = "NumberParties">РНОКПП
-        <input
-          maxLength="10"
-          name='registrationNumber'
-          value={registrationNumber}
-          onChange={handleChangeInput}
-         />
-        </label>
-        </div>
-        <label className="addressParties">Зараєстрований за адресою
-        <input
-          name='address'
-          value={address}
-          onChange={handleChangeInput}
-        />
-        </label>
-      </div>
+      <Row>
+        <Label>{this.props.NameParties}</Label>
+        <Label size="60%">
+            <Placeholder>ПІБ</Placeholder>
+              <Input
+                type="text"
+                name='name'
+                value={name}
+                onChange={handleChangeInput}
+              />
+        </Label>
+        <Label size="30%">
+            <Placeholder>РНОКПП</Placeholder>
+            <Input
+              maxLength="10"
+              name='registrationNumber'
+              value={registrationNumber}
+              onChange={handleChangeInput}
+             />
+        </Label>
+        <Label>
+            <Placeholder>Зараєстрований за адресою</Placeholder>
+            <Input
+              name='address'
+              value={address}
+              onChange={handleChangeInput}
+            />
+        </Label>
+      </Row>
     )
   }
 }
 
-export default (Parties)  
+export default (Parties)

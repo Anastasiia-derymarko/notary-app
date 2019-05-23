@@ -38,18 +38,26 @@ function MonthToString(month) {
 function IssuedOnToValide(issuedOn) {
     issuedOn = issuedOn.date;
     issuedOn = issuedOn.split('-');
-    console.log(issuedOn);
+
     issuedOn[1] = MonthToString(issuedOn[1]);
     issuedOn[2]= parseInt(issuedOn[2], 10);
 
     return issuedOn.reverse().join(' ');
 }
 
-export const ConvertingNumberToString = (number) =>{
-    number = number.number;
+export const ConvertingNumberToString = (props) => {
+    let number = props.number,
+        capsFirstLetter = props.capsFirstLetter;
+
     number = number.split('/');
     number[0] = parseInt(number[0],10);
     number[0] = fun_dayes (number[0]);
+
+    // Capitalize first letter
+    if (number[0].length > 0 && capsFirstLetter) {
+        number[0] = number[0].match(/^(.)/)[1].toLocaleUpperCase()+number[0].match(/^.(.*)$/)[1];
+    }
+
     number[1] = MonthToString(number[1]);
 
     let years = number[2].split('0');
@@ -58,6 +66,7 @@ export const ConvertingNumberToString = (number) =>{
 
     number[2] = years.join(' ');
     let str = number.join(' ');
+
 
     return str;
 };

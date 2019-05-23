@@ -1,7 +1,9 @@
 .react-tabs__tab-list {
   background: linear-gradient(to bottom right, #919396, #282c30);
   color: #e0e0e0;
-  padding-bottom: 2vh; }
+  padding-bottom: 2vh;
+  display: flex;
+  justify-content: center; }
 
 .react-tabs__tab {
   margin-top: 15vh; }

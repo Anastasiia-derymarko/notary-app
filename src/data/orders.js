@@ -8,11 +8,9 @@ export const orderTypes = [
 
 export const statementDoc = [
     {label: "Свідоцтвом про одруження", value: 1},
-
 ];
 
 export const docsSellerName = [
-  {label: "оберіть варіант", value: 0},
   {label: "договору купівлі-продажу", value: 1},
   // {label: "договору дарування", value: 2},
   // {label: "свідоцтва про право власності", value: 3},

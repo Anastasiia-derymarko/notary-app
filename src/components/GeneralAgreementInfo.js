@@ -4,7 +4,9 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setMainParameters } from '../actions/SetupeActions';
-import styled from 'styled-components';
+import PriceObject from '../components/PriceObject.js';
+import AddressAgreement from '../components/AddressAgreement.js';
+import {Label, Placeholder, styleSelectMenu, Column, Row, Input, colorOptions, Wrapper} from '../components/styleComponents';
 
 class GeneralAgreementInfo extends Component {
     constructor (props) {
@@ -16,6 +18,7 @@ class GeneralAgreementInfo extends Component {
             orderType: orderType,
             orderObject: orderObject,
             orderDate: orderDate,
+            inputType: 'text',
         }
     }
     handleOnInputChange = (valueSelect, nameSelect) => {
@@ -38,58 +41,64 @@ class GeneralAgreementInfo extends Component {
 
         this.setState({[name]: value}, ()=>{this.props.setMainParameters(this.state)});
     };
-    colorOptions = (theme) => ({
-        ...theme,
-        borderRadius: 0,
-        colors: {
-            ...theme.colors,
-            primary: '#b3b3b2',
-            primary25:'#e6e6e6',
-            primary50:'#e6e6e6',
-        },
-    });
-
+    onFocus = () => {
+      this.setState({inputType: 'date'});
+    };
+    onBluer = () => {
+        this.setState({inputType: 'text'});
+    };
   render (){
-      const {orderType, orderObject, orderDate} = this.state;
-
+      const {orderType, orderObject, orderDate, inputType} = this.state;
    return (
-         <div className="column">
-          <StyleInput>
-            <Placeholder placeholderPosition={orderType != null ? orderType.value : null} >Тип угоди</Placeholder>
-            <Select
-                name="orderType"
-                placeholder=""
-                value={orderType}
-                isSearchable={false}
-                onChange={this.handleOnInputChange}
-                options={orderTypes}
-                isClearable={true}
-                theme={this.colorOptions}
-            />
-          </StyleInput>
-          <StyleInput>
-              <Placeholder placeholderPosition={orderObject != null ? orderObject.value : null} >Об'єкт угоди</Placeholder>
+       <Wrapper>
+           <Column>
+            <Label>
+                <Placeholder placeholderPosition={orderType != null ? orderType.value : null} >Тип угоди</Placeholder>
                 <Select
-                    name="orderObject"
-                    placeholder=""
-                    value={orderObject}
+                    name="orderType"
+                    value={orderType}
                     onChange={this.handleOnInputChange}
-                    options={orderObjects}
-                    isClearable={true}
+                    options={orderTypes}
+                    placeholder=""
                     isSearchable={false}
-                    theme={this.colorOptions}
+                    isClearable={true}
+                    theme={colorOptions}
+                    styles={styleSelectMenu}
                 />
-          </StyleInput>
-            <label>
-            <span>Дата угоди:</span>
-            <input
-                name="orderDate"
-              type = "date"
-              value= "orderDate"
-              onChange={this.handleOnInputChange}
-            />
-            </label>
-            <div className = "column">
+            </Label>
+            <Row>
+                <Label size='47%'>
+                  <Placeholder placeholderPosition={orderObject != null ? orderObject.value : null} >Об'єкт угоди</Placeholder>
+                    <Select
+                        name="orderObject"
+                        placeholder=""
+                        value={orderObject}
+                        onChange={this.handleOnInputChange}
+                        options={orderObjects}
+                        isClearable={true}
+                        isSearchable={false}
+                        theme={colorOptions}
+                        styles={styleSelectMenu}
+                    />
+                </Label>
+                <Label size='47%'>
+                    <Placeholder placeholderPosition = {inputType === 'date' || orderDate !== '' ? '' : null} >Дата угоди</Placeholder>
+                    <Input
+                    name="orderDate"
+                    type = {inputType}
+                    value={orderDate}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBluer}
+                    onChange={this.handleOnInputChange}
+                    />
+                </Label>
+            </Row>
+            <PriceObject />
+           </Column>
+           <Column>
+               <AddressAgreement />
+
+             {/*<div className = "column">
               <label>
                 <span>державне мито сплачується</span>
                 <Select
@@ -121,8 +130,9 @@ class GeneralAgreementInfo extends Component {
                 <label>Інформація про брокера</label>
                 <textarea></textarea>
               </div>
-            </div>
-          </div>
+            </div>*/}
+         </Column>
+       </Wrapper>
     )
   }
 }
@@ -136,21 +146,3 @@ const mapStateToProps = state => ({
     ...state.headerOrder,
 });
 export default connect(mapStateToProps, { setMainParameters })(GeneralAgreementInfo);
-
-
-const StyleInput = styled.div`
-  width: 100%;
-  position: relative;
-  margin-bottom: 30px;
-`;
-const Placeholder = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: ${props => props.placeholderPosition === null ? 'translate(5px,-50%)' : 'translate(5px,-200%)'};
-  z-index:2;
-  transition: transform 0.3s ease;
-  color:
-`;
-const Column = styled.div`
-    width: 30%;
-`;

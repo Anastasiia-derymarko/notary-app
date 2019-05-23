@@ -4,16 +4,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './components/react-tabs-style.css';
 
-import AddressAgreement from './components/AddressAgreement.js';
 import DocsSeller from './components/DocsSeller.js';
 import GeneralAgreementInfo from './components/GeneralAgreementInfo.js';
-import PriceObject from './components/PriceObject.js';
 import Statement from './components/Statement';
-import Seller from './components/Seller';
-import Buyer from './components/Buyer';
-import Show from './components/Show';
+import SellerAndBuyer from './components/SellerAndBuyer';
+import AgreementToPrint from './components/ArgeementToPrint';
 
 import Scheduel from './components/scheduel/scheduel.js';
+import './App.css';
 
 class App extends Component {
     componentWillMount(){
@@ -26,13 +24,11 @@ class App extends Component {
 
   render() {
     return (
-        <Tabs defaultIndex={0}>
+        <Tabs defaultIndex={1}>
             <TabList>
                 <Tab>Загальна інформація</Tab>
                 <Tab>Сторони</Tab>
-                <Tab>Об'єкт нерухомого майна</Tab>
                 <Tab>Супровідні документи</Tab>
-                <Tab>Ціна</Tab>
                 <Tab>Заяви-згоди</Tab>
                 <Tab>Договір</Tab>
                 <Tab>Календар</Tab>
@@ -41,28 +37,16 @@ class App extends Component {
                 <GeneralAgreementInfo />
             </TabPanel>
             <TabPanel>
-                <Seller />
-                <Buyer />
+                <SellerAndBuyer />
             </TabPanel>
-
-            <TabPanel>
-                <AddressAgreement />
-            </TabPanel>
-
             <TabPanel>
                 <DocsSeller />
             </TabPanel>
-
-            <TabPanel>
-                <PriceObject />
-            </TabPanel>
-
             <TabPanel>
                 <Statement />
             </TabPanel>
-
             <TabPanel>
-                <Show/>
+                <AgreementToPrint />
             </TabPanel>
             <TabPanel>
                 <Scheduel />

@@ -9,6 +9,11 @@ const initialState = {
       totalArea:'65,90',
       livingArea:'52,60',
   },
+    address:{
+        region: null,
+        city: null,
+        streetValue: null,
+    }
 };
 
 export default function addressObject(state = initialState, action) {

@@ -3,8 +3,8 @@ import { SET_DOC_SELLER} from '../constans/setup'
 
 const initialState = {
     docSeller:{
-        name:1,
-        type:1,
+        name: {label: "договору купівлі-продажу", value: 1},
+        type:{label: "квартири", value: 1, },
         issuedOn:"2012-05-17",
         issuedBy:'Юрченком В.В., приватним нотаріусом Київського міського нотаріального округу',
         indexNumbers: 1286,

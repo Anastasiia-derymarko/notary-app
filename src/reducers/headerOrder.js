@@ -1,7 +1,7 @@
 import { SET_MAIN_PARAMETERS } from '../constans/setup'
 
-let dataLocal = new Date();
-let dataString = dataLocal.getFullYear()+'-0'+(+dataLocal.getMonth()+1)+'-'+dataLocal.getDate();
+// let dataLocal = new Date();
+// let dataString = dataLocal.getFullYear()+'-0'+(+dataLocal.getMonth()+1)+'-'+dataLocal.getDate();
 
 const initialState = {
     mainParametersContract:{

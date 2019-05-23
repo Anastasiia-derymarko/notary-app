@@ -7,7 +7,7 @@ const initialState = {
         nameSeller:'Школьна Наталія Петрівна',
         addressSeller:'с. Борова Фастівського р-ну Київської обл., вул. Р. Люксембург, буд. 28, кв. 5,',
         statementSeller: false,
-
+        genderSeller: 'NCL::$WOMEN',
     },
     spouseSeller:{},
     buyer:{
@@ -16,6 +16,7 @@ const initialState = {
         nameBuyer: 'Римар Людмила Петрівна',
         addressBuyer: 'с. Борова Фастівського р-ну Київської обл., вул. Миру, буд. 20,',
         statementBuyer: false,
+        genderBuyer: 'NCL::$WOMEN',
     },
     spouseBuyer:{},
 };

@@ -14,7 +14,7 @@ class PopupEvent extends Component {
         }
     }
     handleHoursPopupActive = (event) => {
-        if (this.state.hoursPopupActive == false){
+        if (this.state.hoursPopupActive === false){
             this.setState({ hoursPopupActive: true});
         }else{
             this.setState({ hoursAktive: +event.target.innerHTML});
@@ -22,7 +22,7 @@ class PopupEvent extends Component {
         }
     }
     handleMinutesPopupActive = (event) => {
-        if (this.state.hoursPopupActive == false){
+        if (this.state.hoursPopupActive === false){
             this.setState({ minutesPopupActive: true});
         }else{
             this.setState({ minutesAktive: event.target.innerHTML});

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { orderTypes, orderObjects} from '../data/orders.js';
 import moment from 'moment';
 import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from '../components/ConvertingNumberToString';
 import {Declination} from './Declination';
@@ -20,7 +19,6 @@ function СonsistsText (numberOfRooms) {
 function GenitiveCase(word) {
     return word.word.replace('договір','Договору');
 }
-
 
 class Show extends Component {
 render(){
@@ -119,7 +117,6 @@ render(){
                 <p>
                     Цей договір складено, підписано та посвідчено в двох примірниках, один з яких зберігається у справах приватного нотаріуса, а інший, викладений на нотаріальному бланку, видається <b>Покупцю.</b>
                 </p>
-
             </div>
 		</div>
 	</div>

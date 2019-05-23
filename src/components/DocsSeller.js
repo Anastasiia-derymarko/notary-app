@@ -4,6 +4,7 @@ import {docsSellerName, orderObjects} from '../data/orders.js';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setDocSeller} from '../actions/SetupeActions';
+import {Wrapper, Column, Row, Label, Input, Placeholder, styleSelectMenu, colorOptions} from './styleComponents';
 
 class DocsSeller extends Component {
   constructor (props) {
@@ -44,84 +45,95 @@ class DocsSeller extends Component {
         indexNumbers, registryName, registryIssuedOn, registryIndexNumbers} = this.state
 
     return (
-      <div>
-        <div className = "row" style = {{marginRight: "10px"}}>
-        <div className = "column">
-          <label>
-          <span>Назва документа:</span>
-           <Select 
-             value={name}
-             onChange={this.handleDocTypeNameChange}
-             options={docsSellerName}
-           />
-           </label>
-           <label>
-           <span>Доповнення:</span>
-           <Select 
-             value={type}
-             onChange={this.handleDocObjTypeChange}
-             options={orderObjects}
-           /> 
-           </label>
-            <div className = "row">
-              <label style = {{width: "75%"}} >Дата
-              <input
-                type="date"
-                name="issuedOn"
-                value= {issuedOn}
-                onChange = {this.onInputChange}
-              />
-              </label>
-              <label style = {{width: "25%"}} >№ 
-              <input
-                name = 'indexNumbers'
-                value={indexNumbers}
-                onChange={this.onInputChange || ''}
-              />
-              </label>
-            </div>
-            <label>
-            <span>Ким виданий:</span>
-            <input 
+      <Wrapper>
+          <Column>
+          <Label>
+            <Placeholder>Назва документа:</Placeholder>
+            <Select
+                name="name"
+                value={name}
+                onChange={this.handleDocTypeNameChange}
+                options={docsSellerName}
+                placeholder=""
+                isSearchable={false}
+                isClearable={true}
+                theme={colorOptions}
+                styles={styleSelectMenu}
+            />
+          </Label>
+            <Row>
+                <Label size="50%">
+                <Placeholder>Доповнення:</Placeholder>
+                <Select
+                    name="type"
+                    value={type}
+                    onChange={this.handleDocObjTypeChange}
+                    options={orderObjects}
+                    placeholder=""
+                    isSearchable={false}
+                    isClearable={true}
+                    theme={colorOptions}
+                    styles={styleSelectMenu}
+                />
+              </Label>
+              <Label size="32%">
+                <Placeholder>Дата</Placeholder>
+                <Input
+                    type="date"
+                    name="issuedOn"
+                    value= {issuedOn}
+                    onChange = {this.onInputChange}
+                    />
+              </Label>
+              <Label size="15%">
+                  <Placeholder>№</Placeholder>
+                  <Input
+                    name = 'indexNumbers'
+                    value={indexNumbers}
+                    onChange={this.onInputChange || ''}
+                  />
+                  </Label>
+            </Row>
+            <Label>
+            <Placeholder>Ким виданий:</Placeholder>
+            <Input
               name = 'issuedBy'
               value={issuedBy}
               onChange={this.onInputChange || ''}
             />
-            </label>
-
-            </div>
-            <div className = "column">
-              <label>
-              <span>Назва реєстра:</span>
-              <input 
-                name = 'registryName'
-                value={registryName}
-                onChange={this.onInputChange || ''}
-              />
-              </label>
-              <div className = "row">
-                 <label style = {{width: "75%"}}>Дата
-                <input
-                    type="date"
-                    name="registryIssuedOn"
-                    value= {registryIssuedOn}
-                    onChange = {this.onInputChange}
-                />
-                </label>
-                <label style = {{width: "25%"}}><span>№ </span>
-                <input
-                name = 'registryIndexNumbers'
-                value={registryIndexNumbers}
-                onChange={this.onInputChange || ''}         
-                />
-                </label>
-              </div>
-            </div>
-          </div> 
-            <div className = "row" style={{marginRight: "10px"}}> 
+            </Label>
+          </Column>
+          <Column>
+              <Label>
+                <Placeholder>Назва реєстра / БТІ:</Placeholder>
+                  <Input
+                    name = 'registryName'
+                    value={registryName}
+                    onChange={this.onInputChange || ''}
+                  />
+              </Label>
+              <Row>
+                 <Label size="32%">
+                    <Placeholder>Дата</Placeholder>
+                    <Input
+                        type="date"
+                        name="registryIssuedOn"
+                        value= {registryIssuedOn}
+                        onChange = {this.onInputChange}
+                    />
+                </Label>
+                <Label size="15%" style={{margin:'0 auto 0 2%'}}>
+                    <Placeholder>№ </Placeholder>
+                    <Input
+                        name = 'registryIndexNumbers'
+                        value={registryIndexNumbers}
+                        onChange={this.onInputChange || ''}
+                    />
+                </Label>
+              </Row>
             <button onClick = {() => this.props.setDocSeller(this.state)}>+ Додати документ</button>
-            </div>  
-      </div>
+          </Column>
+      </Wrapper>
     )
   }      
 }

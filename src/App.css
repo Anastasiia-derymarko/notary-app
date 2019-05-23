@@ -5,3 +5,22 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+@media print {
+
+    @page:right{
+        margin-top: 1cm;
+        margin-right: 1cm;
+        margin-bottom: 1cm;
+        margin-left: 3cm;
+    }
+    @page:left{
+        width: 25cm;
+        margin-top:1cm;
+        margin-right: 3cm;
+        margin-bottom: 1cm;
+        margin-left: -1cm;
+
+    }
+
+
+}

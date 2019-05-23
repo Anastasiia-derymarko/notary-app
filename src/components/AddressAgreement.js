@@ -5,19 +5,24 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setCity, setStateAddress } from '../actions/SetupeActions';
 import Footage from './addressAndFootage/footage';
+import {Label, Placeholder, styleSelectMenu, Address, Row, Input, colorOptions} from '../components/styleComponents';
+
+
 class AddressAgreement extends Component{
 	constructor (props) {
     super(props);
 
+    const {region, city, street} = this.props.address;
+
     this.state = {
       regions: {},
-      regionValue:this.props.regionValue,
+      region: region,
       areas:{},
       areaValue:this.props.areaValue,
       citys:{},
-      cityValue:this.props.cityValue,
+      city: city,
       streets:{},
-      streetValue:this.props.streetValue,
+      street: street,
       streetOptions:[],
       buildingValue:this.props.buildingValue,
       numberBuildingValue:this.props.numberBuildingValue,
@@ -29,42 +34,44 @@ class AddressAgreement extends Component{
 
   componentDidMount()
   {
-     fetch('http://lolololo.zzz.com.ua', {
-        method: 'POST',
-         body: JSON.stringify({
-          action: 'region',
-        }),
-         cache: 'no-cache',
+      fetch('http://lolololo.zzz.com.ua', {
+          method: 'POST',
+          body: JSON.stringify({
+              action: 'region',
+          }),
+          cache: 'no-cache',
       })
-      .then(response => {
-          console.log(response);
-        response.json().then(data => {
-          this.setState(() => ({regions: data}));
-        });
-      });
+          .then(response => {
+              response.json().then(data => {
+                  this.setState(() => ({regions: data}));
+              });
+          });
 }
   handleRegionValueChange = selectedOption => {
-    this.setState({ regionValue: selectedOption ? selectedOption.value : null });
+    this.setState({ region: selectedOption });
+    if (selectedOption){
+        if (selectedOption.value === '9') {this.setState({city:'8859'})}
 
-    if (selectedOption.value === '9') {this.setState({cityValue:'8859'})}
-    fetch('http://lolololo.zzz.com.ua/notaryApp', {
-        method: 'POST',
-        body: JSON.stringify({
-          action: 'area',
-          column: 'region_id',
-          number_strings : selectedOption ? selectedOption.value : null
-        }),
-        cache: 'no-cache',
-      })
-      .then(response => {
-        response.json().then(data => {
-          this.setState(() => ({areas: data}));
-        });
-      });
-  }
+        fetch('http://lolololo.zzz.com.ua', {
+            method: 'POST',
+            body: JSON.stringify({
+              action: 'area',
+              column: 'region_id',
+              number_strings : selectedOption.value,
+            }),
+            cache: 'no-cache',
+          })
+          .then(response => {
+            response.json().then(data => {
+              this.setState(() => ({areas: data}));
+            });
+          });
+    }
+
+  };
   handleAreaValueChange = selectedOption => {
     this.setState({ areaValue: selectedOption ? selectedOption.value : null });
-    fetch('http://lolololo.zzz.com.ua/notaryApp', {
+    fetch('http://lolololo.zzz.com.ua', {
         method: 'POST',
         body: JSON.stringify({
           action: 'city',
@@ -78,19 +85,16 @@ class AddressAgreement extends Component{
           this.setState(() => ({citys: data}));
         });
       }); 
-  }
-
+  };
   handleCityValueChange = selectedOption => {
-    this.setState({ cityValue: selectedOption ? selectedOption.value : null });
-    this.props.setCity(selectedOption ? +selectedOption.value : null)  
-
-      
-  }  
-   handleSelectValueChange = selectedOption => {
+    this.setState({ city: selectedOption ? selectedOption.value : null });
+    this.props.setCity(selectedOption ? +selectedOption.value : null);
+  };
+  handleSelectValueChange = selectedOption => {
       const name = selectedOption.name;
       const value = selectedOption ? selectedOption.value : null ;
       this.setState({[name]: value});   
-  }
+  };
   onInputChange = event => {
     const name = event.target.name;
     let value = event.target.value;
@@ -102,21 +106,19 @@ class AddressAgreement extends Component{
     this.setState({[name]: value});
     this.props.setStateAddress(this.state);
 
-  }
+  };
   handleStreetOnChange = event => {
-
-    if(event.target.value.length < 3 ){
+        console.log(2222);
+      const value = event.target.value;
+    if(value.length < 3 ){
       return;
     }else {
-      console.log(this.state.cityValue);
-    console.log(event.target.value);
-
-      fetch('http://lolololo.zzz.com.ua/notaryApp', {
+      fetch('http://lolololo.zzz.com.ua', {
         method: 'POST',
         body: JSON.stringify({
           action: 'streets_test',
-          city: this.state.cityValue,
-          search_q:event.target.value
+          city: this.state.city,
+          search_q: value
         }),
         cache: 'no-cache',
       })
@@ -126,17 +128,12 @@ class AddressAgreement extends Component{
         });
       }); 
     }
-  }
-
-
+  };
 
       render(){
-    	const {regionValue, regions, areas, areaValue, 
-        citys, streets, streetValue, buildingValue, numberBuildingValue, 
+    	const {region, regions, areas, areaValue, city,
+        citys, streets, street, buildingValue, numberBuildingValue,
         typeObjectValue, numberObjectValue} = this.state
-      const {cityValue} = this.props
-      
-        console.log('test');
 
       let regionsOptions = Object.keys(regions).map(key => ({value: key, label: regions[key].name}));
       let areasOptions = Object.keys(areas).map(key => ({value: areas[key].id, label: areas[key].name}));
@@ -144,8 +141,8 @@ class AddressAgreement extends Component{
       let streetsOptions = Object.keys(streets).map(key => ({value: streets[key].id, label: streets[key].Street}));
 
       let select = null;
-      if(regionValue === undefined || regionValue === '9') {
-        select = <div></div>;
+      if(region === null || region.value === '9') {
+        select = null;
 
       }else{
         select = <div style = {{width: "100%"}}>
@@ -159,82 +156,87 @@ class AddressAgreement extends Component{
                 <span>місто/село:</span>
                 <Select
                   name="city"
-                  value={cityValue}
+                  value={city}
                   onChange={this.handleCityValueChange}
                   options={citysOptions}
                 /></div>
       }  
 
-      return(
-        <div style = {{position:"relative"}}>
-          <div className = "column">
-            <div className= "column address">
-              <span>Регіон:</span>
-        			<Select
-    		          name="region"
-    		          value={regionValue}
-    		          onChange={this.handleRegionValueChange}
-    		          options={regionsOptions}
-            		/> 
+    return(
+        <Address>
+            <Label>
+                <Placeholder>Регіон:</Placeholder>
+                <Select
+                  name="region"
+                  value={region}
+                  onChange={this.handleRegionValueChange}
+                  options={regionsOptions}
+                  isClearable={true}
+                  placeholder=""
+                  theme={colorOptions}
+                  styles={styleSelectMenu}
+                />
+            </Label>
                 {select}
-                <span>вулиця:</span>
-                <div className = "street">
-                  <input 
-                    list="street" 
-                    autoComplete="on" 
+            <Label>
+                <Placeholder>Вулиця:</Placeholder>
+                  <Select
+                    name ="street"
+                    value={street}
+                    options={streetsOptions}
                     onChange={this.handleStreetOnChange}
-                    value = {streetValue}  
-                    />
-                  <datalist id="street">
-                  {streetsOptions.map((post) =>
-                    <option key={post.value}>
-                      {post.label}
-                    </option>
-                  )}
-                  </datalist>
-                </div>
-              </div>
-
-          		<div className="column building">
-                <div className = "label_building">
-                  <label className ="type">Тип будівлі:
+                    isClearable={true}
+                    placeholder=""
+                    theme={colorOptions}
+                    styles={styleSelectMenu}
+                  />
+            </Label>
+            <Row>
+                <Label size="47%">
+                    <Placeholder>Тип будівлі:</Placeholder>
                     <Select
-                          name="buildingValue"
-                          value={buildingValue}
-                          onChange={this.handleSelectValueChange}
-                          options={buildingOptions}
-                        /> 
-                  </label>
-                  <label className = "number"> №
-                    <input
-                      className ="input"
-                      name="numberBuildingValue"
-                      value={numberBuildingValue || ''}
-                      onChange={this.onInputChange}
-                    /> 
-                  </label>
-                </div>
-                <div className = "label_building">
-                  <label className ="type">Тип об'єкта:
+                      name="buildingValue"
+                      value={buildingValue}
+                      onChange={this.handleSelectValueChange}
+                      isClearable={true}
+                      options={buildingOptions}
+                      placeholder=""
+                      theme={colorOptions}
+                      styles={styleSelectMenu}
+                    />
+                </Label>
+                <Label size="40%">
+                    <Placeholder>№</Placeholder>
+                    <Input
+                        name="numberBuildingValue"
+                        value={numberBuildingValue || ''}
+                        onChange={this.onInputChange}
+                    />
+                </Label>
+                <Label size='47%'>
+                    <Placeholder>Тип об'єкта:</Placeholder>
                     <Select
                         name="numberObjectValue"
                         value={typeObjectValue}
-                      onChange={this.handleSelectValueChange}
-                      options={typeObjectOptions}
-                    /> 
-                  </label>
-                  <label className = "number"> №
-                    <input
+                        onChange={this.handleSelectValueChange}
+                        options={typeObjectOptions}
+                        isClearable={true}
+                        placeholder=""
+                        theme={colorOptions}
+                        styles={styleSelectMenu}
+                    />
+                </Label>
+                <Label size="40%">
+                  <Placeholder>№</Placeholder>
+                  <Input
                       className ="input"
                       value={numberObjectValue || ''}
                       onChange={this.onInputChange}
-                    /> 
-                  </label>
-                </div>
-                <Footage/>
-                </div>
-          </div>
-        </div>
+                  />
+                </Label>
+            </Row>
+            <Footage/>
+        </Address>
     	);
     }
 }
