@@ -162,9 +162,9 @@ function From0To999(fValue, oObjDesc, fnAddNum, fnAddDesc)
     fnAddDesc(oObjDesc._arrStates[nCurrState]);
 }
 
-function FloatToSamplesInWordsRus(fAmount)
+function FloatToSamplesInWordsRus(number)
 {
-    fAmount = parseFloat(fAmount.price);
+    let fAmount = parseFloat(number.price);
 
     let fInt = Math.floor(fAmount + 0.005);
     let fDec = Math.floor(((fAmount - fInt) * 100) + 0.5);
@@ -207,8 +207,14 @@ function FloatToSamplesInWordsRus(fAmount)
         arrRet.push((fDec < 10) ? ("0" + fDec) : ("" + fDec));
     From0To999(fDec, objKop, function() {}, PushToRes);
 
-    let replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' грив', ') грив');
-    return '('+replaceString;
+    let replaceString;
+    if(number.number){
+        replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' гривень', ')');
+        return ' ('+replaceString;
+    }else{
+        replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' грив', ') грив');
+        return '('+replaceString;
+    }
 }
 
 // this.getField("Сумма_пр").value = FloatToSamplesInWordsRus(parseFloat(event.value))+".";

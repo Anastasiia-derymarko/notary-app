@@ -2,34 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="05ea7583-a2a6-4554-bcd8-73e58f27755b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/ArgeementToPrint.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/SellerAndBuyer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/StatementToPrint.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/styleComponents.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Buyer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Seller.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package-lock.json" afterPath="$PROJECT_DIR$/package-lock.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.css" afterPath="$PROJECT_DIR$/src/App.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/AddressAgreement.js" afterPath="$PROJECT_DIR$/src/components/AddressAgreement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ArgeementToPrint.js" afterPath="$PROJECT_DIR$/src/components/ArgeementToPrint.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/ConvertingNumberToString.js" afterPath="$PROJECT_DIR$/src/components/ConvertingNumberToString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/DocsSeller.js" afterPath="$PROJECT_DIR$/src/components/DocsSeller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/GeneralAgreementInfo.js" afterPath="$PROJECT_DIR$/src/components/GeneralAgreementInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Parties.js" afterPath="$PROJECT_DIR$/src/components/Parties.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/PriceObject.js" afterPath="$PROJECT_DIR$/src/components/PriceObject.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Show.js" afterPath="$PROJECT_DIR$/src/components/Show.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/Statement.js" afterPath="$PROJECT_DIR$/src/components/Statement.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/addressAndFootage/footage.js" afterPath="$PROJECT_DIR$/src/components/addressAndFootage/footage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/react-tabs-style.css" afterPath="$PROJECT_DIR$/src/components/react-tabs-style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/react-tabs-style.scss" afterPath="$PROJECT_DIR$/src/components/react-tabs-style.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/scheduel/popupEvent.js" afterPath="$PROJECT_DIR$/src/components/scheduel/popupEvent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/orders.js" afterPath="$PROJECT_DIR$/src/data/orders.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/AddressObject.js" afterPath="$PROJECT_DIR$/src/reducers/AddressObject.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/Parties.js" afterPath="$PROJECT_DIR$/src/reducers/Parties.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/docSeller.js" afterPath="$PROJECT_DIR$/src/reducers/docSeller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/headerOrder.js" afterPath="$PROJECT_DIR$/src/reducers/headerOrder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/configureStore.js" afterPath="$PROJECT_DIR$/src/store/configureStore.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,24 +26,68 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="SellerAndBuyer.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/SellerAndBuyer.js">
+      <file leaf-file-name="ArgeementToPrint.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/ArgeementToPrint.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="81">
-              <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+            <state relative-caret-position="1350">
+              <caret line="56" column="195" lean-forward="false" selection-start-line="56" selection-start-column="195" selection-end-line="56" selection-end-column="195" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddressAgreement.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/AddressAgreement.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="94" column="66" lean-forward="false" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="66" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+                <marker date="1559143814624" expanded="true" signature="2733:3041" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Parties.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Parties.js">
+      <file leaf-file-name="DocsSeller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/DocsSeller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="378">
+              <caret line="38" column="99" lean-forward="false" selection-start-line="38" selection-start-column="99" selection-end-line="38" selection-end-column="99" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AddressObject.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/reducers/AddressObject.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ping.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/enhancers/ping.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+              <folding>
+                <marker date="1559210338724" expanded="true" signature="1512:1608" ph="{&quot;type&quot;: &quot;git&quot;...}" />
+                <marker date="1559210338724" expanded="true" signature="1656:1732" ph="{&quot;url&quot;: &quot;https://github.com/Anastasiia-derymarko/notary-app/issues&quot;...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,8 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>прик</find>
-      <find>addressObject</find>
       <find>orderTypes</find>
       <find>objKop</find>
       <find>00</find>
@@ -100,6 +124,8 @@
       <find>WifeOrHusband</find>
       <find>firs</find>
       <find>upper</find>
+      <find>handleSelectValueChange</find>
+      <find>8859</find>
     </findStrings>
     <replaceStrings>
       <replace>let</replace>
@@ -141,30 +167,31 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/components/Setup.js" />
         <option value="$PROJECT_DIR$/src/components/react-tabs-style.scss" />
-        <option value="$PROJECT_DIR$/src/reducers/AddressObject.js" />
         <option value="$PROJECT_DIR$/src/components/PriceObject.js" />
         <option value="$PROJECT_DIR$/src/components/Seller.js" />
         <option value="$PROJECT_DIR$/src/components/Buyer.js" />
         <option value="$PROJECT_DIR$/src/reducers/docSeller.js" />
         <option value="$PROJECT_DIR$/src/components/DocsSeller.js" />
         <option value="$PROJECT_DIR$/src/data/orders.js" />
-        <option value="$PROJECT_DIR$/src/components/ConvertingNumberToString.js" />
-        <option value="$PROJECT_DIR$/src/components/Show.js" />
         <option value="$PROJECT_DIR$/src/components/argeementToPrint.js" />
         <option value="$PROJECT_DIR$/src/components/styleComponents.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/reducers/Parties.js" />
-        <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/components/StatementToPrint.js" />
         <option value="$PROJECT_DIR$/src/components/scheduel/popupEvent.js" />
         <option value="$PROJECT_DIR$/src/components/Parties.js" />
         <option value="$PROJECT_DIR$/src/reducers/headerOrder.js" />
-        <option value="$PROJECT_DIR$/src/components/ArgeementToPrint.js" />
         <option value="$PROJECT_DIR$/src/components/addressAndFootage/footage.js" />
         <option value="$PROJECT_DIR$/src/components/Statement.js" />
         <option value="$PROJECT_DIR$/src/components/GeneralAgreementInfo.js" />
-        <option value="$PROJECT_DIR$/src/components/AddressAgreement.js" />
         <option value="$PROJECT_DIR$/src/components/SellerAndBuyer.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/components/Show.js" />
+        <option value="$PROJECT_DIR$/src/components/ArgeementToPrint.js" />
+        <option value="$PROJECT_DIR$/src/components/ConvertingNumberToString.js" />
+        <option value="$PROJECT_DIR$/src/reducers/AddressObject.js" />
+        <option value="$PROJECT_DIR$/src/components/AddressAgreement.js" />
+        <option value="$PROJECT_DIR$/src/store/configureStore.js" />
       </list>
     </option>
   </component>
@@ -241,6 +268,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notary-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notary-app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="reducers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -259,47 +304,25 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="enhancers" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notary-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="notary-app" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notary-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notary-app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notary-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="notary-app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="addressAndFootage" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -409,12 +432,13 @@
       <workItem from="1556801163021" duration="28439000" />
       <workItem from="1557155399216" duration="53551000" />
       <workItem from="1558374584418" duration="373000" />
-      <workItem from="1558371362837" duration="3122000" />
+      <workItem from="1558371362837" duration="20551000" />
+      <workItem from="1559141712237" duration="3914000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227077000" />
+    <option name="totallyTimeSpent" value="248420000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -512,13 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/enhancers/ping.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -549,13 +566,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PartiesTest.js" />
-    <entry file="file://$PROJECT_DIR$/src/store/configureStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -604,13 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/reducers/AddressObject.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/PriceObject.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -634,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/DocsSeller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="75" column="44" lean-forward="false" selection-start-line="71" selection-start-column="20" selection-end-line="75" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
@@ -652,14 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,31 +672,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Show.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3861">
-          <caret line="146" column="45" lean-forward="true" selection-start-line="139" selection-start-column="0" selection-end-line="146" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ConvertingNumberToString.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1539">
-          <caret line="57" column="35" lean-forward="false" selection-start-line="57" selection-start-column="30" selection-end-line="57" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/StatementToPrint.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="11" column="100" lean-forward="false" selection-start-line="11" selection-start-column="100" selection-end-line="11" selection-end-column="100" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -728,21 +695,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Statement.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="72" column="100" lean-forward="false" selection-start-line="72" selection-start-column="100" selection-end-line="72" selection-end-column="100" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/scheduel/popupEvent.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="16" column="43" lean-forward="false" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -759,38 +715,35 @@
         <state relative-caret-position="131">
           <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/ArgeementToPrint.js">
+    <entry file="file://$PROJECT_DIR$/src/components/SellerAndBuyer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="10" lean-forward="false" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="486">
+          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Statement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="55" column="33" lean-forward="true" selection-start-line="54" selection-start-column="11" selection-end-line="55" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/AddressAgreement.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4428">
-          <caret line="187" column="28" lean-forward="true" selection-start-line="187" selection-start-column="28" selection-end-line="187" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-272">
+          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -798,17 +751,86 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Show.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="27" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/SellerAndBuyer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/ConvertingNumberToString.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="21" column="5" lean-forward="true" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+        <state relative-caret-position="27">
+          <caret line="211" column="90" lean-forward="false" selection-start-line="211" selection-start-column="90" selection-end-line="211" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/ArgeementToPrint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1350">
+          <caret line="56" column="195" lean-forward="false" selection-start-line="56" selection-start-column="195" selection-end-line="56" selection-end-column="195" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/DocsSeller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="38" column="99" lean-forward="false" selection-start-line="38" selection-start-column="99" selection-end-line="38" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/AddressAgreement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="94" column="66" lean-forward="false" selection-start-line="94" selection-start-column="51" selection-end-line="94" selection-end-column="66" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+            <marker date="1559143814624" expanded="true" signature="2733:3041" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding>
+            <marker date="1559210338724" expanded="true" signature="1512:1608" ph="{&quot;type&quot;: &quot;git&quot;...}" />
+            <marker date="1559210338724" expanded="true" signature="1656:1732" ph="{&quot;url&quot;: &quot;https://github.com/Anastasiia-derymarko/notary-app/issues&quot;...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/enhancers/ping.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/configureStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reducers/AddressObject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" column="11" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>

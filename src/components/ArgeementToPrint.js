@@ -25,6 +25,8 @@ class AgreementToPrint extends Component {
     render(){
         const { orderType, orderObject, orderDate, } = this.props.mainParametersContract
         const { cityValue, footage, docSeller, price, buyer, seller, } = this.props;
+        const {region, area, city, street, buildingValue, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
+        console.log(city);
         return(
             <Column>
                 <ReactToPrint
@@ -52,10 +54,8 @@ class AgreementToPrint extends Component {
                                     за адресою: <BoldItalic>{buyer.addressBuyer},</BoldItalic>
                                 – надалі <BoldItalic>«Покупець»</BoldItalic>, які також іменуються <BoldItalic>«Сторони»,</BoldItalic> уклали цей договір
                                     про нижчевикладене:
-                                <p>1. <BoldItalic>Продавці</BoldItalic> зобов’язуються передати у власність Покупця квартиру під номером 30 (тридцять),
-                                    що знаходиться в будинку під номером 2-А (два «А») на вулиці Піддубного Івана в місті
-                                    {cityValue <= 0 ? '' : cityValue},
-                                    а Покупець зобов’язується прийняти цю квартиру та сплатити за неї ціну відповідно до умов,
+                                <p>1. <BoldItalic>Продавці</BoldItalic> зобов’язуються передати у власність <BoldItalic>Покупця квартиру </BoldItalic> під номером <BoldItalic> {numberObjectValue}<FloatToSamplesInWordsRus number = {true} price={numberObjectValue} />, </BoldItalic>
+                                    що знаходиться <BoldItalic> в будинку </BoldItalic> під номером <BoldItalic> 2-А (два «А») на вулиці Піддубного Івана в місті {city.label},</BoldItalic> а <BoldItalic>Покупець </BoldItalic> зобов’язується прийняти цю <BoldItalic> квартиру </BoldItalic>та сплатити за неї ціну відповідно до умов,
                                     що визначені в цьому Договорі.</p>
                                 <p>Квартира, що відчужується, складається з <b><ConsistsText number = {footage.numberOfRooms} />.</b> Загальна площа квартири <b>{footage.totalArea} кв.м.,</b>
                                     в тому числі житлова – <b>{footage.livingArea} кв.м.</b></p>

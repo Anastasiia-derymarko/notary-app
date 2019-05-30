@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     return (
-        <Tabs defaultIndex={1}>
+        <Tabs defaultIndex={0}>
             <TabList>
                 <Tab>Загальна інформація</Tab>
                 <Tab>Сторони</Tab>

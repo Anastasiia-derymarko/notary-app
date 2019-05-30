@@ -23,8 +23,10 @@ function GenitiveCase(word) {
 class Show extends Component {
 render(){
     const { orderType, orderObject, orderDate, } = this.props.mainParametersContract
-	const { cityValue, footage, docSeller, price, buyer, seller, } = this.props;
-	return	(
+	const {footage, docSeller, price, buyer, seller, } = this.props;
+    const {region, area, city, street, buildingValue, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
+console.log(city);
+    return	(
 	<div className="row">
 		<div className="show">
 			<div className="showHead bold">
@@ -50,8 +52,7 @@ render(){
                     про нижчевикладене:
 				</span>
         <p>1. Продавці зобов’язуються передати у власність Покупця квартиру під номером 30 (тридцять),
-        що знаходиться в будинку під номером 2-А (два «А») на вулиці Піддубного Івана в місті
-            {cityValue <= 0 ? '' : cityValue},
+        що знаходиться в будинку під номером 2-А (два «А») на вулиці Піддубного Івана в місті {city},
         а Покупець зобов’язується прийняти цю квартиру та сплатити за неї ціну відповідно до умов,
         що визначені в цьому Договорі.</p>
                 <p>Квартира, що відчужується, складається з
@@ -129,8 +130,8 @@ Show.propTypes = {
   orderType:PropTypes.number.isRequired,
   orderObject:PropTypes.number.isRequired,
   orderDate:PropTypes.object.isRequired,
-  cityValue:PropTypes.number.isRequired,
-  addressStateObject:PropTypes.object.isRequired,
+
+  address:PropTypes.object.isRequired,
     footage:PropTypes.object.isRequired,
     price:PropTypes.object.isRequired,
     buyer:PropTypes.object.isRequired,
