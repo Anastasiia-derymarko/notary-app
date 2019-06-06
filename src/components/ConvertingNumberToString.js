@@ -1,4 +1,4 @@
-import { months, days, days_new } from '../data/orders.js';
+import { months, days, days_new } from './data/orders.js';
 
 function fun_dayes (day){
     if(day <= 9){
@@ -22,17 +22,19 @@ function fun_dayes (day){
 }
 
 function MonthToString(month) {
-    month = parseInt(month,10);
-    month = months[month];
+    if(month){
+        month = parseInt(month,10);
+        month = months[month];
 
-    if(month.slice(-3) === 'ень'){
-        month = month.slice(0, -3) + 'ня';
-    }else if(month.slice(-2) === 'ий'){
-        month = month.slice(0, -2) + 'ого';
-    }else{
-        month = month+'а';
+        if( month.slice(-3) === 'ень'){
+            month = month.slice(0, -3) + 'ня';
+        }else if(month.slice(-2) === 'ий'){
+            month = month.slice(0, -2) + 'ого';
+        }else{
+            month = month+'а';
+        }
+        return month;
     }
-    return month;
 }
 
 function IssuedOnToValide(issuedOn) {

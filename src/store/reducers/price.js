@@ -11,9 +11,17 @@ const initialState = {
 };
 
 export default function setPrice(state = initialState, action) {
+    let name;
+    let obj;
+
+    for (let i in action.payload){
+        name = i;
+        obj = action.payload[i];
+    }
+
     switch (action.type){
         case SET_PRICE:
-            return { ...state, price: action.payload };
+            return { ...state, price:{...state.price, [name]: obj}};
 
         default:
             return state;

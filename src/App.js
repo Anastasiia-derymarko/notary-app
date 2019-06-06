@@ -4,10 +4,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './components/react-tabs-style.css';
 
-import DocsSeller from './components/DocsSeller.js';
-import GeneralAgreementInfo from './components/GeneralAgreementInfo.js';
-import Statement from './components/Statement';
-import SellerAndBuyer from './components/SellerAndBuyer';
+import DocsSeller from './containers/DocsSeller.js';
+import GeneralAgreementInfo from './containers/GeneralAgreementInfo.js';
+import Statement from './containers/Statement';
+import SellerAndBuyer from './containers/SellerAndBuyer';
 import AgreementToPrint from './components/ArgeementToPrint';
 
 import Scheduel from './components/scheduel/scheduel.js';
@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     return (
-        <Tabs defaultIndex={0}>
+        <Tabs defaultIndex={3}>
             <TabList>
                 <Tab>Загальна інформація</Tab>
                 <Tab>Сторони</Tab>

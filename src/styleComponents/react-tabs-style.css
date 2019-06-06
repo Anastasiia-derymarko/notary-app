@@ -1,0 +1,23 @@
+.react-tabs__tab-list {
+  background: linear-gradient(to bottom right, #919396, #282c30);
+  color: #e0e0e0;
+  padding-bottom: 2vh;
+  display: flex;
+  justify-content: center; }
+
+.react-tabs__tab {
+  margin-top: 15vh; }
+  .react-tabs__tab--selected {
+    background: none;
+    border: none;
+    color: inherit;
+    position: relative; }
+    .react-tabs__tab--selected:before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%);
+      width: 30px;
+      height: 1px;
+      background: #e0e0e0; }

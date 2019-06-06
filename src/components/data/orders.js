@@ -12,7 +12,7 @@ export const statementDoc = [
 
 export const docsSellerName = [
   {label: "договору купівлі-продажу", value: 1},
-  // {label: "договору дарування", value: 2},
+  {label: "договору дарування", value: 2},
   // {label: "свідоцтва про право власності", value: 3},
   // {label: "свідоцтва про право на спадщину", value: 4},
   // {label: "рішення суду", value: 5}
@@ -35,16 +35,16 @@ export const days = [
 export const days_new = ['','першого','другого','третього','четвертого','п’ятого','шостого','сьомого','восьмого','дев’ятого'];
 
 export const buildingOptions = [
-  {label: "будинок", value: 1, name:"buildingValue"},
+  {label: "будинок", value: 1},
   // {label: "земельна ділянка", value: 2, name:"buildingValue"},
 ];
 export const sectionBuildingOptions = [
-  {label: "секц.", value: 1, name:"sectionBuildingValue"},
-  {label: "корп.", value: 2, name:"sectionBuildingValue"},
+  {label: "секц.", value: 1},
+  {label: "корп.", value: 2},
 ];
 export const typeObjectOptions = [
   // {label: "гараж", value: 1, name:"typeObjectValue"},
-  {label: "квартира", value: 2, name:"typeObjectValue"},
+  {label: "квартира", value: 2},
   // {label: "кімната", value: 3, name:"typeObjectValue"},
   // {label: "приміщення", value: 4, name:"typeObjectValue"},
   // {label: "блок", value: 5, name:"typeObjectValue"},

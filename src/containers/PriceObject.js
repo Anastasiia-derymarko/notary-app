@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import {setPrice} from '../actions/SetupeActions';
-import {Label, Placeholder,Row, Input} from '../components/styleComponents';
+import {setPrice} from '../store/actions/SetupeActions';
+import {Label, Placeholder,Row, Input} from '../styleComponents/styleComponents';
 
 class PriceObject extends Component {
   constructor (props) {
@@ -23,11 +21,12 @@ class PriceObject extends Component {
       const value = e.target.value;
       const name = e.target.name;
 
-      this.setState({[name]: value}, () => {this.props.setPrice(this.state)});
+      this.setState({[name]: value}, () => {this.props.setPrice({[name]: value})});
   };
 
   render (){
-      let {priceObject, appraisalValue, conclusion, issuedOn, issuedBy} = this.state;
+   let {priceObject, appraisalValue, conclusion, issuedOn, issuedBy} = this.state;
+
    return (
           <Row>
             <label size="47%">
@@ -41,44 +40,39 @@ class PriceObject extends Component {
             <Label size="47%">
               <Placeholder>Ринкова вартість</Placeholder>
               <Input
-                  name="appraisalValue"
-                  value={appraisalValue}
-                  onChange={this.onInputChange}
+                name="appraisalValue"
+                value={appraisalValue}
+                onChange={this.onInputChange}
               />
             </Label>
             <Label>
               <Placeholder>Згідно з</Placeholder>
               <Input
-                  name="conclusion"
-                  value={conclusion}
-                  onChange={this.onInputChange}
+                name="conclusion"
+                value={conclusion}
+                onChange={this.onInputChange}
               />
             </Label>
             <Label>
               <Placeholder>Видавник</Placeholder>
               <Input
-                  name="issuedBy"
-                  value={issuedBy}
-                  onChange={this.onInputChange}
+                name="issuedBy"
+                value={issuedBy}
+                onChange={this.onInputChange}
               />
             </Label>
             <Label size="47%">
             <Placeholder>Дата видачі:</Placeholder>
             <Input
-              type = "date"
-              name="issuedOn"
-              value={issuedOn}
-              onChange={this.onInputChange}
+                type = "date"
+                name="issuedOn"
+                value={issuedOn}
+                onChange={this.onInputChange}
             />
             </Label>
           </Row>
     )
   }
-}
-
-PriceObject.propTypes = {
-    setPrice: PropTypes.func.isRequired,
-    price:PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({

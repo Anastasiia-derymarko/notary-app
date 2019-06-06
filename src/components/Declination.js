@@ -1,3 +1,3 @@
-export const Declination = (sex) => {
-    return (sex.sex !== 1 ? ' який зареєстрований ' : ' яка зареєстрована ');
+export const Declination = (gender) => {
+    return (gender !== 1 ? ' який зареєстрований ' : ' яка зареєстрована ');
 };

@@ -12,10 +12,17 @@ const initialState = {
 };
 
 export default function headerOrder(state = initialState, action) {
-  
+    let name;
+    let obj;
+
+    for (let i in action.payload){
+        name = i;
+        obj = action.payload[i];
+    }
+
   switch (action.type){
   	case SET_MAIN_PARAMETERS:
-  	return { ...state, mainParametersContract: action.payload }
+  	return { ...state, mainParametersContract: {...state.mainParametersContract, [name]: obj}}
 
   	default:
   	  return state;

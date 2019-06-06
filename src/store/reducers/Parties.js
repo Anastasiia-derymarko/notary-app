@@ -22,16 +22,23 @@ const initialState = {
 };
 
 export default function parties(state = initialState, action) {
-  
-  switch (action.type){
-    case SET_SELLER:
-    return { ...state, seller: action.payload };
+    let name;
+    let obj;
 
-    case SET_BUYER:
-    return { ...state, buyer: action.payload };
-    
-    default:
- 	 	return state;
+    for (let i in action.payload){
+        name = i;
+        obj = action.payload[i];
+    }
+
+    switch (action.type){
+        case SET_SELLER:
+        return { ...state, seller:{...state.seller, [name]: obj}};
+
+        case SET_BUYER:
+        return { ...state, buyer: {...state.buyer, [name]: obj}};
+
+        default:
+            return state;
    }
 
 }

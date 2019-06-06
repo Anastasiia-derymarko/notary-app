@@ -2,33 +2,12 @@ import React, { Component } from 'react';
 import Parties from '../components/Parties.js';
 import { connect } from 'react-redux';
 import Select from 'react-select';
-import { statementDoc } from '../data/orders';
-import StatementToPrint from './StatementToPrint';
-import {Wrapper, Column, Row, Label, Placeholder, Input, colorOptions, styleSelectMenu} from './styleComponents';
+import { statementDoc } from '../components/data/orders';
+import StatementToPrint from '../components/StatementToPrint';
+import {Wrapper, Column, Row, Label, Placeholder, Input, colorOptions, styleSelectMenu} from '../styleComponents/styleComponents';
 import ReactToPrint from 'react-to-print';
+import {GenderQuery, NameCase} from '../api/query';
 
-const NameCase = async (nameState) => {
-    let resolve, reject;
-    const result = new Promise((res, rej) => {
-        resolve = res;
-        reject = rej;
-    });
-
-    fetch('http://lolololo.zzz.com.ua', {
-        method: 'POST',
-        body: JSON.stringify({
-            action: 'NameCase',
-            name: nameState,
-        }),
-        cache: 'no-cache',
-    })
-        .then(response => {
-            response.json().then(data => {
-                resolve(data.name);
-            });
-        }).catch((err) => reject(err));
-    return result;
-};
 
 class Statement extends Component {
     constructor (props) {
@@ -47,6 +26,7 @@ class Statement extends Component {
             nameNotary:'Климпик В.В.',
             dateStatement:'2012-04-04',
             nameBuyer:this.props.buyer.nameBuyer,
+            genderParty:'',
         }
     }
 
@@ -55,8 +35,11 @@ class Statement extends Component {
         // const name = await NameCase(this.state.name);
         // this.setState({name});
         //
-        NameCase(this.state.nameBuyer).then(name => this.setState({nameBuyer: name}));
+        const buyer = this.state.nameBuyer;
+
+        NameCase(buyer).then(name => this.setState({nameBuyer: name}));
         NameCase(this.state.name).then(name => this.setState({nameCase: name[1]}));
+        GenderQuery(buyer).then(name => this.setState({genderParty:name}));
     }
 
     handleChangeInput = e => {
@@ -67,11 +50,10 @@ class Statement extends Component {
     };
 
     render(){
-        const {name, registrationNumber, address, nameDoc, serieNumber, registerNumber, issuedBy, issuedOn, nameNotary, dateStatement, nameCase, nameBuyer} = this.state;
+        const {name, registrationNumber, address, nameDoc, serieNumber, registerNumber, issuedBy, issuedOn, nameNotary, dateStatement, nameCase, nameBuyer, genderParty} = this.state;
         const {buyer} = this.props;
-        const WifeOrHusband = (genderParty) => {
-            return genderParty !== '1' ? ['дружина', 'моїм чоловіком']: ['чоловік','моєю дружиною'];
-        };
+        const WifeOrHusband = genderParty !== 1 ? ['дружина', 'моїм чоловіком']: ['чоловік','моєю дружиною'];
+
         return(
             <Wrapper>
                 <Column>
@@ -81,7 +63,7 @@ class Statement extends Component {
                     registrationNumber={registrationNumber}
                     chooseMorW = 'false'
                     address={address}
-                    NameParties =  {WifeOrHusband(buyer.chooseMorWBuyer)[0] +' покупця'}
+                    NameParties =  {WifeOrHusband[0] +' покупця'}
                 />
                 <Label>
                     <Placeholder>Свідоцтво</Placeholder>
@@ -176,6 +158,7 @@ class Statement extends Component {
                         nameNotary={nameNotary}
                         buyer={buyer}
                         nameBuyer={nameBuyer}
+                        gender={genderParty}
                     />
                 </Column>
             </Wrapper>

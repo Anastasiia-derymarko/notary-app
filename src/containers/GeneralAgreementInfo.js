@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { orderTypes, orderObjects } from '../data/orders.js';
+import { orderTypes, orderObjects } from '../components/data/orders.js';
 import Select from 'react-select';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setMainParameters } from '../actions/SetupeActions';
-import PriceObject from '../components/PriceObject.js';
-import AddressAgreement from '../components/AddressAgreement.js';
-import {Label, Placeholder, styleSelectMenu, Column, Row, Input, colorOptions, Wrapper} from '../components/styleComponents';
+import { setMainParameters } from '../store/actions/SetupeActions';
+import PriceObject from './PriceObject.js';
+import AddressAgreement from './AddressAgreement.js';
+import {Label, Placeholder, styleSelectMenu, Column, Row, Input, colorOptions, Wrapper} from '../styleComponents/styleComponents';
 
 class GeneralAgreementInfo extends Component {
     constructor (props) {
         super(props);
 
         const {orderType, orderObject, orderDate} = this.props.mainParametersContract;
-
         this.state = {
             orderType: orderType,
             orderObject: orderObject,
@@ -22,10 +20,6 @@ class GeneralAgreementInfo extends Component {
         }
     }
     handleOnInputChange = (valueSelect, nameSelect) => {
-        // const check = valueSelect != null || (typeof valueSelect['target'] !== "undefined");
-        // const value = check ? valueSelect.target.value : valueSelect;
-        // const name = check ? valueSelect.target.name : nameSelect.name;
-
         let value, name;
 
         if(valueSelect === null){
@@ -38,8 +32,7 @@ class GeneralAgreementInfo extends Component {
             value = valueSelect;
             name = nameSelect.name;
         }
-
-        this.setState({[name]: value}, ()=>{this.props.setMainParameters(this.state)});
+        this.setState({[name]: value}, ()=>{this.props.setMainParameters({[name]: value})});
     };
     onFocus = () => {
       this.setState({inputType: 'date'});
@@ -84,12 +77,12 @@ class GeneralAgreementInfo extends Component {
                 <Label size='47%'>
                     <Placeholder placeholderPosition = {inputType === 'date' || orderDate !== '' ? '' : null} >Дата угоди</Placeholder>
                     <Input
-                    name="orderDate"
-                    type = {inputType}
-                    value={orderDate}
-                    onFocus={this.onFocus}
-                    onBlur={this.onBluer}
-                    onChange={this.handleOnInputChange}
+                        name="orderDate"
+                        type = {inputType}
+                        value={orderDate}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBluer}
+                        onChange={this.handleOnInputChange}
                     />
                 </Label>
             </Row>
@@ -136,11 +129,6 @@ class GeneralAgreementInfo extends Component {
     )
   }
 }
-
-GeneralAgreementInfo.propTypes = {
-    setMainParameters : PropTypes.func.isRequired,
-    mainParametersContract:PropTypes.object.isRequired,
-};
 
 const mapStateToProps = state => ({
     ...state.headerOrder,

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ReactToPrint from 'react-to-print';
-import {MainText, Title, Column, StylePrint, BoldItalic, NameParties} from './styleComponents';
+import {MainText, Title, Column, StylePrint, BoldItalic, NameParties} from '../styleComponents/styleComponents';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from '../components/ConvertingNumberToString';
+import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from './ConvertingNumberToString';
 import {Declination} from './Declination';
+import {GenderQuery} from '../api/query';
 
 function ConsistsText (numberOfRooms) {
     let number = numberOfRooms.number,
@@ -22,11 +23,42 @@ function GenitiveCase(word) {
 }
 
 class AgreementToPrint extends Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            genderSeller:'',
+            genderBuyer:'',
+        }
+    }
+
+    async componentDidMount()
+    {
+        // NameCase(this.state.name).then(name => this.setState({nameCase: name[1]}));
+        GenderQuery(this.props.buyer.nameBuyer).then(gender => {
+            if (gender === 2){
+                this.setState({genderBuyer:' яка зареєстрована '})
+            }else{
+                this.setState({genderBuyer:' який зареєстрований '})
+            }
+        });
+        GenderQuery(this.props.seller.nameSeller).then(gender => {
+            if (gender === 2){
+                this.setState({genderSeller:' яка зареєстрована '})
+            }else{
+                this.setState({genderSeller:' який зареєстрований '})
+            }
+        });
+
+    }
     render(){
         const { orderType, orderObject, orderDate, } = this.props.mainParametersContract
         const { cityValue, footage, docSeller, price, buyer, seller, } = this.props;
         const {region, area, city, street, buildingValue, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
-        console.log(city);
+        const {genderSeller, genderBuyer} = this.state;
+        console.log(this.props);
+
+
         return(
             <Column>
                 <ReactToPrint
@@ -46,11 +78,12 @@ class AgreementToPrint extends Component {
                                     <NameParties>{seller.nameSeller},</NameParties>
                                     реєстраційний номер облікової картки платника податків
                                     <BoldItalic>{seller.registrationNumberSeller}, </BoldItalic>
-                                    <Declination sex = {parseInt(seller.chooseMorWSeller, 10)}/>
+                                    {genderSeller}
                                     за адресою: <BoldItalic>{seller.addressSeller},</BoldItalic> – надалі «Продавець»,
-                                    та <NameParties>{buyer.nameBuyer},</NameParties> реєстраційний номер облікової картки платника податків
+                                    та <NameParties>{buyer.nameBuyer},</NameParties>
+                                реєстраційний номер облікової картки платника податків
                                     <BoldItalic> {buyer.registrationNumberBuyer},</BoldItalic>
-                                    <Declination sex = {parseInt(buyer.chooseMorWBuyer, 10)}/>
+                                {genderBuyer}
                                     за адресою: <BoldItalic>{buyer.addressBuyer},</BoldItalic>
                                 – надалі <BoldItalic>«Покупець»</BoldItalic>, які також іменуються <BoldItalic>«Сторони»,</BoldItalic> уклали цей договір
                                     про нижчевикладене:
@@ -60,7 +93,7 @@ class AgreementToPrint extends Component {
                                 <p>Квартира, що відчужується, складається з <b><ConsistsText number = {footage.numberOfRooms} />.</b> Загальна площа квартири <b>{footage.totalArea} кв.м.,</b>
                                     в тому числі житлова – <b>{footage.livingArea} кв.м.</b></p>
                                 <p>2. Квартира належить <b>Продавцю</b> на пiдставi <b><GenitiveCase word = {docSeller.name.label}/> {docSeller.type.label}</b>,
-                                посвідченого <IssuedOnToValide date = {docSeller.issuedOn} /> року {docSeller.issuedBy} за реєстровим № {docSeller.indexNumbers}, зареєстрованого {docSeller.registry.name} <IssuedOnToValide date ={docSeller.registry.issuedOn} /> року за реєстровим № {docSeller.registry.indexNumbers}.</p>
+                                посвідченого <IssuedOnToValide date = {docSeller.issuedOn} /> року {docSeller.issuedBy} за реєстровим № {docSeller.indexNumbers}, зареєстрованого {docSeller.registryName} <IssuedOnToValide date ={docSeller.registryIssuedOn} /> року за реєстровим № {docSeller.registryIndexNumbers}.</p>
                                 <p>3. За погодженням сторін продаж квартири вчинено за <b><SpaceBetweenNumbers price = {price.priceObject} /> <FloatToSamplesInWordsRus price={price.priceObject} />, </b>
                                     які повністю сплачені <b>Покупцем Продавцю</b> до підписання цього договору. </p>
                                 <p>

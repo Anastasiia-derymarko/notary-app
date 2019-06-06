@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import {Row, Label, Placeholder, Input} from '../components/styleComponents';
+import {Row, Label, Placeholder, Input} from '../styleComponents/styleComponents';
 
 class Parties extends Component{
 
   render () {
-    const {name,address, handleChangeInput, registrationNumber }= this.props;
-
-      // const chooseMorWRadioGroup = <RadioGroup name='chooseMorW' onChange={ handleChangeInput } value={ chooseMorW } className = "chooseMorW">
-      //     <RadioButton value="0" padding={5}>Він</RadioButton>
-      //     <RadioButton value="1" padding={5}>Вона</RadioButton>
-      // </RadioGroup>;
+    const {name,address, handleChangeInput, registrationNumber, party }= this.props;
 
     return(
       <Row>
@@ -18,16 +13,16 @@ class Parties extends Component{
             <Placeholder>ПІБ</Placeholder>
               <Input
                 type="text"
-                name='name'
-                value={name}
+                name={'name'+party}
                 onChange={handleChangeInput}
+                value={name}
               />
         </Label>
         <Label size="30%">
             <Placeholder>РНОКПП</Placeholder>
             <Input
               maxLength="10"
-              name='registrationNumber'
+              name={'registrationNumber'+party}
               value={registrationNumber}
               onChange={handleChangeInput}
              />
@@ -35,7 +30,7 @@ class Parties extends Component{
         <Label>
             <Placeholder>Зараєстрований за адресою</Placeholder>
             <Input
-              name='address'
+              name={'address'+party}
               value={address}
               onChange={handleChangeInput}
             />

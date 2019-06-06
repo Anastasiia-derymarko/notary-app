@@ -1,27 +1,8 @@
 import React, { Component } from 'react';
 import Parties from '../components/Parties.js';
-import {setSeller, setBuyer} from '../actions/SetupeActions';
-import PropTypes from 'prop-types';
+import {setSeller, setBuyer} from '../store/actions/SetupeActions';
 import { connect } from 'react-redux';
-import {Column, Label, Placeholder, Wrapper} from '../components/styleComponents';
-
-const parties = (e, arr, party) => {
-    let name = e.target.name + party;
-    let value = typeof(e) !== 'string' ? e.target.value : e;
-
-    if (name === 'registrationNumber' + party){
-        value = value.replace(/\D/,'');
-    }
-    let buyer = {};
-
-    for (let key in arr){
-        if(key.indexOf(party) !== -1){
-            buyer[key] = arr[key];
-        }
-
-    }
-    return [name,value,buyer]
-};
+import {Column, Label, Placeholder, Wrapper} from '../styleComponents/styleComponents';
 
 class SellerAndBuyer extends Component {
     constructor (props) {
@@ -39,57 +20,42 @@ class SellerAndBuyer extends Component {
             registrationNumberBuyer:buyer.registrationNumberBuyer,
             addressBuyer:buyer.addressBuyer,
             statementBuyer:buyer.statementBuyer,
-
         };
     }
 
-    handleChangeInputSeller = e => {
-        let seller = parties(e, this.state, 'Seller');
-        this.setState({[seller[0]]:seller[1]}, () => {this.props.setSeller(seller[2])});
-
-        if(e.target.name === 'name' && e.target.value.indexOf(' ') !== -1){
-
-            fetch('http://lolololo.zzz.com.ua', {
-                method: 'POST',
-                body: JSON.stringify({
-                    action: 'gender',
-                    name: e.target.value,
-                }),
-                cache: 'no-cache',
-            })
-                .then(response => {
-                    response.json().then(data => {
-                        console.log(data.name);
-                    });
-                });
-        }
-    };
-
-    handleChangeInputBuyer = e => {
-        let buyer = parties(e, this.state, 'Buyer');
-        this.setState({[buyer[0]]:buyer[1]}, () => {this.props.setBuyer(buyer[2])});
+    handleChangeInput = e => {
+        let name = e.target.name;
+        let value = typeof(e) !== 'string' ? e.target.value : e;
+        console.log({[name]: value});
+        this.setState({[name]: value}, () => {
+            if(name.indexOf('Seller') != -1){
+                this.props.setSeller({[name]: value})
+            }else{
+                this.props.setBuyer({[name]: value})
+            }
+        });
     };
 
     render() {
-        const { nameSeller, registrationNumberSeller, chooseMorWSeller, addressSeller, statementSeller,nameBuyer, registrationNumberBuyer, chooseMorWBuyer, addressBuyer, statementBuyer} = this.state;
+        const { nameSeller, registrationNumberSeller, addressSeller, statementSeller,nameBuyer, registrationNumberBuyer, addressBuyer, statementBuyer} = this.state;
 
         return (
             <Wrapper>
                 <Column>
                     <Parties
                         name={nameSeller}
-                        handleChangeInput={this.handleChangeInputSeller}
                         registrationNumber={registrationNumberSeller}
-                        chooseMorW={chooseMorWSeller}
                         address={addressSeller}
                         NameParties = "Продавець"
+                        party="Seller"
+                        handleChangeInput={this.handleChangeInput}
                     />
                     <Label>
                         <Placeholder>Заява-згода</Placeholder>
                         <input
                             type="checkbox"
                             name="statementSeller"
-                            onChange={this.handleChangeInputSeller}
+                            onChange={this.handleChangeInput}
                             value = {statementSeller}
                         />
                     </Label>
@@ -97,11 +63,11 @@ class SellerAndBuyer extends Component {
                 <Column>
                     <Parties
                         name={nameBuyer}
-                        handleChangeInput={this.handleChangeInputBuyer}
                         registrationNumber={registrationNumberBuyer}
-                        chooseMorW = {chooseMorWBuyer}
                         address={addressBuyer}
                         NameParties = "Покупець"
+                        party="Buyer"
+                        handleChangeInput={this.handleChangeInput}
                     />
                     <Label>
                         <Placeholder>Заява-згода</Placeholder>
@@ -117,14 +83,6 @@ class SellerAndBuyer extends Component {
         );
     }
 }
-
-
-SellerAndBuyer.propTypes = {
-    seller:PropTypes.object.isRequired,
-    setSeller:PropTypes.func.isRequired,
-    buyer:PropTypes.object.isRequired,
-    setBuyer: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = state => ({
     ...state.parties,

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setFootage } from '../../actions/SetupeActions';
-import {Label, Placeholder, Row, Input} from '../../components/styleComponents';
+import { setFootage } from '../../store/actions/SetupeActions';
+import {Label, Placeholder, Row, Input} from '../../styleComponents/styleComponents';
 
 class Footage extends Component{
 

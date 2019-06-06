@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/lib/Async';
-import { buildingOptions, typeObjectOptions } from '../data/orders.js';
+import { buildingOptions, typeObjectOptions } from '../components/data/orders.js';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { setStateAddress } from '../actions/SetupeActions';
-import Footage from './addressAndFootage/footage';
-import {Label, Placeholder, styleSelectMenu, Address, Row, Input, colorOptions} from '../components/styleComponents';
+import { setStateAddress } from '../store/actions/SetupeActions';
+import Footage from '../components/addressAndFootage/footage';
+import {Label, Placeholder, styleSelectMenu, Address, Row, Input, colorOptions} from '../styleComponents/styleComponents';
 
 const AsyncAddress = async (action, column, numberStrings) => {
     let resolve, reject;
@@ -32,35 +31,24 @@ const AsyncAddress = async (action, column, numberStrings) => {
     return result;
 };
 
-const setAddress = (obj) => {
-    let objAddress = {};
-
-    for (let i in obj){
-        if(['regions','areas','citys'].indexOf(i) === -1 ){
-            objAddress[i]= obj[i];
-        }
-    }
-    return objAddress;
-};
-
 class AddressAgreement extends Component{
 	constructor (props) {
     super(props);
 
-    const {region, area, city, street, buildingValue, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
+    const {region, area, city, street, typeBuilding, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
 
     this.state = {
-      regions: {},
-      areas:{},
-      citys:{},
-      region: region,
-      area: area,
-      city: city,
-      street: street,
-      buildingValue: buildingValue,
-      numberBuildingValue: numberBuildingValue,
-      typeObjectValue: typeObjectValue,
-      numberObjectValue: numberObjectValue,
+        regions: {},
+        areas:{},
+        citys:{},
+        region: region,
+        area: area,
+        city: city,
+        street: street,
+        typeBuilding: typeBuilding,
+        numberBuildingValue: numberBuildingValue,
+        typeObjectValue: typeObjectValue,
+        numberObjectValue: numberObjectValue,
     }
   }
 
@@ -75,14 +63,23 @@ class AddressAgreement extends Component{
         region: ['area', 'region_id','areas'],
         area: ['city', 'area_id', 'citys'],
     };
-      this.setState({ [name]: selectedOption });
-        if (selectedOption.value === '9') {this.setState({city:'8859'}, () => {setStateAddress(setAddress(this.state))})}
-        AsyncAddress(query[name][0], query[name][1], selectedOption.value).then(data => this.setState(() => ({[query[name][2]]: data})));
+
+    this.setState({[name]: selectedOption }, () => {this.props.setStateAddress({[name]: selectedOption })});
+
+    if (selectedOption != null ) {
+        if(selectedOption.value === '9'){
+            this.setState({city:'8859'}, () => {
+                this.props.setStateAddress({city:'8859'})
+            });
+        }else {
+            AsyncAddress(query[name][0], query[name][1], selectedOption.value).then(data => this.setState(() => ({[query[name][2]]: data})));
+        }
+    }
   };
 
   handleSelectChange = (selectedOption, inputName) => {
       let name = inputName.name;
-      this.setState({[name]: selectedOption}, () => this.props.setStateAddress(setAddress(this.state)));
+      this.setState({[name]: selectedOption}, () => this.props.setStateAddress({[name]: selectedOption}));
   };
 
   onInputChange = event => {
@@ -92,19 +89,21 @@ class AddressAgreement extends Component{
     if (name === 'numberOfRooms') {
         value = event.target.validity.valid ? event.target.value : this.state.numberOfRooms;
     }
-    this.setState({[name]: value},() => this.props.setStateAddress(this.props.region:'xjxjxj'));
+    this.setState({[name]: value},() => this.props.setStateAddress({[name]: value}));
   };
 
   promiseOptionsStreet = (inputValue, callback) => {
       const value = inputValue;
-      if (value.length < 3) {
+
+      if(this.state.city.label === 'Київ' && value.length < 3) {
           return;
-      } else {
+      }else {
           fetch('http://lolololo.zzz.com.ua', {
               method: 'POST',
               body: JSON.stringify({
                   action: 'streets_test',
-                  city: this.state.city,
+                  column:'Region',
+                  Region: this.state.region.value,
                   search_q: value
               }),
               cache: 'no-cache',
@@ -119,8 +118,8 @@ class AddressAgreement extends Component{
   };
       render(){
     	const {regions, region, areas, area, city,
-        citys, street, buildingValue, numberBuildingValue,
-        typeObjectValue, numberObjectValue} = this.state
+        citys, street, typeBuilding, numberBuildingValue,
+        typeObjectValue, numberObjectValue} = this.state;
 
         let regionsOptions = Object.keys(regions).map(key => ({value: key, label: regions[key].name}));
         let areasOptions = Object.keys(areas).map(key => ({value: areas[key].id, label: areas[key].name}));
@@ -132,18 +131,18 @@ class AddressAgreement extends Component{
 
       }else{
         select = <div style = {{width: "100%"}}>
-                <span>Район:</span>
+                <Label>Район:</Label>
                 <Select
                   name="area"
                   value={area}
                   onChange={this.handleRegionValueChange}
                   options={areasOptions}
                 /> 
-                <span>місто/село:</span>
+                <Label>місто/село:</Label>
                 <Select
                   name="city"
                   value={city}
-                  onChange={this.handleCityValueChange}
+                  onChange={this.handleSelectChange}
                   options={citysOptions}
                 /></div>
       }  
@@ -175,15 +174,14 @@ class AddressAgreement extends Component{
                     placeholder=""
                     theme={colorOptions}
                     styles={styleSelectMenu}
-
                 />
             </Label>
             <Row>
                 <Label size="47%">
                     <Placeholder>Тип будівлі:</Placeholder>
                     <Select
-                      name="buildingValue"
-                      value={buildingValue}
+                      name="typeBuilding"
+                      value={typeBuilding}
                       onChange={this.handleSelectChange}
                       isClearable={true}
                       options={buildingOptions}
@@ -203,7 +201,7 @@ class AddressAgreement extends Component{
                 <Label size='47%'>
                     <Placeholder>Тип об'єкта:</Placeholder>
                     <Select
-                        name="numberObjectValue"
+                        name="typeObjectValue"
                         value={typeObjectValue}
                         onChange={this.handleSelectChange}
                         options={typeObjectOptions}
@@ -216,7 +214,7 @@ class AddressAgreement extends Component{
                 <Label size="40%">
                   <Placeholder>№</Placeholder>
                   <Input
-                      className ="input"
+                      name='numberObjectValue'
                       value={numberObjectValue || ''}
                       onChange={this.onInputChange}
                   />
@@ -228,9 +226,7 @@ class AddressAgreement extends Component{
     }
 }
 
-AddressAgreement.propTypes = {
-  setStateAddress:PropTypes.func.isRequired,
-};
+
 const mapStateToProps = state => ({
     ...state.addressObject,
 });
