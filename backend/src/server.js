@@ -1,26 +1,25 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
-var mysql      = require('mysql');
-
-var connection = mysql.createConnection({
-    host     : '127.0.0.1',
-    user     : 'root',
-    password : 'root',
-    database : 'notaryapp',
-});
-connection.connect(function(err) {
-    if (err) throw err;
-});
-var result;
-
-connection.query('SELECT * FROM area WHERE region_id = 1', function (error, results, fields) {
-    if (results){
-        return result = results;
-    }
-    if (error) console.log(error);;
-});
-connection.end();
+// var mysql      = require('mysql');
+//
+// var connection = mysql.createConnection({
+//     host     : '127.0.0.1',
+//     user     : 'root',
+//     password : 'root',
+//     database : 'notaryapp',
+// });
+// connection.connect(function(err) {
+//     if (err) throw err;
+// });
+//
+// var queryBd = function () {
+//
+//     connection.query('SELECT * FROM area WHERE region_id = 1', function (error, results, fields) {
+//     })
+// };
+console.log(true);
+// connection.end();
 
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
