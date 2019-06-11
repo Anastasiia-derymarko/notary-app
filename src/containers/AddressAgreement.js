@@ -102,7 +102,7 @@ class AddressAgreement extends Component{
               method: 'POST',
               body: JSON.stringify({
                   action: 'streets_test',
-                  column:'Region',
+                  column: 'Region',
                   Region: this.state.region.value,
                   search_q: value
               }),

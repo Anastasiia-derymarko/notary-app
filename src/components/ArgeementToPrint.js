@@ -12,9 +12,9 @@ function ConsistsText (numberOfRooms) {
         classification = ["двох", "трьох", "чотирьох", "п'яти", "шести", "сьоми", "восьми", "дев'яти", "десяти",  "однокімнатна", "двокімнатна", "трьохкімнатна"]
 
     if (Number(number) > 1 ){
-        return classification[number-2]+' жилих кімнат';
+        return (classification[number-2]+' жилих кімнат');
     }else{
-        return ' однієї жилої кімнати';
+        return (' однієї жилої кімнати');
     }
 }
 
