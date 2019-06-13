@@ -1,25 +1,31 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
-// var mysql      = require('mysql');
-//
-// var connection = mysql.createConnection({
-//     host     : '127.0.0.1',
-//     user     : 'root',
-//     password : 'root',
-//     database : 'notaryapp',
-// });
-// connection.connect(function(err) {
-//     if (err) throw err;
-// });
-//
-// var queryBd = function () {
-//
-//     connection.query('SELECT * FROM area WHERE region_id = 1', function (error, results, fields) {
-//     })
-// };
-console.log(true);
-// connection.end();
+const Sequelize = require('sequelize');
+
+const sequelize = new Sequelize('notaryapp', 'root', 'root', {
+    host: '127.0.0.1',
+    dialect: 'mysql'
+});
+
+const region = sequelize.define('region', {
+    id: {
+        type: Sequelize.INTEGER(10).UNSIGNED,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+        type: Sequelize.STRING(255),
+        allowNull: true,
+        unique: true
+    }
+});
+
+region.findAll({raw: true}).then(region=> {
+    region;
+});
+
 
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
@@ -35,9 +41,10 @@ var root = {
     return 'Hello world!';
   },
   city: () => {
-    return res;
+    return 'test'
   }
 };
+console.log(root);
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
