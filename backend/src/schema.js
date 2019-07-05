@@ -9,7 +9,7 @@ const typeDefs = gql`
     }
     type Contract {
         id: ID!
-        type: TypeContract
+        contractType: TypeContract
         data: String
         object: TypeContract
     }     
@@ -18,12 +18,12 @@ const typeDefs = gql`
         value: String
     }
     input ContractInput {
-        type: JSON
+        contractType: JSON
         data: String
         object: JSON
     }
     type Mutation {
-        changeContract(id: ID!, input:ContractInput): ContractUpdateResponse!
+        changeContract(id: ID!, input:ContractInput): ContractUpdateResponse
     }
     type ContractUpdateResponse{
         success: Boolean!

@@ -14,7 +14,7 @@ class ContractApi extends DataSource {
         return response[0];
     }
     async changeContract ({id, input}) {
-        console.log(input);
+
         return !!await this.store.contracts.update(
             input,
             { where: { id } }

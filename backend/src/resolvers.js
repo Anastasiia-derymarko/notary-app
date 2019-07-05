@@ -1,7 +1,5 @@
-const GraphQLJSON = require('graphql-type-json');
 
 module.exports = {
-    JSON: GraphQLJSON,
     Query: {
         contracts: (_, __, {dataSources}) => {
             return dataSources.contractAPI.findAllContracts();
@@ -13,7 +11,7 @@ module.exports = {
     Mutation: {
         changeContract: async (_, {id, input}, { dataSources }) => {
             const result = await dataSources.contractAPI.changeContract({id, input});
-
+            console.log('changeContract');
             if (!result)
                 return {
                     success: false,
@@ -21,7 +19,7 @@ module.exports = {
                 };
 
             const contract = await dataSources.contractAPI.contractById({id});
-            console.log(contract);
+
             return {
                 success: true,
                 message: 'contract update',

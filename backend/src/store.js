@@ -15,7 +15,7 @@ module.exports.createStore = () => {
             primaryKey: true,
             autoIncrement: true,
         },
-        type: SQL.JSON,
+        contractType: SQL.JSON,
         data: SQL.STRING,
         object: SQL.JSON,
     },

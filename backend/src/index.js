@@ -6,11 +6,12 @@ const { createStore } = require('./store');
 const ContractAPI = require('./dataSources/contractApi');
 
 const store = createStore();
-const resolvers = require('./resolvers');
+const resolver = require('./resolvers');
+const GraphQLJSON = require('graphql-type-json');
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers:[resolver, {JSON: GraphQLJSON}],
     dataSources: () => ({
         contractAPI: new ContractAPI({ store })
     })
