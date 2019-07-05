@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Label, Placeholder, styleSelectMenu, Row, Input, colorOptions} from '../styleComponents/styleComponents';
 import { orderTypes, orderObjects } from '../components/data/orders.js';
 import Select from 'react-select';
-import { setMainParameters } from '../store/actions/SetupeActions';
 import { Mutation } from 'react-apollo';
 import { UPDATE_CONTRACT } from '../api/mutation';
 
