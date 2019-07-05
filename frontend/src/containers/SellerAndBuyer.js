@@ -3,6 +3,7 @@ import Parties from '../components/Parties.js';
 import {setSeller, setBuyer} from '../store/actions/SetupeActions';
 import { connect } from 'react-redux';
 import {Column, Label, Placeholder, Wrapper} from '../styleComponents/styleComponents';
+import {FindContracts} from './findContracts';
 
 class SellerAndBuyer extends Component {
     constructor (props) {
@@ -41,6 +42,7 @@ class SellerAndBuyer extends Component {
 
         return (
             <Wrapper>
+                <p>{FindContracts}</p>
                 <Column>
                     <Parties
                         name={nameSeller}

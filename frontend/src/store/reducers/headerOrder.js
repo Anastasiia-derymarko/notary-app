@@ -1,8 +1,5 @@
 import { SET_MAIN_PARAMETERS } from '../constans/setup'
 
-// let dataLocal = new Date();
-// let dataString = dataLocal.getFullYear()+'-0'+(+dataLocal.getMonth()+1)+'-'+dataLocal.getDate();
-
 const initialState = {
     mainParametersContract:{
         orderType: {label: "договір купівлі-продажу", value: 1},
@@ -29,29 +26,3 @@ export default function headerOrder(state = initialState, action) {
   }
 
 }
-
-const data = initialState.mainParametersContract;
-
-
-const NameCase = async (type, obj, date, number, nameNotary) => {
-    let resolve, reject;
-    const result = new Promise((res, rej) => {
-        resolve = res;
-        reject = rej;
-    });
-
-    fetch('http://lolololo.zzz.com.ua', {
-        method: 'POST',
-        body: JSON.stringify({
-            action: 'addAgreement',
-            type: type,
-        }),
-        cache: 'no-cache',
-    })
-        .then(response => {
-            console.log(response);
-        }).catch((err) => reject(err));
-    return result;
-};
-console.log(data.orderType)
-NameCase(data.orderType);

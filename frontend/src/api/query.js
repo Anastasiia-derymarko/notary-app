@@ -1,3 +1,5 @@
+import gql from "graphql-tag";
+
 export const GenderQuery = async (name) => {
     let resolve, reject;
     const result = new Promise((res, rej) => {
@@ -43,3 +45,22 @@ export const NameCase = async (nameState) => {
         }).catch((err) => reject(err));
     return result;
 };
+
+
+
+export const GET_CONTRACT = gql`
+  query GetContract($id: ID!) {
+    contract(id: $id) {
+        id
+        data
+        object {
+          label
+          value
+        }
+        contractType {
+          label
+          value
+        }
+    }
+  }
+`;

@@ -4,7 +4,6 @@ import {MainText, Title, Column, StylePrint, BoldItalic, NameParties} from '../s
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { ConvertingNumberToString, IssuedOnToValide, FloatToSamplesInWordsRus, SpaceBetweenNumbers } from './ConvertingNumberToString';
-import {Declination} from './Declination';
 import {GenderQuery} from '../api/query';
 
 function ConsistsText (numberOfRooms) {

@@ -1,92 +1,29 @@
 import React, { Component } from 'react';
-import { orderTypes, orderObjects } from '../components/data/orders.js';
-import Select from 'react-select';
 import { connect } from 'react-redux';
 import { setMainParameters } from '../store/actions/SetupeActions';
 import PriceObject from './PriceObject.js';
 import AddressAgreement from './AddressAgreement.js';
-import {Label, Placeholder, styleSelectMenu, Column, Row, Input, colorOptions, Wrapper} from '../styleComponents/styleComponents';
+import {Column, Wrapper} from '../styleComponents/styleComponents';
+
+import { Query} from 'react-apollo';
+import { GET_CONTRACT } from '../api/query';
+import HeaderContract from '../components/HeaderContract';
 
 class GeneralAgreementInfo extends Component {
-    constructor (props) {
-        super(props);
 
-        const {orderType, orderObject, orderDate} = this.props.mainParametersContract;
-        this.state = {
-            orderType: orderType,
-            orderObject: orderObject,
-            orderDate: orderDate,
-            inputType: 'text',
-        }
-    }
-    handleOnInputChange = (valueSelect, nameSelect) => {
-        let value, name;
-
-        if(valueSelect === null){
-            value = valueSelect;
-            name = nameSelect.name;
-        }else if ((typeof valueSelect['target'] !== "undefined")){
-            value = valueSelect.target.value;
-            name = valueSelect.target.name;
-        }else {
-            value = valueSelect;
-            name = nameSelect.name;
-        }
-        this.setState({[name]: value}, ()=>{this.props.setMainParameters({[name]: value})});
-    };
-    onFocus = () => {
-      this.setState({inputType: 'date'});
-    };
-    onBluer = () => {
-        this.setState({inputType: 'text'});
-    };
-  render (){
-      const {orderType, orderObject, orderDate, inputType} = this.state;
-   return (
+    render (){
+      return (
        <Wrapper>
            <Column>
-            <Label>
-                <Placeholder placeholderPosition={orderType != null ? orderType.value : null} >Тип угоди</Placeholder>
-                <Select
-                    name="orderType"
-                    value={orderType}
-                    onChange={this.handleOnInputChange}
-                    options={orderTypes}
-                    placeholder=""
-                    isSearchable={false}
-                    isClearable={true}
-                    theme={colorOptions}
-                    styles={styleSelectMenu}
-                />
-            </Label>
-            <Row>
-                <Label size='47%'>
-                  <Placeholder placeholderPosition={orderObject != null ? orderObject.value : null} >Об'єкт угоди</Placeholder>
-                    <Select
-                        name="orderObject"
-                        placeholder=""
-                        value={orderObject}
-                        onChange={this.handleOnInputChange}
-                        options={orderObjects}
-                        isClearable={true}
-                        isSearchable={false}
-                        theme={colorOptions}
-                        styles={styleSelectMenu}
-                    />
-                </Label>
-                <Label size='47%'>
-                    <Placeholder placeholderPosition = {inputType === 'date' || orderDate !== '' ? '' : null} >Дата угоди</Placeholder>
-                    <Input
-                        name="orderDate"
-                        type = {inputType}
-                        value={orderDate}
-                        onFocus={this.onFocus}
-                        onBlur={this.onBluer}
-                        onChange={this.handleOnInputChange}
-                    />
-                </Label>
-            </Row>
-            <PriceObject />
+               <Query query={ GET_CONTRACT } variables={{id:2}}>
+                   {({ data, loading, error }) => {
+                       if (loading) return <p>loading</p>;
+                       if (error) return <p>ERROR</p>;
+
+                       return (<HeaderContract initialValues={data.contract} />);
+                   }}
+               </Query>
+               <PriceObject />
            </Column>
            <Column>
                <AddressAgreement />

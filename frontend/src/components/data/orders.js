@@ -1,6 +1,6 @@
 export const orderTypes = [
-  {label: "договір купівлі-продажу", value: 1},
-  {label: "дарування", value: 2},
+  {label: "договір купівлі-продажу", value: "1"},
+  {label: "дарування", value: "2"},
   // {label: "оренди", value: 3},
   // {label: "іпотеки", value: 4},
   // {label: "попередній", value: 5},  

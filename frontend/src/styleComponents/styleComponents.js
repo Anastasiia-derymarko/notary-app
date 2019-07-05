@@ -96,3 +96,20 @@ export const BoldItalic = styled.span`
 export const NameParties = styled(BoldItalic)`
     text-transform: uppercase;
 `;
+
+export const ButtonSave = styled.div`
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    color: white;
+    letter-spacing: .05em;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 18px;
+    &:hover{
+        cursor: pointer;
+        background: white;
+        color:#34383c;
+    }
+`;

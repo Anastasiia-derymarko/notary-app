@@ -12,6 +12,7 @@ import AgreementToPrint from './components/ArgeementToPrint';
 
 import Scheduel from './components/scheduel/scheduel.js';
 import './App.css';
+import {ButtonSave} from './styleComponents/styleComponents';
 
 class App extends Component {
     componentWillMount(){
@@ -24,7 +25,8 @@ class App extends Component {
 
   render() {
     return (
-        <Tabs defaultIndex={3}>
+        <Tabs defaultIndex={1}>
+            <ButtonSave>зберегти</ButtonSave>
             <TabList>
                 <Tab>Загальна інформація</Tab>
                 <Tab>Сторони</Tab>
@@ -32,9 +34,10 @@ class App extends Component {
                 <Tab>Заяви-згоди</Tab>
                 <Tab>Договір</Tab>
                 <Tab>Календар</Tab>
+                <Tab>Знайти</Tab>
             </TabList>
             <TabPanel>
-                <GeneralAgreementInfo />
+                <GeneralAgreementInfo/>
             </TabPanel>
             <TabPanel>
                 <SellerAndBuyer />
@@ -50,6 +53,8 @@ class App extends Component {
             </TabPanel>
             <TabPanel>
                 <Scheduel />
+            </TabPanel>
+            <TabPanel>
             </TabPanel>
         </Tabs>
     );
