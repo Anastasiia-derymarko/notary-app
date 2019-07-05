@@ -1,12 +1,15 @@
 
 module.exports = {
     Query: {
-        contracts: (_, __, {dataSources}) => {
+        contracts: (_, __, { dataSources }) => {
             return dataSources.contractAPI.findAllContracts();
         },
-        contract: (_, {id}, {dataSources}) => {
-            return dataSources.contractAPI.contractById({id});
+        contract: (_, { id }, { dataSources }) => {
+            return dataSources.contractAPI.contractById({ id });
         },
+        price: (_, { contractId }, { dataSources }) => {
+            return dataSources.contractAPI.priceByContractId({ contractId });
+        }
     },
     Mutation: {
         changeContract: async (_, {id, input}, { dataSources }) => {

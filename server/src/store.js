@@ -22,6 +22,22 @@ module.exports.createStore = () => {
         {timestamps: false}
     );
 
-    return { contracts };
+    const price = db.define('price', {
+        id: {
+            type: SQL.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+            contractId:SQL.INTEGER,
+            appraisalValue: SQL.FLOAT,
+            conclusion: SQL.STRING,
+            issuedBy: SQL.STRING,
+            issuedOn: SQL.STRING,
+            priceObject: SQL.FLOAT
+    },
+        {timestamps: false}
+    );
+
+    return { contracts, price };
 };
 //INSERT INTO contracts SET object={label: "квартири", value: 1}, type={label: "договір купівлі-продажу", value: 1}, data= "2019-05-05"
