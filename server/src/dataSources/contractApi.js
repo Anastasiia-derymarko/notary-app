@@ -5,39 +5,59 @@ class ContractApi extends DataSource {
         super();
         this.store = store;
     }
-    async findAllContracts() {
-        const response = await this.store.contracts.findAll();
-        return response;
+
+    async contractById({ id, info }) {
+        const include = ['addressAndFootage', 'price'];
+        // let possibleName = ['addressAndFootage', 'price'];
+
+
+        // if (info.parentType == 'Mutation'){
+        //     for (let key in info.variableValues.input){
+        //        if (key != 'mainParameters'){
+        //            include.push(key);
+        //        }
+        //     }
+        // }else {
+        //     const rootSelection = info.operation.selectionSet.selections[0];
+        //
+        //     rootSelection.selectionSet.selections.forEach(({ name: { value } }) => {
+        //         if(possibleName.includes(value)){
+        //             include.push(value);
+        //         }
+        //     });
+        // }
+        return await this.store.contract.findOne({
+            where: { id },
+            ...(include ? { include } : {})
+        });
     }
 
-    contractReducer(mainParameters, contract) {
-        console.log(contract.contractType);
-        return {
-            id: contract.id,
-            [mainParameters]: {
-                contractType: contract.contractType,
-                data: contract.data,
-                object: contract.object
-            },
-
-        };
+    async findAllByContractId ({id, nameTable}) {
+        return await this.store[nameTable].findAll({
+            where: {contractId: id}
+        });
     }
 
-    async contractById({ id }) {
-        const response = await this.store.contracts.findAll({where: { id }});
-        return this.contractReducer('mainParameters', response[0]);
-    }
-    async priceByContractId({ contractId }) {
-        const response = await this.store.price.findAll({where: { contractId }});
-        console.log(response[0]);
-        return response[0];
-    }
     async changeContract ({id, input}) {
+        let where;
+        const name = Object.keys(input)[0];
 
-        return !!await this.store.contracts.update(
-            input,
-            { where: { id } }
-        );
+        switch(name){
+            case 'participant':
+            case 'document':
+                where = { where: { id:input[name].id, contractId:id }}
+                delete input[name].id;
+                break;
+            case 'mainParameters' :
+                return !!await this.store.contract.update(
+                    input[name], { where: { id:id} });
+                break;
+            default:
+                where = { where: { contractId:id }}
+        }
+
+        return !!await this.store[name].update(
+           input[name], where);
     }
 }
 
