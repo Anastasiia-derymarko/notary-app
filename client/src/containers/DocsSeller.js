@@ -4,131 +4,170 @@ import {docsSellerName, orderObjects} from '../components/data/orders.js';
 import { connect } from 'react-redux';
 import { setDocSeller} from '../store/actions/SetupeActions';
 import {Wrapper, Column, Row, Label, Input, Placeholder, styleSelectMenu, colorOptions} from '../styleComponents/styleComponents';
+import { UPDATE_CONTRACT } from '../api/mutation';
+import { Mutation } from 'react-apollo';
 
 class DocsSeller extends Component {
     constructor (props) {
         super(props);
 
-          let d = this.props.docSeller;
+          const doc = this.props.contract[0];
 
           this.state = {
-            name:d.name,
-            type:d.type,
-            issuedOn:d.issuedOn,
-            issuedBy:d.issuedBy,
-            indexNumbers:d.indexNumbers,
-            registryName:d.registryName,
-            registryIssuedOn:d.registryIssuedOn,
-            registryIndexNumbers:d.registryIndexNumbers,
+              doc,
         };
     }
-    onInputChange = (inputValue)=> {
-        const target =inputValue.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
+    handleOnInputChange = (val, name, mutate, id) => {
 
-        this.setState({[name]: value}, () => this.props.setDocSeller({[name]: value}));
+        if (val === null || !val.target) {
+            //select null or true
+            name = name.name;
+            mutate({
+                variables:
+                    {
+                        input:{
+                            document:{
+                                id: id,
+                                [name]:val
+                            }
+                        }
+                    }
+            })
+        } else {
+            // input data
+            name = val.target.name;
+            val = val.target.value;
+        }
+        this.setState({doc:{...this.state.doc, [name]:val}});
+
     };
 
-    handleSelected = (InputValue, name) => {
-        this.setState({ [name.name]: InputValue}, () => this.props.setDocSeller({ [name.name]: InputValue}));
+    onBlur = (e, mutate, id) => {
+        let value = e.target.value;
+        let name = e.target.name;
+
+        mutate({
+            variables:
+                {
+                    input:{
+                        document: {
+                            id:id,
+                            [name]:value
+                        }
+                    }
+                }
+        })
+
     };
 
-  render() {
-    const {name, type, issuedOn, issuedBy,
-        indexNumbers, registryName, registryIssuedOn, registryIndexNumbers} = this.state;
-    return (
-      <Wrapper>
-          <Column>
-          <Label>
-            <Placeholder>Назва документа:</Placeholder>
-            <Select
-                name="name"
-                value={name}
-                onChange={this.handleSelected}
-                options={docsSellerName}
-                placeholder=""
-                isSearchable={false}
-                isClearable={true}
-                theme={colorOptions}
-                styles={styleSelectMenu}
-            />
-          </Label>
-            <Row>
-                <Label size="50%">
-                <Placeholder>Доповнення:</Placeholder>
-                <Select
-                    name="type"
-                    value={type}
-                    onChange={this.handleSelected}
-                    options={orderObjects}
-                    placeholder=""
-                    isSearchable={false}
-                    isClearable={true}
-                    theme={colorOptions}
-                    styles={styleSelectMenu}
-                />
-              </Label>
-              <Label size="32%">
-                <Placeholder>Дата</Placeholder>
-                <Input
-                    type="date"
-                    name="issuedOn"
-                    value= {issuedOn}
-                    onChange = {this.onInputChange}
-                    />
-              </Label>
-              <Label size="15%">
-                  <Placeholder>№</Placeholder>
-                  <Input
-                    name = 'indexNumbers'
-                    value={indexNumbers}
-                    onChange={this.onInputChange || ''}
-                  />
-                  </Label>
-            </Row>
-            <Label>
-            <Placeholder>Ким виданий:</Placeholder>
-            <Input
-              name = 'issuedBy'
-              value={issuedBy}
-              onChange={this.onInputChange || ''}
-            />
-            </Label>
-          </Column>
-          <Column>
-              <Label>
-                <Placeholder>Назва реєстра / БТІ:</Placeholder>
-                  <Input
-                    name = 'registryName'
-                    value={registryName}
-                    onChange={this.onInputChange || ''}
-                  />
-              </Label>
-              <Row>
-                 <Label size="32%">
-                    <Placeholder>Дата</Placeholder>
-                    <Input
-                        type="date"
-                        name="registryIssuedOn"
-                        value= {registryIssuedOn}
-                        onChange = {this.onInputChange}
-                    />
-                </Label>
-                <Label size="15%" style={{margin:'0 auto 0 2%'}}>
-                    <Placeholder>№ </Placeholder>
-                    <Input
-                        name = 'registryIndexNumbers'
-                        value={registryIndexNumbers}
-                        onChange={this.onInputChange || ''}
-                    />
-                </Label>
-              </Row>
-            <button onClick = {() => this.props.setDocSeller(this.state)}>+ Додати документ</button>
-          </Column>
-      </Wrapper>
-    )
-  }      
+    render() {
+
+    const d = this.state.doc;
+
+        return (
+            <Mutation
+                mutation={ UPDATE_CONTRACT }
+                variables={{id:1}}>
+
+                {(mutate) =>(
+                    <Wrapper>
+                      <Column>
+                      <Label>
+                        <Placeholder>Назва документа:</Placeholder>
+                        <Select
+                            name="name"
+                            value={d.name}
+                            options={docsSellerName}
+                            onChange={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
+                            placeholder=""
+                            isSearchable={false}
+                            isClearable={true}
+                            theme={colorOptions}
+                            styles={styleSelectMenu}
+                        />
+                      </Label>
+                        <Row>
+                            <Label size="50%">
+                            <Placeholder>Доповнення:</Placeholder>
+                            <Select
+                                name="type"
+                                value={d.type}
+                                options={orderObjects}
+                                onChange={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
+                                placeholder=""
+                                isSearchable={false}
+                                isClearable={true}
+                                theme={colorOptions}
+                                styles={styleSelectMenu}
+                            />
+                          </Label>
+                          <Label size="32%">
+                            <Placeholder>Дата</Placeholder>
+                            <Input
+                                type="date"
+                                name="issuedOn"
+                                value= {d.issuedOn}
+                                onChange = {this.handleOnInputChange}
+                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                            />
+                          </Label>
+                          <Label size="15%">
+                              <Placeholder>№</Placeholder>
+                              <Input
+                                name = 'indexNumbers'
+                                value={d.indexNumbers}
+                                onChange={this.handleOnInputChange}
+                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                              />
+                              </Label>
+                        </Row>
+                        <Label>
+                        <Placeholder>Ким виданий:</Placeholder>
+                        <Input
+                          name = 'issuedBy'
+                          value={d.issuedBy}
+                          onChange={this.handleOnInputChange}
+                          onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                        />
+                        </Label>
+                      </Column>
+                      <Column>
+                          <Label>
+                            <Placeholder>Назва реєстра / БТІ:</Placeholder>
+                              <Input
+                                name = 'registryName'
+                                value={d.registryName}
+                                onChange={this.handleOnInputChange}
+                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                              />
+                          </Label>
+                          <Row>
+                             <Label size="32%">
+                                <Placeholder>Дата</Placeholder>
+                                <Input
+                                    type="date"
+                                    name="registryIssuedOn"
+                                    value= {d.registryIssuedOn}
+                                    onChange = {this.handleOnInputChange}
+                                    onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                                />
+                            </Label>
+                            <Label size="15%" style={{margin:'0 auto 0 2%'}}>
+                                <Placeholder>№ </Placeholder>
+                                <Input
+                                    name = 'registryIndexNumbers'
+                                    value={d.registryIndexNumbers}
+                                    onChange={this.handleOnInputChange}
+                                    onBlur = {(e) => this.onBlur(e, mutate, d.id)}
+                                />
+                            </Label>
+                          </Row>
+                      </Column>
+                    </Wrapper>
+                )}
+            </Mutation>
+        )
+    }
 }
 
 const mapStateToProps = state => ({

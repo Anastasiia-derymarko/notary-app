@@ -14,7 +14,7 @@ import { HttpLink } from 'apollo-link-http';
 const store = configureStore()
 const cache = new InMemoryCache();
 const link = new HttpLink({
-    uri: 'http://localhost:4000/'
+    uri: 'http://localhost:4001/'
 });
 
 const client = new ApolloClient({

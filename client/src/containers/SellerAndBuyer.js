@@ -3,85 +3,117 @@ import Parties from '../components/Parties.js';
 import {setSeller, setBuyer} from '../store/actions/SetupeActions';
 import { connect } from 'react-redux';
 import {Column, Label, Placeholder, Wrapper} from '../styleComponents/styleComponents';
-import {FindContracts} from './findContracts';
+import { UPDATE_CONTRACT } from '../api/mutation';
+import { Mutation } from 'react-apollo';
+const _ = require('lodash');
 
 class SellerAndBuyer extends Component {
     constructor (props) {
         super(props);
 
-        let seller = this.props.seller;
-        let buyer = this.props.buyer;
-
         this.state = {
-            nameSeller: seller.nameSeller,
-            registrationNumberSeller: seller.registrationNumberSeller,
-            addressSeller: seller.addressSeller,
-            statementSeller: seller.statementSeller,
-            nameBuyer: buyer.nameBuyer,
-            registrationNumberBuyer:buyer.registrationNumberBuyer,
-            addressBuyer:buyer.addressBuyer,
-            statementBuyer:buyer.statementBuyer,
+            Seller: this.props.contract[0],
+            Buyer: this.props.contract[1],
         };
     }
 
-    handleChangeInput = e => {
+    handleChangeInput = (e, id, mutate) => {
         let name = e.target.name;
-        let value = typeof(e) !== 'string' ? e.target.value : e;
-        console.log({[name]: value});
-        this.setState({[name]: value}, () => {
-            if(name.indexOf('Seller') != -1){
-                this.props.setSeller({[name]: value})
-            }else{
-                this.props.setBuyer({[name]: value})
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+        const party = _.findKey(this.state, (o) => {
+            if(o.id === id){
+                return o;
             }
         });
+        if (e.target.type === 'checkbox'){
+            mutate({
+                variables:
+                    {
+                        input:{
+                            participant: {
+                                id:id,
+                                [name]:value
+                            }
+                        }
+                    }
+            })
+        }
+        this.setState({[party]:{...this.state[party], [name]:value}});
+
+    };
+
+    handlerOnBlur = (e, id, mutate) => {
+        let name = e.target.name;
+        let value = e.target.type !== 'checkbox' ? e.target.value : !!e.target.checked ;
+
+        mutate({
+            variables:
+                {
+                    input:{
+                        participant: {
+                            id:id,
+                            [name]:value
+                        }
+                    }
+                }
+        })
     };
 
     render() {
-        const { nameSeller, registrationNumberSeller, addressSeller, statementSeller,nameBuyer, registrationNumberBuyer, addressBuyer, statementBuyer} = this.state;
+        const s = this.state.Seller;
+        const b = this.state.Buyer;
 
         return (
-            <Wrapper>
-                <p>{FindContracts}</p>
-                <Column>
-                    <Parties
-                        name={nameSeller}
-                        registrationNumber={registrationNumberSeller}
-                        address={addressSeller}
-                        NameParties = "Продавець"
-                        party="Seller"
-                        handleChangeInput={this.handleChangeInput}
-                    />
-                    <Label>
-                        <Placeholder>Заява-згода</Placeholder>
-                        <input
-                            type="checkbox"
-                            name="statementSeller"
-                            onChange={this.handleChangeInput}
-                            value = {statementSeller}
-                        />
-                    </Label>
-                </Column>
-                <Column>
-                    <Parties
-                        name={nameBuyer}
-                        registrationNumber={registrationNumberBuyer}
-                        address={addressBuyer}
-                        NameParties = "Покупець"
-                        party="Buyer"
-                        handleChangeInput={this.handleChangeInput}
-                    />
-                    <Label>
-                        <Placeholder>Заява-згода</Placeholder>
-                        <input
-                            type="checkbox"
-                            name="statement"
-                            onChange={this.handleChangeInputBuyer}
-                            value = {statementBuyer}
-                        />
-                    </Label>
-                </Column>
-            </Wrapper>
+            <Mutation
+                mutation={ UPDATE_CONTRACT }
+                variables={{id:1}}>
+
+                {(mutate) =>(
+                    <Wrapper>
+                        <Column>
+                            <Parties
+                                name={s.name}
+                                registrationNumber={s.registrationNumber}
+                                address={s.address}
+                                NameParties="Продавець"
+                                party="Seller"
+                                handleChangeInput={(e) => this.handleChangeInput(e, s.id)}
+                                handlerOnBlur = {(e) => this.handlerOnBlur(e, s.id, mutate)}
+                            />
+                            <Label>
+                                <Placeholder>Заява-згода</Placeholder>
+                                <input
+                                    type="checkbox"
+                                    name="statement"
+                                    onChange={(e) => {this.handleChangeInput(e, s.id, mutate)}}
+                                    checked = {s.statement}
+                                />
+                            </Label>
+                        </Column>
+                        <Column>
+                            <Parties
+                                name={b.name}
+                                registrationNumber={b.registrationNumber}
+                                address={b.address}
+                                NameParties = "Покупець"
+                                party="Buyer"
+                                handleChangeInput={(e) => this.handleChangeInput(e, b.id)}
+                                handlerOnBlur = {(e) => this.handlerOnBlur(e, b.id,mutate)}
+                            />
+                            <Label>
+                                <Placeholder>Заява-згода</Placeholder>
+                                <input
+                                    type="checkbox"
+                                    name="statement"
+                                    onChange={(e) => this.handleChangeInput(e, b.id, mutate)}
+                                    checked={b.statement}
+                                />
+                            </Label>
+                        </Column>
+                    </Wrapper>
+                )}
+            </Mutation>
         );
     }
 }

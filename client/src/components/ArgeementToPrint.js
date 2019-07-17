@@ -52,8 +52,8 @@ class AgreementToPrint extends Component {
     }
     render(){
         const { orderType, orderObject, orderDate, } = this.props.mainParametersContract
-        const { cityValue, footage, docSeller, price, buyer, seller, } = this.props;
-        const {region, area, city, street, buildingValue, numberBuildingValue, typeObjectValue, numberObjectValue} = this.props.address;
+        const { footage, docSeller, price, buyer, seller, } = this.props;
+        const {city,numberObjectValue} = this.props.address;
         const {genderSeller, genderBuyer} = this.state;
         console.log(this.props);
 

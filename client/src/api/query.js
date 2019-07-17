@@ -46,20 +46,86 @@ export const NameCase = async (nameState) => {
     return result;
 };
 
-
-
 export const GET_CONTRACT = gql`
-  query GetContract($id: ID!) {
+  query contract($id: ID!) {
     contract(id: $id) {
         id
-        data
-        object {
-          label
-          value
+        mainParameters{
+            data
+            object {
+              label
+              value
+            }
+            contractType {
+              label
+              value
+            }
         }
-        contractType {
-          label
-          value
+        price {
+            appraisalValue
+            priceObject
+            conclusion
+            issuedBy
+            issuedOn
+        }
+        addressAndFootage {
+            region {
+              label
+              value
+            }
+            area {
+              label
+              value
+            }
+            city {
+              label
+              value
+            }
+            street {
+              label
+              value
+            }
+            typeBuilding {
+              label
+              value
+            }
+            numberBuildingValue 
+            typeObjectValue {
+              label
+              value
+            }
+            numberObjectValue
+            numberOfRooms
+            totalArea
+            livingArea
+        }
+        participant {
+            id
+            linkById
+            name
+            registrationNumber
+            address
+            statement
+            memberType
+        }
+        document {
+            id
+            participantId
+            name {
+              label
+              value
+            }
+            type {
+              label
+              value
+            }
+            issuedOn
+            issuedBy
+            indexNumbers
+            seriesNumber
+            registryName
+            registryIndexNumbers
+            registryIssuedOn
         }
     }
   }

@@ -6,10 +6,11 @@ import { Mutation } from 'react-apollo';
 import { UPDATE_CONTRACT } from '../api/mutation';
 
 class HeaderContract extends Component {
+
     constructor(props) {
         super(props);
 
-        const {contractType, object, data} = this.props.initialValues;
+        const {contractType, object, data} = this.props.contract;
         this.state = {
             contractType: contractType,
             object: object,
@@ -25,12 +26,13 @@ class HeaderContract extends Component {
             //select null or true
             value = e;
             name = nameSelect.name;
-
             mutate({
                 variables:
                     {
                         input:{
-                            [name]:value
+                            mainParameters:{
+                                [name]:value
+                            }
                         }
                     }
             })
@@ -45,17 +47,19 @@ class HeaderContract extends Component {
     onFocus = () => {
         this.setState({inputType: 'date'});
     };
-    onBluer = (e, mutate) => {
+    onBlur = (e, mutate) => {
         let value = e.target.value;
         let name = e.target.name;
 
-        this.setState({inputType: 'text'});
+        if (name === 'data'){this.setState({inputType: 'text'})}
 
         mutate({
             variables:
                 {
                     input:{
-                        [name]:value
+                        mainParameters: {
+                            [name]:value
+                        }
                     }
                 }
         })
@@ -67,7 +71,7 @@ class HeaderContract extends Component {
         return (
             <Mutation
                 mutation={ UPDATE_CONTRACT }
-                variables={{id:2}}
+                variables={{id:1}}
             >
                 {(mutate) =>(
                     <div>
@@ -107,7 +111,7 @@ class HeaderContract extends Component {
                                     type={inputType}
                                     value={data}
                                     onFocus={this.onFocus}
-                                    onBlur={(e) => this.onBluer(e, mutate)}
+                                    onBlur={(e) => this.onBlur(e, mutate)}
                                     onChange={this.handleOnInputChange}
                                 />
                             </Label>
