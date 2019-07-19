@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const Label = styled.div`
   width: ${props => props.size ? props.size : '100%'};
+  flex: ${props => props.flex ? props.flex : 'inherit'};
+  margin-left: ${props => props.marginLeft ? props.marginLeft : '0px'};
+  margin-right: ${props => props.marginRight? props.marginRight : '0px'};
   margin-bottom: 15px;
 `;
 

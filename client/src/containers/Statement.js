@@ -9,6 +9,8 @@ import ReactToPrint from 'react-to-print';
 import {GenderQuery, NameCase} from '../api/query';
 import { UPDATE_CONTRACT } from '../api/mutation';
 import { Mutation } from 'react-apollo';
+import Document from '../components/Document'
+
 
 class Statement extends Component {
     constructor (props) {
@@ -121,86 +123,30 @@ class Statement extends Component {
                             registrationNumber={men.registrationNumber}
                             address={men.address}
                         />
-                        <Label>
-                            <Placeholder>Свідоцтво</Placeholder>
-                            <Select
-                                name="name"
-                                value={cert.name}
-                                onChange={(e,nameSelect) => this.handleChangeInput(e, 'marriageCertificate', mutate, nameSelect)}
-                                options={statementDoc}
-                                placeholder=""
-                                isSearchable={false}
-                                isClearable={true}
-                                theme={colorOptions}
-                                styles={styleSelectMenu}
-                            />
-                        </Label>
-                        <Row>
-                            <Label size="40%">
-                                <Placeholder>Серія, номер</Placeholder>
-                                <Input
-                                    type="text"
-                                    name="seriesNumber"
-                                    value={cert.seriesNumber}
-                                    onChange={(e) => this.handleChangeInput(e, 'marriageCertificate')}
-                                    onBlur = {(e) => this.handlerOnBlur(e, cert.id, mutate, false)}
-                                />
-                            </Label>
-                            <Label size="20%">
-                                <Placeholder>а/запис</Placeholder>
-                                <Input
-                                    type="text"
-                                    name="indexNumbers"
-                                    value={cert.indexNumbers}
-                                    onChange={(e) => this.handleChangeInput(e, 'marriageCertificate')}
-                                    onBlur = {(e) => this.handlerOnBlur(e, cert.id, mutate, false)}
-                                />
-                            </Label>
-                            <Label size="32%">
-                                <Placeholder>Дата видачі</Placeholder>
-                                <Input
-                                    type="date"
-                                    name="issuedOn"
-                                    value={cert.issuedOn}
-                                    onChange={(e) => this.handleChangeInput(e, 'marriageCertificate')}
-                                    onBlur = {(e) => this.handlerOnBlur(e, cert.id, mutate, false)}
-                                />
-                            </Label>
-                        </Row>
-                        <Label>
-                            <Placeholder>Видавник</Placeholder>
-                            <Input
-                                type="text"
-                                name="issuedBy"
-                                value={cert.issuedBy}
-                                onChange={(e) => this.handleChangeInput(e, 'marriageCertificate')}
-                                onBlur = {(e) => this.handlerOnBlur(e, cert.id, mutate, false)}
-                            />
-                        </Label>
-                        <Row>
-                            <Label size="65%">
-                                <Placeholder>Нотаріус</Placeholder>
-                                <Input
-                                    type="text"
-                                    name="issuedBy"
-                                    value={contr.issuedBy}
-                                    onChange={(e) => this.handleChangeInput(e, 'statementContract')}
-                                    onBlur = {(e) => this.handlerOnBlur(e, contr.id, mutate, false)}
-                                />
-                            </Label>
-                            <Label size="32%">
-                                <Placeholder>Дата</Placeholder>
-                                <Input
-                                    type="date"
-                                    name="issuedOn"
-                                    value={contr.issuedOn}
-                                    onChange={(e) => this.handleChangeInput(e, 'statementContract')}
-                                    onBlur = {(e) => this.handlerOnBlur(e, contr.id, mutate, false)}
-                                />
-                            </Label>
-                        </Row>
+                        <Document
+                            name={cert.name}
+                            optionsName={statementDoc}
+                            type={cert.type}
+                            optionsType={statementDoc}
+                            issuedOn={cert.issuedOn}
+                            issuedBy={cert.issuedBy}
+                            indexNumbers={cert.indexNumbers}
+                            indexNumbersText="а/запис"
+                            seriesNumber={cert.seriesNumber}
+                            handleChangeInput={(e) => this.handleChangeInput(e, 'marriageCertificate')}
+                            handlerOnBlur = {(e) => this.handlerOnBlur(e, men.id, mutate, false)}
+                        />
+                        <Document
+                            issuedOn={contr.issuedOn}
+                            issuedBy={contr.issuedBy}
+                            indexNumbers={contr.indexNumbers}
+                            indexNumbersText="реєстровий №"
+                            onChange={(e) => this.handleChangeInput(e, 'statementContract')}
+                            onBlur = {(e) => this.handlerOnBlur(e, contr.id, mutate, false)}
+                        />
                         </Column>
                         <Column>
+
                             <ReactToPrint
                                 trigger={() => <button>Print</button>}
                                 content={() => this.componentRef}
@@ -227,7 +173,7 @@ class Statement extends Component {
                 )}
             </Mutation>
         )
-    }
+    }cert
 }
 
 const mapStateToProps = state => ({
