@@ -79,9 +79,7 @@ module.exports.createStore = () => {
         issuedBy: SQL.STRING,
         indexNumbers: SQL.STRING,
         seriesNumber: SQL.STRING,
-        registryName: SQL.STRING,
-        registryIndexNumbers: SQL.STRING,
-        registryIssuedOn: SQL.STRING,
+        linkById: SQL.INTEGER
     },{timestamps: false});
 
     contract.hasOne(document);

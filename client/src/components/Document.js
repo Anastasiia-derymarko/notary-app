@@ -5,7 +5,7 @@ import {Row, Label, Placeholder, Input, colorOptions, styleSelectMenu} from '../
 export default function Document(props) {
     return(
         <Row>
-            {!!props.name && <Label>
+            {props.hasOwnProperty('name') && <Label>
                 <Placeholder>Назва документа:</Placeholder>
                 <Select
                     name="name"
@@ -19,13 +19,13 @@ export default function Document(props) {
                     styles={styleSelectMenu}
                 />
             </Label>}
-            {!!props.type && <Label>
+            {!!props.type && <Label flex="3" marginRight="20px">
                 <Placeholder>Доповнення:</Placeholder>
                 <Select
                     name="type"
                     value={props.type}
                     options={props.optionsType}
-                    onChange={props.handleOnInputChange}
+                    onChange={props.handleChangeInput}
                     placeholder=""
                     isSearchable={false}
                     isClearable={true}
@@ -41,7 +41,6 @@ export default function Document(props) {
                     value={props.indexNumbers}
                     onChange={props.handleChangeInput}
                     onBlur = {props.handlerOnBlur}
-                    defaultValue=""
                 />
             </Label>}
             {!!props.seriesNumber && <Label flex="2">
@@ -52,7 +51,6 @@ export default function Document(props) {
                     value={props.seriesNumber}
                     onChange={props.handleChangeInput}
                     onBlur = {props.handlerOnBlur}
-                    defaultValue=""
                 />
             </Label>}
             {!!props.issuedOn && <Label flex="2" marginLeft="10px">
@@ -63,17 +61,15 @@ export default function Document(props) {
                     value={props.issuedOn}
                     onChange={props.handleChangeInput}
                     onBlur = {props.handlerOnBlur}
-                    defaultValue=""
                 />
             </Label>}
-            {!!props.issuedBy && <Label>
+            {props.hasOwnProperty('issuedBy') && <Label>
                 <Placeholder>Ким виданий:</Placeholder>
                 <Input
                     name = 'issuedBy'
                     value={props.issuedBy}
-                    onChange={props.handleOnInputChange}
+                    onChange={props.handleChangeInput}
                     onBlur = {props.handlerOnBlur}
-                    defaultValue=""
                 />
             </Label>}
         </Row>

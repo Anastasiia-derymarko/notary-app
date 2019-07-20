@@ -6,6 +6,7 @@ const typeDefs = gql`
     type Query {
       contract(id: ID!): Contract
       participant(id: ID!): [Participant]
+      nameCase: NameCase
     }
     type Contract {
         id: ID!
@@ -55,19 +56,20 @@ const typeDefs = gql`
         id: ID!
         contractId:ID
         participantId:ID
+        linkById: ID
         name: TypeContract
         type: TypeContract
         issuedOn: String
         issuedBy: String
         indexNumbers: String
         seriesNumber: String
-        registryName: String
-        registryIndexNumbers: String
-        registryIssuedOn: String
     }
     type TypeContract {
         label: String
         value: String
+    }
+    type NameCase {
+        name: String
     }
     input MainParametersInput {
         contractType: JSON
@@ -110,9 +112,7 @@ const typeDefs = gql`
         issuedBy: String
         indexNumbers: String
         seriesNumber: String
-        registryName: String
-        registryIndexNumbers: String
-        registryIssuedOn: String
+        linkById: Int
     }
     input ContractInput {
         mainParameters: MainParametersInput

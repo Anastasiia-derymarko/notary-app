@@ -75,9 +75,7 @@ export const UPDATE_CONTRACT = gql`
                     issuedBy
                     indexNumbers
                     seriesNumber
-                    registryName
-                    registryIndexNumbers
-                    registryIssuedOn
+                    linkById
                 }
             }
         }

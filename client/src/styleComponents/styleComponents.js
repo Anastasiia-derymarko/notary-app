@@ -37,7 +37,7 @@ export const Row = styled.div`
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 5%;
+    margin-bottom: 5%;
 `;
 export const Input = styled.input`
     border: 1px solid #ccc;

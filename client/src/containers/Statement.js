@@ -1,65 +1,50 @@
 import React, { Component } from 'react';
 import Parties from '../components/Parties.js';
 import { connect } from 'react-redux';
-import Select from 'react-select';
 import { statementDoc } from '../components/data/orders';
 import StatementToPrint from '../components/StatementToPrint';
-import {Wrapper, Column, Row, Label, Placeholder, Input, colorOptions, styleSelectMenu} from '../styleComponents/styleComponents';
+import {Wrapper, Column} from '../styleComponents/styleComponents';
 import ReactToPrint from 'react-to-print';
-import {GenderQuery, NameCase} from '../api/query';
+// import {GenderQuery, NameCase} from '../api/query';
 import { UPDATE_CONTRACT } from '../api/mutation';
 import { Mutation } from 'react-apollo';
 import Document from '../components/Document'
+const _ = require('lodash');
 
 
 class Statement extends Component {
     constructor (props) {
         super(props);
 
-        let statement = this.props.contract.participant;
-        for (let i = 0; i < statement.length; i++){
-            if (statement[i].memberType === "Statement"){
-                statement = statement[i]
-            }
-        }
+        const d = this.props.contract.document;
+        const p = this.props.participant;
 
-        let doc = this.props.contract.document;
-        let marriageCertificate;
-        for (let i=0; i < doc.length; i++){
-            if (doc[i].participantId == statement.linkById){
-                marriageCertificate = doc[i];
-            }
-        }
-
-        let statementContract;
-        for (let i=0; i < doc.length; i++){
-            if (doc[i].participantId == statement.id){
-                statementContract = doc[i];
-            }
-        }
+        const statement = p[_.findIndex(p, _.matchesProperty('memberType', 'Statement'))];
+        const marriageCertificate = d[_.findIndex(d, _.matchesProperty('participantId', statement.linkById))];
+        const statementContract = d[_.findIndex(d, _.matchesProperty('participantId', statement.id))];
 
         this.state = {
             statement,
             marriageCertificate,
             statementContract,
+            nameCase: null
         }
     }
 
     async componentDidMount()
     {
-        // const name = await NameCase(this.state.name);
-        // this.setState({name});
+        // const name = await NameCase(this.state.statement.name);
+        // this.setState({nameCase:name});
         //
         // const buyer = this.state.nameBuyer;
-
+        //
         // NameCase(buyer).then(name => this.setState({nameBuyer: name}));
-        // NameCase(this.state.name).then(name => this.setState({nameCase: name[1]}));
+        // NameCase(this.state.statement.name).then(name => this.setState({nameCase: name[1]}));
         // GenderQuery(buyer).then(name => this.setState({genderParty:name}));
     }
 
     handleChangeInput = (e, nameInState, mutate, nameSelect) => {
         let name, value;
-
         //input text, data if(!nameSelect) == true
         if(!nameSelect) {
             name = e.target.name;
@@ -141,8 +126,8 @@ class Statement extends Component {
                             issuedBy={contr.issuedBy}
                             indexNumbers={contr.indexNumbers}
                             indexNumbersText="реєстровий №"
-                            onChange={(e) => this.handleChangeInput(e, 'statementContract')}
-                            onBlur = {(e) => this.handlerOnBlur(e, contr.id, mutate, false)}
+                            handleChangeInput={(e) => this.handleChangeInput(e, 'statementContract')}
+                            handlerOnBlur = {(e) => this.handlerOnBlur(e, contr.id, mutate, false)}
                         />
                         </Column>
                         <Column>
@@ -151,29 +136,28 @@ class Statement extends Component {
                                 trigger={() => <button>Print</button>}
                                 content={() => this.componentRef}
                             />
-                            {/*<StatementToPrint
+                            <StatementToPrint
                                 ref={el => (this.componentRef = el)}
-                                name={name}
-                                nameCase={nameCase}
-                                registrationNumber={registrationNumber}
-                                address={address}
-                                nameDoc={nameDoc}
-                                serieNumber={serieNumber}
-                                issuedBy={issuedBy}
-                                issuedOn={issuedOn}
-                                registerNumber={registerNumber}
-                                dateStatement={dateStatement}
-                                nameNotary={nameNotary}
-                                buyer={buyer}
-                                nameBuyer={nameBuyer}
-                                gender={genderParty}
-                            />*/}
+                                name={men.name}
+                                registrationNumber={men.registrationNumber}
+                                address={men.address}
+                                nameDoc={cert.name}
+                                serieNumber={cert.seriesNumber}
+                                issuedBy={cert.issuedBy}
+                                issuedOn={cert.issuedOn}
+                                registerNumber={cert.registerNumber}
+                                dateStatement={contr.issuedOn}
+                                nameNotary={contr.issuedBy}
+                                buyer='Sskskkss'
+                                nameBuyer="ddddd"
+                                gender="sddd"
+                            />
                         </Column>
                     </Wrapper>
                 )}
             </Mutation>
         )
-    }cert
+    }
 }
 
 const mapStateToProps = state => ({

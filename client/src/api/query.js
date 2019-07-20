@@ -123,9 +123,7 @@ export const GET_CONTRACT = gql`
             issuedBy
             indexNumbers
             seriesNumber
-            registryName
-            registryIndexNumbers
-            registryIssuedOn
+            linkById
         }
     }
   }

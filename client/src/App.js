@@ -50,10 +50,10 @@ class App extends Component {
                             <SellerAndBuyer contract={data.contract.participant}/>
                         </TabPanel>
                         <TabPanel>
-                            <DocsSeller contract={data.contract.document}/>
+                            <DocsSeller contract={data.contract.document} participant={data.contract.participant}/>
                         </TabPanel>
                         <TabPanel>
-                            <Statement contract={data.contract}/>
+                            <Statement contract={data.contract} participant={data.contract.participant}/>
                         </TabPanel>
                         <TabPanel>
                             <AgreementToPrint />

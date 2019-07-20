@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import {docsSellerName, orderObjects} from '../components/data/orders.js';
 import { connect } from 'react-redux';
 import { setDocSeller} from '../store/actions/SetupeActions';
-import {Wrapper, Column, Row, Label, Input, Placeholder, styleSelectMenu, colorOptions} from '../styleComponents/styleComponents';
+import {Wrapper, Column, Row, Label, Input, Placeholder} from '../styleComponents/styleComponents';
 import { UPDATE_CONTRACT } from '../api/mutation';
 import { Mutation } from 'react-apollo';
+import Document from '../components/Document';
+const _ = require('lodash');
 
 class DocsSeller extends Component {
     constructor (props) {
         super(props);
 
-          const doc = this.props.contract[0];
+        const sellerId = this.props.participant[_.findIndex(this.props.participant, _.matches({memberType:"Seller"}))].id;
+        const SellerDoc = this.props.contract[_.findIndex(this.props.contract, _.matches({participantId: sellerId, linkById: null}))];
+        const registryDoc = this.props.contract[_.findIndex(this.props.contract, _.matches({participantId: sellerId, linkById: SellerDoc.id}))];
 
-          this.state = {
-              doc,
+        this.state = {
+            SellerDoc,
+            registryDoc
         };
     }
     handleOnInputChange = (val, name, mutate, id) => {
@@ -38,7 +42,7 @@ class DocsSeller extends Component {
             name = val.target.name;
             val = val.target.value;
         }
-        this.setState({doc:{...this.state.doc, [name]:val}});
+        this.setState({SellerDoc:{...this.state.SellerDoc, [name]:val}});
 
     };
 
@@ -62,7 +66,8 @@ class DocsSeller extends Component {
 
     render() {
 
-    const d = this.state.doc;
+    const d = this.state.SellerDoc;
+    const r = this.state.registryDoc;
 
         return (
             <Mutation
@@ -72,96 +77,29 @@ class DocsSeller extends Component {
                 {(mutate) =>(
                     <Wrapper>
                       <Column>
-                      <Label>
-                        <Placeholder>Назва документа:</Placeholder>
-                        <Select
-                            name="name"
-                            value={d.name}
-                            options={docsSellerName}
-                            onChange={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
-                            placeholder=""
-                            isSearchable={false}
-                            isClearable={true}
-                            theme={colorOptions}
-                            styles={styleSelectMenu}
-                        />
-                      </Label>
-                        <Row>
-                            <Label size="50%">
-                            <Placeholder>Доповнення:</Placeholder>
-                            <Select
-                                name="type"
-                                value={d.type}
-                                options={orderObjects}
-                                onChange={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
-                                placeholder=""
-                                isSearchable={false}
-                                isClearable={true}
-                                theme={colorOptions}
-                                styles={styleSelectMenu}
-                            />
-                          </Label>
-                          <Label size="32%">
-                            <Placeholder>Дата</Placeholder>
-                            <Input
-                                type="date"
-                                name="issuedOn"
-                                value= {d.issuedOn}
-                                onChange = {this.handleOnInputChange}
-                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                            />
-                          </Label>
-                          <Label size="15%">
-                              <Placeholder>№</Placeholder>
-                              <Input
-                                name = 'indexNumbers'
-                                value={d.indexNumbers}
-                                onChange={this.handleOnInputChange}
-                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                              />
-                              </Label>
-                        </Row>
-                        <Label>
-                        <Placeholder>Ким виданий:</Placeholder>
-                        <Input
-                          name = 'issuedBy'
-                          value={d.issuedBy}
-                          onChange={this.handleOnInputChange}
-                          onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                        />
-                        </Label>
+                          <Document
+                              name={d.name}
+                              optionsName={docsSellerName}
+                              type={d.type}
+                              optionsType={orderObjects}
+                              issuedOn={d.issuedOn}
+                              issuedBy={d.issuedBy}
+                              indexNumbers={d.indexNumbers}
+                              indexNumbersText="№"
+                              handleChangeInput={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
+                              onBlur={(e) => this.onBlur(e, mutate, d.id)}
+                          />
                       </Column>
                       <Column>
-                          <Label>
-                            <Placeholder>Назва реєстра / БТІ:</Placeholder>
-                              <Input
-                                name = 'registryName'
-                                value={d.registryName}
-                                onChange={this.handleOnInputChange}
-                                onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                              />
-                          </Label>
-                          <Row>
-                             <Label size="32%">
-                                <Placeholder>Дата</Placeholder>
-                                <Input
-                                    type="date"
-                                    name="registryIssuedOn"
-                                    value= {d.registryIssuedOn}
-                                    onChange = {this.handleOnInputChange}
-                                    onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                                />
-                            </Label>
-                            <Label size="15%" style={{margin:'0 auto 0 2%'}}>
-                                <Placeholder>№ </Placeholder>
-                                <Input
-                                    name = 'registryIndexNumbers'
-                                    value={d.registryIndexNumbers}
-                                    onChange={this.handleOnInputChange}
-                                    onBlur = {(e) => this.onBlur(e, mutate, d.id)}
-                                />
-                            </Label>
-                          </Row>
+                          <p>БТІ</p>
+                          <Document
+                              issuedOn={r.issuedOn}
+                              issuedBy={r.issuedBy}
+                              indexNumbers={r.indexNumbers}
+                              indexNumbersText="№"
+                              handleChangeInput={(val, name) => this.handleOnInputChange(val, name, mutate, d.id)}
+                              onBlur={(e) => this.onBlur(e, mutate, d.id)}
+                          />
                       </Column>
                     </Wrapper>
                 )}
