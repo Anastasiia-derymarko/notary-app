@@ -6,26 +6,9 @@ class ContractApi extends DataSource {
         this.store = store;
     }
 
-    async contractById({ id, info }) {
+    async contractById({ id }) {
         const include = ['addressAndFootage', 'price'];
-        // let possibleName = ['addressAndFootage', 'price'];
 
-
-        // if (info.parentType == 'Mutation'){
-        //     for (let key in info.variableValues.input){
-        //        if (key != 'mainParameters'){
-        //            include.push(key);
-        //        }
-        //     }
-        // }else {
-        //     const rootSelection = info.operation.selectionSet.selections[0];
-        //
-        //     rootSelection.selectionSet.selections.forEach(({ name: { value } }) => {
-        //         if(possibleName.includes(value)){
-        //             include.push(value);
-        //         }
-        //     });
-        // }
         return await this.store.contract.findOne({
             where: { id },
             ...(include ? { include } : {})

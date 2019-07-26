@@ -1,28 +1,18 @@
 const execPhp = require('exec-php');
-
+const NameCase = require('./dataSources/nameCase');
 module.exports = {
     Query: {
-        contract: (_, { id }, { dataSources }, info) => {
-            return dataSources.contractAPI.contractById({ id, info });
+        contract: (_, { id }, { dataSources }) => {
+            return dataSources.contractAPI.contractById({ id });
         },
-        nameCase: (_, { name }) => new Promise((resolve, reject) => {
-            execPhp('./bd/nameCase.php', (error, php) =>{
-                if(error) {reject(error)}
-                php.name_case(name, (err, result) =>{
-                    if(err) reject(err)
-                    resolve(result);
-                });
-            });
-        }),
-        nameGender: (_, { name }) =>new Promise((resolve, reject) => {
-            execPhp('./bd/nameCase.php', (error, php) =>{
+        nameCase: async (_, { name }) => {
+            const result = await NameCase(name, "name_case");
 
-                php.name_gender(name, (err, result) =>{
-                    if(err) reject(err);
-                    resolve(result);
-                });
-            });
-        })
+            return result.flat();
+        },
+        nameGender: (_, { name }) => {
+            return NameCase(name, "name_gender")
+        }
     },
     Contract: {
       mainParameters: (contract) => {

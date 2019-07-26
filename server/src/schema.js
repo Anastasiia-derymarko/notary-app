@@ -6,8 +6,8 @@ const typeDefs = gql`
     type Query {
       contract(id: ID!): Contract
       participant(id: ID!): [Participant]
-      nameCase(name: String!): [String]
-      nameGender(name: String!): String
+      nameCase(name: [String]): [String]
+      nameGender(name: [String]): [String]
     }
     type Contract {
         id: ID!

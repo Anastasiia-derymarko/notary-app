@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.6.3",
+    "exec-php": "0.0.5",
     "express": "^4.17.1",
     "express-graphql": "^0.8.0",
     "graphql": "^14.3.1",
