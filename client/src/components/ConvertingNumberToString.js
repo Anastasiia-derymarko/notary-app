@@ -211,11 +211,14 @@ function FloatToSamplesInWordsRus(number)
 
     let replaceString;
     if(number.number){
-        replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' гривень', ')');
-        return ' ('+replaceString;
+        replaceString = arrRet.join(" ").replace(' 00 копійок', '');
+        mapOrders[0]._arrStates.forEach(item=> replaceString=replaceString.replace(item, ''));
+        replaceString = replaceString.replace(/.$/,"");
+
+        return replaceString;
     }else{
-        replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' грив', ') грив');
-        return '('+replaceString;
+        replaceString = arrRet.join(" ").replace(' 00 копійок', '').replace(' грив', ' грив');
+        return replaceString;
     }
 }
 

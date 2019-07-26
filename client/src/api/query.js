@@ -128,3 +128,11 @@ export const GET_CONTRACT = gql`
     }
   }
 `;
+
+export const NAME_CASE = gql`
+    query nameCase($name: [String]) {
+      nameGender(name: $name)
+      nameCase(name: $name)
+    }
+`;
+

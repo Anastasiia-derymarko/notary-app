@@ -73,21 +73,22 @@ export const Header = styled.div`
 `;
 export const MainText = styled.div`
     text-align:justify;
+    margin-bottom: 5%;
 `;
 export const Title = styled.h5`
     text-align: center;
 `;
 export const StylePrint = styled.div`
-        font-size: 10pt;
-        font-weight: 400;
-        font-family: Arial;
-        width: 17cm;
-        margin-bottom: 5%;
-        line-height: 12pt;
-        box-sizing: border-box;
-        p{
-            margin:0;
-        }
+    font-size: 10pt;
+    font-weight: 400;
+    font-family: Arial;
+    width: 17cm;
+    margin-bottom: 5%;
+    line-height: 12pt;
+    box-sizing: border-box;
+    p{
+        margin:0;
+    }
 `;
 export const Indent = styled.p`
     text-indent: 1.5em;
@@ -98,4 +99,11 @@ export const BoldItalic = styled.span`
 `;
 export const NameParties = styled(BoldItalic)`
     text-transform: uppercase;
+`;
+
+export const EmptyGreyLine = styled.span`
+    width: ${props => props.width ? props.width: 20}px
+    height: 10px;
+    display: inline-flex;
+    background: #cccaca;
 `;

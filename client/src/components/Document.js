@@ -19,7 +19,7 @@ export default function Document(props) {
                     styles={styleSelectMenu}
                 />
             </Label>}
-            {!!props.type && <Label flex="3" marginRight="20px">
+            {props.hasOwnProperty('type') && <Label flex="3" marginRight="20px">
                 <Placeholder>Доповнення:</Placeholder>
                 <Select
                     name="type"
@@ -33,7 +33,7 @@ export default function Document(props) {
                     styles={styleSelectMenu}
                 />
             </Label>}
-            {!!props.indexNumbers && <Label flex="1" marginRight="10px">
+            {props.hasOwnProperty('indexNumbers') && <Label flex="1" marginRight="10px">
                 <Placeholder>{props.indexNumbersText}</Placeholder>
                 <Input
                     type="text"
@@ -43,7 +43,7 @@ export default function Document(props) {
                     onBlur = {props.handlerOnBlur}
                 />
             </Label>}
-            {!!props.seriesNumber && <Label flex="2">
+            {props.hasOwnProperty('seriesNumber') && <Label flex="2">
                 <Placeholder>Серія, номер</Placeholder>
                 <Input
                     type="text"
@@ -53,7 +53,7 @@ export default function Document(props) {
                     onBlur = {props.handlerOnBlur}
                 />
             </Label>}
-            {!!props.issuedOn && <Label flex="2" marginLeft="10px">
+            {props.hasOwnProperty('issuedOn') && <Label flex="2" marginLeft="10px">
                 <Placeholder>Дата видачі</Placeholder>
                 <Input
                     type="date"

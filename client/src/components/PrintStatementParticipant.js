@@ -11,9 +11,8 @@ export default function PrintStatmentParticipant(props) {
     return(
         <Query query={ NAME_CASE } variables={{name: p.name}}>
             {({ data, loading, error }) => {
-                if (loading) return <p>loading</p>;
-                if (error) return <p>ERROR</p>;
-                console.log(data.nameGender);
+                if (loading) return <span>loading</span>;
+                if (error) return <span>ERROR</span>;
                 return (
                     <span>
                         <b> {data.nameCase[4]}</b>,
